@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.PisangHitam.InstaFashion">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,16 +21,10 @@
             android:name=".splash_screen"
             android:exported="true"
             android:theme="@style/Theme.InstaFashion.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Personaldata"
             android:exported="false" />
-
         <activity
             android:name=".register"
             android:exported="false"
@@ -34,7 +36,7 @@
             android:name=".OA_result"
             android:exported="false" />
         <activity
-            android:name=".OA_outfitPic"
+            android:name=".OA_pic2"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
@@ -43,7 +45,7 @@
         </activity>
 
         <activity
-            android:name=".OA_petPic"
+            android:name=".OA_pic1"
             android:exported="false" />
         <activity
             android:name=".shop_productList"
@@ -70,16 +72,14 @@
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="sensorPortrait"
-            android:theme="@style/Theme.InstaFashion.NoActionBar">
+            android:theme="@style/Theme.InstaFashion.NoActionBar"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

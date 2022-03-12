@@ -12,7 +12,7 @@ import java.text.NumberFormat
 
 object singletonData {
 
-    //1. DATABASE + METHOD FITUR =============================================
+    //1. DATA + METHOD FITUR =============================================
 
     // LOGIN SIGNUP + BASKET
     var accList : MutableList<classAccount> = mutableListOf(
@@ -39,6 +39,7 @@ object singletonData {
         return total
     }
 
+    //TOTAL + 5000 (sebagai ongkos kirim)
     fun totalInCart() : Int = subtotalInCart() + 5000
 
     // SHOP PRODUCTS
@@ -240,7 +241,7 @@ object singletonData {
     //Ini dipakai ketika mau ubah objek jadi JSON biar pengiriman data ke activity lain lebih gampang.
     val toJson : Gson = Gson()
 
-    //Image Cropper. Utk OA
+    //Image Cropper. Utk bagian Outfit Analyzer
     fun cropThis(pic : Bitmap) : Bitmap{
         var w = pic.width
         var h = pic.height

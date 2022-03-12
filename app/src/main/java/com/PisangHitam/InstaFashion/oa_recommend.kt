@@ -11,8 +11,6 @@ import android.os.AsyncTask
 import android.view.View
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.PisangHitam.InstaFashion.OA_petPic
-import com.PisangHitam.InstaFashion.classProduk
 import dev.jorgecastillo.androidcolorx.library.RGBColor
 import dev.jorgecastillo.androidcolorx.library.asRgb
 import kotlinx.android.synthetic.main.activity_oa_recommend.*
@@ -34,7 +32,7 @@ class oa_recommend : AppCompatActivity() {
         actionbar!!.title = getString(R.string.recommedationTitle)
 
         tryAgain.setOnClickListener {
-            var intent = Intent(this, OA_petPic::class.java)
+            var intent = Intent(this, OA_pic1::class.java)
             startActivity(intent)
         }
 

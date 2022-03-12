@@ -3,8 +3,6 @@ package com.PisangHitam.InstaFashion
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.PisangHitam.InstaFashion.classItemBasket
-import com.PisangHitam.InstaFashion.classProduk
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_shop_info_produk.*
 

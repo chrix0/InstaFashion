@@ -14,24 +14,20 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragmentContainerView)
         navBottom.setupWithNavController(navController)
 
-        navController.navigate(R.id.adopt_Main_Frag)
-        titleText.text = "Shop"
+        navController.navigate(R.id.shop_Main_Frag)
 
         navBottom.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.adopt_Main_Frag -> {
-                    navController.navigate(R.id.adopt_Main_Frag)
-                    titleText.text = "Shop"
+                R.id.shop_Main_Frag -> {
+                    navController.navigate(R.id.shop_Main_Frag)
                     true
                 }
-                R.id.breed_Main_Frag -> {
-                    navController.navigate(R.id.breed_Main_Frag)
-                    titleText.text = "History"
+                R.id.wishlist_Main_Frag -> {
+                    navController.navigate(R.id.wishlist_Main_Frag)
                     true
                 }
                 R.id.profile_Main_Frag -> {
                     navController.navigate(R.id.profile_Main_Frag)
-                    titleText.text = "Profile" //getString(R.string.profile)
                     true
                 }
                 else ->
@@ -45,10 +41,10 @@ class MainActivity : AppCompatActivity() {
                 navBottom.selectedItemId = R.id.shop_Main_Frag
             }
             (intentData.getStringExtra(RETURN_LAST_TAB).equals("ADOPT")) -> {
-                navBottom.selectedItemId = R.id.adopt_Main_Frag
+                navBottom.selectedItemId = R.id.wishlist_Main_Frag
             }
             (intentData.getStringExtra(RETURN_LAST_TAB).equals("BREED")) -> {
-                navBottom.selectedItemId = R.id.breed_Main_Frag
+                navBottom.selectedItemId = R.id.profile_Main_Frag
             }
         }
     }
