@@ -11,8 +11,8 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.palette.graphics.Palette
-import com.rain.adopets.OA_result
-import com.rain.adopets.singletonData
+import com.PisangHitam.InstaFashion.OA_result
+import com.PisangHitam.InstaFashion.singletonData
 import dev.jorgecastillo.androidcolorx.library.asHex
 import kotlinx.android.synthetic.main.activity_oa_outfit_pic.*
 import kotlinx.android.synthetic.main.activity_oa_pet_pic.*
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_oa_pet_pic.openGallery
 import kotlinx.android.synthetic.main.activity_oa_pet_pic.photo
 import kotlinx.android.synthetic.main.recycler_tracker_productlist.*
 
-class OA_outfitPic : AppCompatActivity() {
+class OA_pic2 : AppCompatActivity() {
 
     fun createPaletteSync(bitmap: Bitmap): Palette = Palette.from(bitmap).maximumColorCount(8).generate()
 

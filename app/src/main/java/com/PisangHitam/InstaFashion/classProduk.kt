@@ -2,7 +2,6 @@ package com.PisangHitam.InstaFashion
 
 import android.graphics.Bitmap
 import android.os.Parcelable
-import com.rain.adopets.singletonData
 import com.squareup.picasso.Picasso
 import kotlinx.android.parcel.Parcelize
 

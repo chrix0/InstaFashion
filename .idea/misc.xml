@@ -10,6 +10,20 @@
         <entry key="..\:/Android Project 2/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1796875" />
         <entry key="..\:/Android Project 2/app/src/main/res/menu/fab_expand.xml" value="0.1796875" />
         <entry key="..\:/Android Project 2/app/src/main/res/menu/productlist_sort.xml" value="0.1796875" />
+        <entry key="..\:/InstaFashion/app/src/main/res/drawable-anydpi/navbar_shop.xml" value="0.12083333333333333" />
+        <entry key="..\:/InstaFashion/app/src/main/res/drawable/shape_rounded_edittext_corners.xml" value="0.18703703703703703" />
+        <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_login.xml" value="0.11481481481481481" />
+        <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
+        <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_oa_recommend.xml" value="0.11481481481481481" />
+        <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_oa_result.xml" value="0.11481481481481481" />
+        <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_register.xml" value="0.11481481481481481" />
+        <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_shop_product_list.xml" value="0.1" />
+        <entry key="..\:/InstaFashion/app/src/main/res/layout/fragment_profile__main_.xml" value="0.14666666666666667" />
+        <entry key="..\:/InstaFashion/app/src/main/res/layout/fragment_shop__main_.xml" value="0.13333333333333333" />
+        <entry key="..\:/InstaFashion/app/src/main/res/layout/fragment_wishlist__main_.xml" value="0.22" />
+        <entry key="..\:/InstaFashion/app/src/main/res/layout/recycler_basket.xml" value="0.1" />
+        <entry key="..\:/InstaFashion/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.11481481481481481" />
+        <entry key="..\:/InstaFashion/app/src/main/res/menu/fab_expand.xml" value="0.1" />
       </map>
     </option>
   </component>

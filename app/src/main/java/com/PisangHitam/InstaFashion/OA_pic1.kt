@@ -14,13 +14,12 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.palette.graphics.Palette
-import com.rain.adopets.singletonData
 import dev.jorgecastillo.androidcolorx.library.asHex
 import kotlinx.android.synthetic.main.activity_oa_pet_pic.*
 import kotlinx.android.synthetic.main.activity_oa_pet_pic.photo
 import kotlinx.android.synthetic.main.recycler_tracker_productlist.*
 
-class OA_petPic : AppCompatActivity() {
+class OA_pic1 : AppCompatActivity() {
 
     fun createPaletteSync(bitmap: Bitmap): Palette = Palette.from(bitmap).maximumColorCount(16).generate()
 
@@ -42,7 +41,7 @@ class OA_petPic : AppCompatActivity() {
 
         toStep2.setOnClickListener {
             if(singletonData.OASession.insertedPet){
-                var intent = Intent(this, OA_outfitPic::class.java)
+                var intent = Intent(this, OA_pic2::class.java)
                 startActivity(intent)
             }
             else{
