@@ -14,12 +14,7 @@ import androidx.palette.graphics.Palette
 import com.PisangHitam.InstaFashion.OA_result
 import com.PisangHitam.InstaFashion.singletonData
 import dev.jorgecastillo.androidcolorx.library.asHex
-import kotlinx.android.synthetic.main.activity_oa_outfit_pic.*
-import kotlinx.android.synthetic.main.activity_oa_pet_pic.*
-import kotlinx.android.synthetic.main.activity_oa_pet_pic.openCamera
-import kotlinx.android.synthetic.main.activity_oa_pet_pic.openGallery
-import kotlinx.android.synthetic.main.activity_oa_pet_pic.photo
-import kotlinx.android.synthetic.main.recycler_tracker_productlist.*
+import kotlinx.android.synthetic.main.activity_oa_pic2.*
 
 class OA_pic2 : AppCompatActivity() {
 
@@ -27,7 +22,7 @@ class OA_pic2 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_oa_outfit_pic)
+        setContentView(R.layout.activity_oa_pic2)
 
         val actionbar = supportActionBar
         actionbar!!.title = getString(R.string.petAnalyzerTitle)

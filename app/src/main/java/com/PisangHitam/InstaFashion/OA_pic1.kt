@@ -15,9 +15,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.palette.graphics.Palette
 import dev.jorgecastillo.androidcolorx.library.asHex
-import kotlinx.android.synthetic.main.activity_oa_pet_pic.*
-import kotlinx.android.synthetic.main.activity_oa_pet_pic.photo
+import kotlinx.android.synthetic.main.activity_oa_pic1.*
 import kotlinx.android.synthetic.main.recycler_tracker_productlist.*
+import kotlinx.android.synthetic.main.recycler_tracker_productlist.photo
 
 class OA_pic1 : AppCompatActivity() {
 
@@ -25,7 +25,7 @@ class OA_pic1 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_oa_pet_pic)
+        setContentView(R.layout.activity_oa_pic1)
         singletonData.OASession = classOASession()
 
         val actionbar = supportActionBar

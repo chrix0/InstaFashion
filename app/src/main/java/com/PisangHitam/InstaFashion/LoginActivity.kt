@@ -7,6 +7,9 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
+    private val EXTRA_USER = "USER"
+    private val EXTRA_PASS = "PASSWORD"
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -43,5 +46,16 @@ class LoginActivity : AppCompatActivity() {
             var intent = Intent(this, register::class.java)
             startActivity(intent)
         }
+    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(EXTRA_USER, usernameLogin.text.toString())
+        outState.putString(EXTRA_PASS, passwordLogin.text.toString())
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        usernameLogin.setText(savedInstanceState?.getString(EXTRA_USER,""))
+        passwordLogin.setText(savedInstanceState?.getString(EXTRA_PASS,""))
     }
 }

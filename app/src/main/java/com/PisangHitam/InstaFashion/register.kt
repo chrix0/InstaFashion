@@ -10,6 +10,11 @@ import kotlinx.android.synthetic.main.activity_register.*
 
 class register : AppCompatActivity() {
 
+    private val EXTRA_REG_USER = "USER"
+    private val EXTRA_REG_PASS = "PASS"
+    private val EXTRA_REG_FN = "FULLNAME"
+    private val EXTRA_REG_EM = "EMAIL"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -17,7 +22,6 @@ class register : AppCompatActivity() {
         lateinit var cpassword : String
         lateinit var cfullName : String
         lateinit var cemail : String
-
 
         var clsAccount = classAccount(
             singletonData.accList.size,
@@ -71,5 +75,21 @@ class register : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(EXTRA_REG_USER, username.text.toString())
+        outState.putString(EXTRA_REG_PASS, password.text.toString())
+        outState.putString(EXTRA_REG_FN, fullname.text.toString())
+        outState.putString(EXTRA_REG_EM, email.text.toString())
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        username.setText(savedInstanceState?.getString(EXTRA_REG_USER,""))
+        password.setText(savedInstanceState?.getString(EXTRA_REG_PASS,""))
+        fullname.setText(savedInstanceState?.getString(EXTRA_REG_FN,""))
+        email.setText(savedInstanceState?.getString(EXTRA_REG_EM,""))
     }
 }

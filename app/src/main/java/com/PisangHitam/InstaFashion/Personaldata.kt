@@ -6,6 +6,15 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_personaldata.*
 
 class Personaldata : AppCompatActivity() {
+
+    private val EXTRA_NAME = "NAME"
+    private val EXTRA_EM = "EMAIL"
+    private val EXTRA_ADD = "ADDRESS"
+    private val EXTRA_CITY = "CITY"
+    private val EXTRA_PROV = "PROVINCE"
+    private val EXTRA_POST = "POSTAL_CODE"
+    //BLM DIKERJAIN
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personaldata)
@@ -29,7 +38,5 @@ class Personaldata : AppCompatActivity() {
             intent.putExtra(RETURN_LAST_TAB, "PROFILE")
             startActivity(intent)
         }
-
-
     }
 }

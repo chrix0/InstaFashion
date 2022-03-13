@@ -53,13 +53,12 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/title"
                         android:layout_marginTop="10dp"
-                        android:scrollbars="horizontal">
+                        android:scrollbars="none">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:scrollbars="horizontal">
+                            android:orientation="horizontal">
 
                             <Button
                                 android:layout_width="wrap_content"
@@ -94,21 +93,30 @@
                         </LinearLayout>
                     </HorizontalScrollView>
 
-                    <TextView
-                        android:id="@+id/title"
-                        android:layout_width="233dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Popular items"
-                        android:textAppearance="?android:textAppearanceLarge"
-                        android:textStyle="bold" />
+                        android:id="@+id/title"
+                        android:weightSum="4">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:text="Popular items"
+                            android:textAppearance="?android:textAppearanceLarge"
+                            android:textStyle="bold" />
 
-                    <Button
-                        android:id="@+id/more"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_toRightOf="@id/title"
-                        android:text="More items" />
+                        <Button
+                            android:id="@+id/more"
+                            style="@style/Widget.AppCompat.Button.Borderless"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="40dp"
+                            android:textAlignment="viewEnd"
+                            android:layout_toRightOf="@id/title"
+                            android:text="More items" /> n
+                    </LinearLayout>
+
 
                     <ScrollView
                         android:id="@+id/scrollFood"
