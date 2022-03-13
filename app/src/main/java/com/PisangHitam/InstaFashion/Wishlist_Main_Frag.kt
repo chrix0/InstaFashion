@@ -40,8 +40,8 @@ class Wishlist_Main_Frag : Fragment() {
             startActivity(info)
         }
 
-        productList.layoutManager = GridLayoutManager(requireContext(), 2)
-        productList.adapter = adapter
+        wishList.layoutManager = GridLayoutManager(requireContext(), 2)
+        wishList.adapter = adapter
 
         return v
     }

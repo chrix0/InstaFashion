@@ -13,7 +13,7 @@ class Personaldata : AppCompatActivity() {
     private val EXTRA_CITY = "CITY"
     private val EXTRA_PROV = "PROVINCE"
     private val EXTRA_POST = "POSTAL_CODE"
-    //BLM DIKERJAIN
+    private val EXTRA_PHONE = "PHONE"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,5 +38,28 @@ class Personaldata : AppCompatActivity() {
             intent.putExtra(RETURN_LAST_TAB, "PROFILE")
             startActivity(intent)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putString(EXTRA_NAME, name.text.toString())
+        outState.putString(EXTRA_EM, email.text.toString())
+        outState.putString(EXTRA_ADD, address.text.toString())
+        outState.putString(EXTRA_CITY, City.text.toString())
+        outState.putString(EXTRA_PROV, Province.text.toString())
+        outState.putString(EXTRA_POST, psCode.text.toString())
+        outState.putString(EXTRA_PHONE, Pnumber.text.toString())
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        name.setText(savedInstanceState?.getString(EXTRA_NAME, ""))
+        email.setText(savedInstanceState?.getString(EXTRA_EM, ""))
+        address.setText(savedInstanceState?.getString(EXTRA_ADD, ""))
+        City.setText(savedInstanceState?.getString(EXTRA_CITY, ""))
+        Province.setText(savedInstanceState?.getString(EXTRA_PROV, ""))
+        psCode.setText(savedInstanceState?.getString(EXTRA_POST, ""))
+        Pnumber.setText(savedInstanceState?.getString(EXTRA_PHONE, ""))
     }
 }
