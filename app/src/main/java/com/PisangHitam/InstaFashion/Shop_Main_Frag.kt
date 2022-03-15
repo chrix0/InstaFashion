@@ -54,7 +54,7 @@ class Shop_Main_Frag : Fragment() {
         //RECYCLER VIEW
         val itemList = v.findViewById<RecyclerView>(R.id.itemList)
 
-        val first5item : List<classProduk> = singletonData.petFoodList.take(5)
+        val first5item : List<classProduk> = singletonData.outfitList.take(5)
 
         adapter = recycler_products_adapter(first5item){
             val info = Intent(requireContext(), shop_infoProduk::class.java)
@@ -71,7 +71,7 @@ class Shop_Main_Frag : Fragment() {
 
         more.setOnClickListener {
             val more = Intent(requireContext(), shop_productList::class.java)
-            more.putExtra(EXTRA_PRODUCT,singletonData.petFoodList as ArrayList<classProduk>)
+            more.putExtra(EXTRA_PRODUCT,singletonData.outfitList as ArrayList<classProduk>)
             more.putExtra(CHANGE_TITLE, "Product list")
             startActivity(more)
         }

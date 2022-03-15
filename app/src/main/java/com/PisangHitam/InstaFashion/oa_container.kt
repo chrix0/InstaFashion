@@ -10,6 +10,9 @@ class oa_container : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_oa_container)
 
+        var actionbar = supportActionBar
+        actionbar!!.title = "Outfit Analyzer"
+
         val fragManager = supportFragmentManager
         val fragmentTransaction = fragManager.beginTransaction()
 

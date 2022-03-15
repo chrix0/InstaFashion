@@ -48,8 +48,8 @@ class oa_recommend : AppCompatActivity() {
         var dialog = ProgressDialog(context)
         override fun doInBackground(vararg p0: Void?): Unit? {
             if (!singletonData.allImageProcessed){
-                for(i in 0 until singletonData.petOutfitList.size){
-                    singletonData.petOutfitList[i].savedBitmap = singletonData.petOutfitList[i].getBitmapBackground()
+                for(i in 0 until singletonData.outfitList.size){
+                    singletonData.outfitList[i].savedBitmap = singletonData.outfitList[i].getBitmapBackground()
                 }
                 singletonData.allImageProcessed = true
             }
@@ -109,7 +109,7 @@ class oa_recommend : AppCompatActivity() {
     fun checkColor(color : RGBColor) : MutableList<classProduk> {
         var temp : MutableList<classProduk> = mutableListOf()
 
-        for(i : classProduk in singletonData.petOutfitList){
+        for(i : classProduk in singletonData.outfitList){
             var colorPalette = createPaletteSync(i.savedBitmap!!)
             var dominantItemColor = colorPalette.dominantSwatch!!.rgb.asRgb()
 

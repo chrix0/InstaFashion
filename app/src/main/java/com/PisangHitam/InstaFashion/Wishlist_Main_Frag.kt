@@ -31,7 +31,7 @@ class Wishlist_Main_Frag : Fragment() {
     private fun doSomething(v: View): View {
         //RECYCLER VIEW
         val wishList = v.findViewById<RecyclerView>(R.id.wishList)
-        val wishList_List : List<classProduk> = singletonData.petOutfitList.take(5)
+        val wishList_List : List<classProduk> = singletonData.outfitList.take(5)
 
         adapter = recycler_products_adapter(wishList_List){
             val info = Intent(requireContext(), shop_infoProduk::class.java)

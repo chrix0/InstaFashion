@@ -64,31 +64,31 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="20dp"
-                                android:text="Shirt" />
+                                android:text="Shirt / T-Shirt" />
 
                             <Button
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="20dp"
-                                android:text="Shirt" />
+                                android:text="Trousers" />
 
                             <Button
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="20dp"
-                                android:text="Shirt" />
+                                android:text="Shoes" />
 
                             <Button
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="20dp"
-                                android:text="Shirt" />
+                                android:text="Accessories" />
 
                             <Button
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="20dp"
-                                android:text="Shirt" />
+                                android:text="Jacket" />
 
                         </LinearLayout>
                     </HorizontalScrollView>
@@ -114,7 +114,7 @@
                             android:layout_height="40dp"
                             android:textAlignment="viewEnd"
                             android:layout_toRightOf="@id/title"
-                            android:text="More items" /> n
+                            android:text="More items" />
                     </LinearLayout>
 
 
