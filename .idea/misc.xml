@@ -10,13 +10,6 @@
         <entry key="..\:/Android Project 2/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1796875" />
         <entry key="..\:/Android Project 2/app/src/main/res/menu/fab_expand.xml" value="0.1796875" />
         <entry key="..\:/Android Project 2/app/src/main/res/menu/productlist_sort.xml" value="0.1796875" />
-        <entry key="..\:/Android Project/InstaFashion/app/src/main/res/layout/activity_login.xml" value="0.17916666666666667" />
-        <entry key="..\:/Android Project/InstaFashion/app/src/main/res/layout/activity_main.xml" value="0.17916666666666667" />
-        <entry key="..\:/Android Project/InstaFashion/app/src/main/res/layout/activity_oa_outfit_pic.xml" value="0.17916666666666667" />
-        <entry key="..\:/Android Project/InstaFashion/app/src/main/res/layout/activity_oa_pet_pic.xml" value="0.17916666666666667" />
-        <entry key="..\:/Android Project/InstaFashion/app/src/main/res/layout/activity_shop_product_list.xml" value="0.17916666666666667" />
-        <entry key="..\:/Android Project/InstaFashion/app/src/main/res/layout/fragment_shop__main_.xml" value="0.17916666666666667" />
-        <entry key="..\:/Android Project/InstaFashion/app/src/main/res/layout/fragment_wishlist__main_.xml" value="0.17916666666666667" />
         <entry key="..\:/InstaFashion/app/src/main/res/drawable-anydpi/navbar_shop.xml" value="0.12083333333333333" />
         <entry key="..\:/InstaFashion/app/src/main/res/drawable-anydpi/navbar_shop_wishlist_filled.xml" value="0.12708333333333333" />
         <entry key="..\:/InstaFashion/app/src/main/res/drawable/shape_rounded_edittext_corners.xml" value="0.18703703703703703" />
@@ -40,7 +33,7 @@
         <entry key="..\:/InstaFashion/app/src/main/res/menu/fab_expand.xml" value="0.1" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_register.xml" value="0.264" />
-        <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/fragment_profile__main_.xml" value="0.25416666666666665" />
+        <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/fragment_profile__main_.xml" value="0.264" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25416666666666665" />
       </map>
     </option>

@@ -40,13 +40,13 @@ class Profile_Main_Frag : Fragment() {
 
     fun main(v : View) : View{
         var user = singletonData.accList[singletonData.currentAccId]
-        /*
+
         var fullName = v.findViewById<TextView>(R.id.fullName)
         fullName.text = user.fullName
 
         var email = v.findViewById<TextView>(R.id.email)
         email.text = user.email
-         */
+
 
         var personaldata = v.findViewById<Button>(R.id.personalData)
         personaldata.setOnClickListener{
