@@ -6,24 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".splash_screen"
     android:orientation="vertical"
-    android:weightSum="100">
+    android:weightSum="100"
+    android:padding="15dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="90"
+        android:layout_weight="80"
         android:gravity="center"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/logo"/>
+            android:padding="80dp"
+            android:src="@drawable/logo01"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="InstaFashion"
             android:textSize="24sp"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/progLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Loading.."
+            android:gravity="center"
+            android:layout_marginBottom="15dp"/>
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:trackCornerRadius="10dp"
+            app:trackColor="@color/white"
+            app:trackThickness="7dp"
+            android:max="1500"
+            android:min="0"
+            android:progress="0"
+            app:indicatorColor="@color/inchwormGreen"/>
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -33,6 +61,5 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="by PHitam"/>
-
     </LinearLayout>
 </LinearLayout>

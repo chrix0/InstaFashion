@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.PisangHitam.InstaFashion.OA_pic1
 import com.PisangHitam.InstaFashion.classProduk
 import io.github.yavski.fabspeeddial.FabSpeedDial
 import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter
@@ -97,7 +96,7 @@ class Shop_Main_Frag : Fragment() {
 
         val analyzer = v.findViewById<Button>(R.id.analyzer)
         analyzer.setOnClickListener {
-            var intent = Intent(requireContext(), OA_pic1::class.java)
+            var intent = Intent(requireContext(), oa_container::class.java)
             startActivity(intent)
         }
         var carouselView = v.findViewById<CarouselView>(R.id.carouselView)

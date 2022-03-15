@@ -32,7 +32,7 @@ class oa_recommend : AppCompatActivity() {
         actionbar!!.title = getString(R.string.recommedationTitle)
 
         tryAgain.setOnClickListener {
-            var intent = Intent(this, OA_pic1::class.java)
+            var intent = Intent(this, oa_container::class.java)
             startActivity(intent)
         }
 

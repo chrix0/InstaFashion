@@ -46,6 +46,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
 
+    //Library yang digunakan
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
@@ -53,7 +54,12 @@ dependencies {
     implementation 'me.jorgecastillo:androidcolorx:0.2.0'
     implementation 'androidx.palette:palette:1.0.0'
     implementation 'com.synnapps:carouselview:0.1.4'
+    implementation "org.jetbrains.anko:anko:0.10.8"
+
+    //noinspection GradleCompatible
     implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

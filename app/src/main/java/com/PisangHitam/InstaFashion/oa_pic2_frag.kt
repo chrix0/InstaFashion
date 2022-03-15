@@ -6,27 +6,58 @@ import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.palette.graphics.Palette
-import com.PisangHitam.InstaFashion.OA_result
-import com.PisangHitam.InstaFashion.singletonData
 import dev.jorgecastillo.androidcolorx.library.asHex
-import kotlinx.android.synthetic.main.activity_oa_pic2.*
+import kotlinx.android.synthetic.main.fragment_oa_pic2_frag.*
 
-class OA_pic2 : AppCompatActivity() {
+class oa_pic2_frag : Fragment() {
 
-    fun createPaletteSync(bitmap: Bitmap): Palette = Palette.from(bitmap).maximumColorCount(8).generate()
+    private lateinit var session : classOASession
+    private lateinit var v : View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_oa_pic2)
+    }
 
-        val actionbar = supportActionBar
-        actionbar!!.title = getString(R.string.petAnalyzerTitle)
-        actionbar.setDisplayHomeAsUpEnabled(true)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        v = inflater.inflate(R.layout.fragment_oa_pic2_frag, container, false)
+        session = arguments?.getParcelable<classOASession>(OA_NEXT_STEP)!!
+        return code(v)
+    }
+
+    fun displayCam() {
+        var takeAPic = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (takeAPic.resolveActivity(requireActivity().packageManager) != null){
+            startActivityForResult(takeAPic,  REQUEST_CAMERA) //[NOTE PLEASE : requestCode]
+        }
+    }
+
+    fun fromGallery(){
+        val intent = Intent("android.intent.action.GET_CONTENT")
+        intent.setType("image/jpeg,image/png,image/bmp")
+        startActivityForResult(intent, REQUEST_GALLERY)
+    }
+
+    fun createPaletteSync(bitmap: Bitmap): Palette = Palette.from(bitmap).maximumColorCount(16).generate()
+
+    private fun code(v: View): View {
+        val openCamera = v.findViewById<Button>(R.id.openCamera)
+        val openGallery = v.findViewById<Button>(R.id.openGallery)
+        val startAnalysis = v.findViewById<Button>(R.id.startAnalysis)
 
         openCamera.setOnClickListener {
             displayCam()
@@ -37,48 +68,42 @@ class OA_pic2 : AppCompatActivity() {
         }
 
         startAnalysis.setOnClickListener {
-            if(singletonData.OASession.insertedOutfit) {
-                var intent = Intent(this, OA_result::class.java)
+            if(session.insertedPic2) {
+                var intent = Intent(requireContext(), OA_result::class.java)
                 //Button Back nanti tidak bisa digunakan untuk kembali ke activity ini
+                singletonData.OASession = session
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intent)
             }
             else{
-                Toast.makeText(this,getString(R.string.need_outfit_pic), Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),getString(R.string.need_outfit_pic), Toast.LENGTH_SHORT).show()
             }
         }
-    }
 
-    fun displayCam() {
-        var takeAPic = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if (takeAPic.resolveActivity(packageManager) != null){
-            startActivityForResult(takeAPic,  REQUEST_CAMERA)
-        }
-    }
-
-    fun fromGallery(){
-        val intent = Intent("android.intent.action.GET_CONTENT")
-        intent.setType("image/jpeg,image/png,image/bmp")
-        startActivityForResult(intent, REQUEST_GALLERY)
+        return v
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+        var photo = v.findViewById<ImageView>(R.id.photo)
+        var colorShow2 = v.findViewById<TextView>(R.id.colorShow2)
+
         if(requestCode == REQUEST_CAMERA && resultCode == Activity.RESULT_OK && data != null ){
             var thumbnail = data.extras
             var bitmap = thumbnail?.get("data") as Bitmap
             bitmap = singletonData.cropThis(bitmap)
 
-            singletonData.OASession.outiftPic = bitmap
+            session.pic2 = bitmap
             photo.setImageBitmap(bitmap)
 
             var color = createPaletteSync(bitmap)
             var dominant = color.dominantSwatch!!.rgb
 
             colorShow2.setBackgroundColor(dominant)
-            singletonData.OASession.outfitHex = dominant.asHex()
+            session.pic2Hex = dominant.asHex()
 
-            singletonData.OASession.insertedOutfit = true
+            session.insertedPic2 = true
         }
 
         if(requestCode == REQUEST_GALLERY && data != null && resultCode == Activity.RESULT_OK){
@@ -88,10 +113,10 @@ class OA_pic2 : AppCompatActivity() {
                 //Kode disesuaikan dengan versi SDK yang digunakan
                 //Versi sebelum Android Pie mungkin tidak bisa menjalankan ImageDecoder
                 bitmap = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
-                    ImageDecoder.decodeBitmap(ImageDecoder.createSource(this.contentResolver, selectedImageUri))
+                    ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireActivity().contentResolver, selectedImageUri))
                 }
                 else{
-                    MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImageUri)
+                    MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, selectedImageUri)
                 }
 
                 var bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -102,22 +127,17 @@ class OA_pic2 : AppCompatActivity() {
 
                 bitmap = singletonData.cropThis(bitmap)
 
-                singletonData.OASession.outiftPic = bitmap
+                session.pic2 = bitmap
                 photo.setImageBitmap(bitmap)
 
                 var color = createPaletteSync(bitmap)
                 var dominant = color.dominantSwatch!!.rgb
 
                 colorShow2.setBackgroundColor(dominant)
-                singletonData.OASession.outfitHex = dominant.asHex()
+                session.pic2Hex = dominant.asHex()
 
-                singletonData.OASession.insertedOutfit = true
+                session.insertedPic2 = true
             }
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
     }
 }

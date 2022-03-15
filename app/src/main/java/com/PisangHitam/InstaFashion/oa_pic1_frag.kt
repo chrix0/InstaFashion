@@ -7,29 +7,56 @@ import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.se.omapi.Session
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.palette.graphics.Palette
 import dev.jorgecastillo.androidcolorx.library.asHex
-import kotlinx.android.synthetic.main.activity_oa_pic1.*
+import kotlinx.android.synthetic.main.fragment_oa_pic1_frag.*
+import kotlinx.android.synthetic.main.fragment_oa_pic1_frag.colorShow
+import kotlinx.android.synthetic.main.fragment_oa_pic1_frag.openCamera
+import kotlinx.android.synthetic.main.fragment_oa_pic1_frag.openGallery
+import kotlinx.android.synthetic.main.fragment_oa_pic1_frag.photo
+import kotlinx.android.synthetic.main.fragment_oa_pic1_frag.toStep2
 import kotlinx.android.synthetic.main.recycler_tracker_productlist.*
-import kotlinx.android.synthetic.main.recycler_tracker_productlist.photo
 
-class OA_pic1 : AppCompatActivity() {
-
-    fun createPaletteSync(bitmap: Bitmap): Palette = Palette.from(bitmap).maximumColorCount(16).generate()
+class oa_pic1_frag : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_oa_pic1)
-        singletonData.OASession = classOASession()
+    }
 
-        val actionbar = supportActionBar
-        actionbar!!.title = getString(R.string.petAnalyzerTitle)
+    private var session = classOASession()
+    private lateinit var v : View
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        v = inflater.inflate(R.layout.fragment_oa_pic1_frag, container, false)
+        return code(v)
+    }
+
+    private fun code(v: View): View {
+//        singletonData.OASession = classOASession()
+//        val actionbar = supportActionBar
+//        actionbar!!.title = getString(R.string.petAnalyzerTitle)
+
+        val openCamera = v.findViewById<Button>(R.id.openCamera)
+        val openGallery = v.findViewById<Button>(R.id.openGallery)
+        val toStep2 = v.findViewById<Button>(R.id.toStep2)
 
         openCamera.setOnClickListener {
             displayCam()
@@ -40,19 +67,37 @@ class OA_pic1 : AppCompatActivity() {
         }
 
         toStep2.setOnClickListener {
-            if(singletonData.OASession.insertedPet){
-                var intent = Intent(this, OA_pic2::class.java)
-                startActivity(intent)
+            if(session.insertedPic1){
+//                var intent = Intent(context, OA_pic2::class.java)
+//                intent.putExtra()
+//                startActivity(intent)
+                nextStep()
             }
             else{
-                Toast.makeText(this,getString(R.string.need_pet_pic),Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,getString(R.string.need_pet_pic),Toast.LENGTH_SHORT).show()
             }
         }
+
+        return v
+    }
+
+    fun nextStep(){
+        val pic2frag = oa_pic2_frag()
+        val fragManager = fragmentManager
+        val fragTransaction = fragManager!!.beginTransaction()
+
+        val bundle = Bundle()
+        bundle.putParcelable(OA_NEXT_STEP, session)
+        pic2frag.arguments = bundle
+
+        fragTransaction.replace(R.id.container, pic2frag, "Step 2")
+        fragTransaction.addToBackStack(null)
+        fragTransaction.commit()
     }
 
     fun displayCam() {
         var takeAPic = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if (takeAPic.resolveActivity(packageManager) != null){
+        if (takeAPic.resolveActivity(requireActivity().packageManager) != null){
             startActivityForResult(takeAPic,  REQUEST_CAMERA) //[NOTE PLEASE : requestCode]
         }
     }
@@ -63,22 +108,28 @@ class OA_pic1 : AppCompatActivity() {
         startActivityForResult(intent, REQUEST_GALLERY)
     }
 
+    fun createPaletteSync(bitmap: Bitmap): Palette = Palette.from(bitmap).maximumColorCount(16).generate()
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+        var photo = v.findViewById<ImageView>(R.id.photo)
+        var colorShow = v.findViewById<TextView>(R.id.colorShow)
+
         if(requestCode == REQUEST_CAMERA && resultCode == Activity.RESULT_OK && data != null ){
             var thumbnail = data.extras
             var bitmap = thumbnail?.get("data") as Bitmap
             bitmap = singletonData.cropThis(bitmap)
 
-            singletonData.OASession.petPic = bitmap
+            session.pic1 = bitmap
             photo.setImageBitmap(bitmap)
 
             var color = createPaletteSync(bitmap)
             var dominant = color.dominantSwatch!!.rgb
 
             colorShow.setBackgroundColor(dominant)
-            singletonData.OASession.petHex = dominant.asHex()
-            singletonData.OASession.insertedPet = true
+            session.pic1Hex = dominant.asHex()
+            session.insertedPic1 = true
         }
 
         if(requestCode == REQUEST_GALLERY && data != null && resultCode == Activity.RESULT_OK){
@@ -89,10 +140,10 @@ class OA_pic1 : AppCompatActivity() {
                 //Versi sebelum Android Pie mungkin tidak bisa menjalankan ImageDecoder
 
                 bitmap = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
-                    ImageDecoder.decodeBitmap(ImageDecoder.createSource(this.contentResolver, selectedImageUri))
+                    ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireContext().contentResolver, selectedImageUri))
                 }
                 else{
-                    MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImageUri)
+                    MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageUri)
                 }
 
                 //Menggunakan config RGBA_F16 atau ARGB_8888 untuk menggantikan HARDWARE config.
@@ -105,16 +156,16 @@ class OA_pic1 : AppCompatActivity() {
 
                 bitmap = singletonData.cropThis(bitmap)
 
-                singletonData.OASession.petPic = bitmap
+                session.pic1 = bitmap
                 photo.setImageBitmap(bitmap)
 
                 var color = createPaletteSync(bitmap)
                 var dominant = color.dominantSwatch!!.rgb
 
                 colorShow.setBackgroundColor(dominant)
-                singletonData.OASession.petHex = dominant.asHex()
+                session.pic1Hex = dominant.asHex()
 
-                singletonData.OASession.insertedPet = true
+                session.insertedPic1 = true
             }
         }
     }
@@ -123,23 +174,22 @@ class OA_pic1 : AppCompatActivity() {
         var permissions = arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.CALL_PHONE)
         var needPermission : ArrayList<String> = ArrayList()
         for (i in permissions){
-            if(ContextCompat.checkSelfPermission(this, i) != PackageManager.PERMISSION_GRANTED){
+            if(ContextCompat.checkSelfPermission(requireContext(), i) != PackageManager.PERMISSION_GRANTED){
                 needPermission.add(i)
             }
         }
         if (!needPermission.isEmpty()){
-            ActivityCompat.requestPermissions(this,
+            ActivityCompat.requestPermissions(requireActivity(),
                 needPermission.toArray(arrayOfNulls(needPermission.size)),100)
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
     }
 
     override fun onStart() {
         super.onStart()
         getAllPermission()
+    }
+
+    companion object {
+
     }
 }

@@ -8,3 +8,4 @@ const val CHECKOUT = "com.PisangHitam.InstaFashion.CHECKOUT"
 const val RETURN_LAST_TAB = "com.PisangHitam.InstaFashion.LAST_TAB"
 const val REQUEST_CAMERA = 111
 const val REQUEST_GALLERY = 112
+const val OA_NEXT_STEP = "com.PisangHitam.InstaFashion.OA_NEXT"
