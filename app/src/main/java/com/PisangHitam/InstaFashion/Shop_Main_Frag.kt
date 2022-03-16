@@ -99,6 +99,8 @@ class Shop_Main_Frag : Fragment() {
             var intent = Intent(requireContext(), oa_container::class.java)
             startActivity(intent)
         }
+
+        //Code untuk CarouselView
         var carouselView = v.findViewById<CarouselView>(R.id.carouselView)
         carouselView.setPageCount(sampleImages.size);
 

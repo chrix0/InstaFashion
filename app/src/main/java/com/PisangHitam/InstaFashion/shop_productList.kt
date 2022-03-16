@@ -2,6 +2,7 @@ package com.PisangHitam.InstaFashion
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.inputmethod.EditorInfo
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.GridLayoutManager
@@ -23,7 +24,7 @@ class shop_productList : AppCompatActivity() {
         //Adapter + on click event
         adapter = recycler_products_adapter(tempList){
             val info = Intent(this, shop_infoProduk::class.java)
-            info.putExtra(SHOW_PRODUCT_INFO, it)
+            info.putExtra(SHOW_PRODUCT_INFO, it as Parcelable)
             info.putExtra(CHANGE_TITLE,getString(R.string.product_info_title))
             startActivity(info)
         }
@@ -37,7 +38,7 @@ class shop_productList : AppCompatActivity() {
                 tempList.addAll(filter(search.text.toString(),allData))
                 adapter = recycler_products_adapter(tempList){
                     val info = Intent(this, shop_infoProduk::class.java)
-                    info.putExtra(SHOW_PRODUCT_INFO, it)
+                    info.putExtra(SHOW_PRODUCT_INFO, it as Parcelable)
                     info.putExtra(CHANGE_TITLE,getString(R.string.product_info_title))
                     startActivity(info)
                 }

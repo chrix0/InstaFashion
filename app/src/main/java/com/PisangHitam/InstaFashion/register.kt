@@ -76,7 +76,6 @@ class register : AppCompatActivity() {
             }
         }
     }
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(EXTRA_REG_USER, username.text.toString())

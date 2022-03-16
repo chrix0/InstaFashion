@@ -184,14 +184,12 @@
 
     <!--Result-->
     <string name="Analysis_Result">Analysis Result</string>
-    <string name="result_pass">Your color choice of your pet\'s outfit is looking good! You can check for more outfits by pressing the button below.</string>
-    <string name="result_faulty">Your color choice of your pet\'s outfit seems to be unsuitable. You can follow one of the recommended colors or tap the button below to check for outfits which are suitable for yout pet!</string>
+    <string name="result_pass">Your color choice of your outfit is looking good! You can check for more outfits by pressing the button below.</string>
+    <string name="result_faulty">Your color choice of your outfit seems to be unsuitable. You can follow one of the recommended colors or tap the button below to check for outfits which are suitable for you!</string>
 
     <!--Recommend-->
     <string name="recommendLoading">Processing. Do not worry. It will be faster next time.</string>
     <string name="recommedationTitle">Recommendation</string>
-    <string name="byRain">by Rain</string>
-
 
     <string-array name="spinner_petCategoryItem">
         <item>All</item>

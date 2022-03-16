@@ -34,8 +34,8 @@ import kotlinx.android.synthetic.main.recycler_tracker_productlist.*
 class oa_pic1_frag : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //Ketika menekan back dari fragment pic2 ke pic1, hapus isi savedInstanceState
-        //Kecuali jika ada perubahan orientasi layar atau perubahan bahasa sistem
+        //Ketika menekan back dari fragment pic2 ke pic1, savedInstanceState diberi null
+        //agar gambar yang tersimpan pada saveInstanceState sebelumnya tidak muncul.
         if(savedInstanceState != null){
             super.onCreate(null)
         }
@@ -71,9 +71,6 @@ class oa_pic1_frag : Fragment() {
     }
 
     private fun code(v: View): View {
-//        singletonData.OASession = classOASession()
-//        val actionbar = supportActionBar
-//        actionbar!!.title = getString(R.string.petAnalyzerTitle)
 
         val openCamera = v.findViewById<Button>(R.id.openCamera)
         val openGallery = v.findViewById<Button>(R.id.openGallery)
@@ -91,9 +88,6 @@ class oa_pic1_frag : Fragment() {
 
         toStep2.setOnClickListener {
             if(session.insertedPic1){
-//                var intent = Intent(context, OA_pic2::class.java)
-//                intent.putExtra()
-//                startActivity(intent)
                 nextStep()
             }
             else{
@@ -125,7 +119,7 @@ class oa_pic1_frag : Fragment() {
     fun displayCam() {
         var takeAPic = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (takeAPic.resolveActivity(requireActivity().packageManager) != null){
-            startActivityForResult(takeAPic,  REQUEST_CAMERA) //[NOTE PLEASE : requestCode]
+            startActivityForResult(takeAPic,  REQUEST_CAMERA)
         }
     }
 
