@@ -24,9 +24,26 @@ class oa_pic2_frag : Fragment() {
 
     private lateinit var session : classOASession
     private lateinit var v : View
+    private var lastPhoto : Bitmap? = null
+    private lateinit var bitmap: Bitmap
+
+    private val EXTRA_SAVE_SESSION = "SAVE_SESSION_2"
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        if(savedInstanceState != null){
+            super.onCreate(null)
+        }
+        else{
+            super.onCreate(savedInstanceState)
+        }
+
+        if(savedInstanceState != null){
+            session = savedInstanceState?.getParcelable<classOASession>(EXTRA_SAVE_SESSION)!!
+            //Bisa saja savedInstanceState ditrigger ketika gambarnya belum diisi user
+            if(session.pic2 != null){
+                lastPhoto = session.pic2
+            }
+        }
     }
 
     override fun onCreateView(
@@ -58,6 +75,7 @@ class oa_pic2_frag : Fragment() {
         val openCamera = v.findViewById<Button>(R.id.openCamera)
         val openGallery = v.findViewById<Button>(R.id.openGallery)
         val startAnalysis = v.findViewById<Button>(R.id.startAnalysis)
+        val photo = v.findViewById<ImageView>(R.id.photo)
 
         openCamera.setOnClickListener {
             displayCam()
@@ -76,8 +94,12 @@ class oa_pic2_frag : Fragment() {
                 startActivity(intent)
             }
             else{
-                Toast.makeText(requireContext(),getString(R.string.need_outfit_pic), Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),"Please take a picture of your outfit before continuing", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        if(lastPhoto != null){
+            photo.setImageBitmap(lastPhoto)
         }
 
         return v
@@ -139,5 +161,10 @@ class oa_pic2_frag : Fragment() {
                 session.insertedPic2 = true
             }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelable(EXTRA_SAVE_SESSION, session)
     }
 }

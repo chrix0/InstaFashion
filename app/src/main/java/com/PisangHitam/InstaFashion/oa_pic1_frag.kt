@@ -34,11 +34,32 @@ import kotlinx.android.synthetic.main.recycler_tracker_productlist.*
 class oa_pic1_frag : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        //Ketika menekan back dari fragment pic2 ke pic1, hapus isi savedInstanceState
+        //Kecuali jika ada perubahan orientasi layar atau perubahan bahasa sistem
+        if(savedInstanceState != null){
+            super.onCreate(null)
+        }
+        else{
+            super.onCreate(savedInstanceState)
+        }
+
+        //restore savedInstanceState melalui onCreate
+        if(savedInstanceState != null){
+            session = savedInstanceState?.getParcelable<classOASession>(EXTRA_SAVE_SESSION)!!
+            //Bisa saja savedInstanceState ditrigger ketika gambarnya belum diisi user
+            if(session.pic1 != null){
+                lastPhoto = session.pic1
+            }
+        }
+
     }
 
     private var session = classOASession()
+    private var lastPhoto : Bitmap? = null
     private lateinit var v : View
+    private lateinit var bitmap: Bitmap
+
+    private val EXTRA_SAVE_SESSION = "SAVE_SESSION_1"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +78,8 @@ class oa_pic1_frag : Fragment() {
         val openCamera = v.findViewById<Button>(R.id.openCamera)
         val openGallery = v.findViewById<Button>(R.id.openGallery)
         val toStep2 = v.findViewById<Button>(R.id.toStep2)
+        val photo = v.findViewById<ImageView>(R.id.photo)
+
 
         openCamera.setOnClickListener {
             displayCam()
@@ -74,8 +97,12 @@ class oa_pic1_frag : Fragment() {
                 nextStep()
             }
             else{
-                Toast.makeText(context,getString(R.string.need_pet_pic),Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"Please take a picture of your outfit before continuing",Toast.LENGTH_SHORT).show()
             }
+        }
+
+        if(lastPhoto != null){
+            photo.setImageBitmap(lastPhoto)
         }
 
         return v
@@ -118,7 +145,7 @@ class oa_pic1_frag : Fragment() {
 
         if(requestCode == REQUEST_CAMERA && resultCode == Activity.RESULT_OK && data != null ){
             var thumbnail = data.extras
-            var bitmap = thumbnail?.get("data") as Bitmap
+            bitmap = thumbnail?.get("data") as Bitmap
             bitmap = singletonData.cropThis(bitmap)
 
             session.pic1 = bitmap
@@ -134,7 +161,6 @@ class oa_pic1_frag : Fragment() {
 
         if(requestCode == REQUEST_GALLERY && data != null && resultCode == Activity.RESULT_OK){
             val selectedImageUri: Uri? = data?.data
-            var bitmap : Bitmap
             if (null != selectedImageUri) {
                 //Kode disesuaikan dengan versi SDK yang digunakan
                 //Versi sebelum Android Pie mungkin tidak bisa menjalankan ImageDecoder
@@ -189,7 +215,8 @@ class oa_pic1_frag : Fragment() {
         getAllPermission()
     }
 
-    companion object {
-
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelable(EXTRA_SAVE_SESSION, session)
     }
 }

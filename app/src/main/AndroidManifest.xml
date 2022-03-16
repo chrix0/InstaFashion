@@ -25,7 +25,7 @@
         <activity
             android:name=".splash_screen"
             android:exported="true"
-            android:screenOrientation="portrait"
+            
             android:theme="@style/Theme.InstaFashion.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,52 +35,48 @@
         </activity>
         <activity
             android:name=".Personaldata"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+            android:exported="false" />
         <activity
             android:name=".register"
             android:exported="false"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.InstaFashion.NoActionBar" />
         <activity
             android:name=".oa_recommend"
             android:exported="false"
-            android:screenOrientation="portrait" />
+             />
         <activity
             android:name=".OA_result"
             android:exported="false"
-            android:screenOrientation="portrait" />
+             />
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.InstaFashion.NoActionBar"></activity>
         <activity
             android:name=".shop_productList"
             android:exported="false"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustNothing" />
         <activity
             android:name=".shop_tracker"
             android:exported="false"
-            android:screenOrientation="sensorPortrait" />
+             />
         <activity
             android:name=".shop_checkout"
             android:exported="false"
-            android:screenOrientation="sensorPortrait" />
+             />
         <activity
             android:name=".shop_basket"
             android:exported="true"
-            android:screenOrientation="sensorPortrait" />
+             />
         <activity
             android:name=".shop_infoProduk"
             android:exported="true"
-            android:screenOrientation="sensorPortrait" />
+             />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:screenOrientation="sensorPortrait"
+            
             android:theme="@style/Theme.InstaFashion.NoActionBar"
             android:windowSoftInputMode="adjustNothing"></activity>
     </application>
