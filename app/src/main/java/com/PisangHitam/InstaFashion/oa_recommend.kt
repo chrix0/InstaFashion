@@ -54,8 +54,11 @@ class oa_recommend : AppCompatActivity() {
                 singletonData.allImageProcessed = true
             }
             firstnComplement= checkColor(singletonData.OASession.rec[0].asRgb())
+
             firstnAnalog = mutableListOf()
             firstnAnalog.addAll(checkColor(singletonData.OASession.rec[1].asRgb()))
+            //Ada kemungkinan terdapat item yang sama di dalam rekomendasi warna analog pertama,
+            //sehingga dilakukan removeAll berdasarkan item yang dihasilkan pada rekomendasi warna kedua
             firstnAnalog.removeAll(checkColor(singletonData.OASession.rec[2].asRgb()))
             firstnAnalog.addAll(checkColor(singletonData.OASession.rec[2].asRgb()))
 
@@ -156,7 +159,8 @@ class oa_recommend : AppCompatActivity() {
                 maxIndex = idx
             }
         }
-        //Kelemahannya untuk warna hitam atau putih mungkin kurang cocok
+
+        //Untuk warna hitam atau putih mungkin kurang cocok
         var conclusion = when(maxIndex){
             0 -> "RED"
             1 -> "GREEN"

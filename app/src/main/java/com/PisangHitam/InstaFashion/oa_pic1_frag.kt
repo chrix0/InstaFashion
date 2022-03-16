@@ -91,9 +91,6 @@ class oa_pic1_frag : Fragment() {
 
         toStep2.setOnClickListener {
             if(session.insertedPic1){
-//                var intent = Intent(context, OA_pic2::class.java)
-//                intent.putExtra()
-//                startActivity(intent)
                 nextStep()
             }
             else{
@@ -125,7 +122,7 @@ class oa_pic1_frag : Fragment() {
     fun displayCam() {
         var takeAPic = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (takeAPic.resolveActivity(requireActivity().packageManager) != null){
-            startActivityForResult(takeAPic,  REQUEST_CAMERA) //[NOTE PLEASE : requestCode]
+            startActivityForResult(takeAPic,  REQUEST_CAMERA)
         }
     }
 
