@@ -18,11 +18,11 @@
            android:text="Your wishlist"
            android:textAppearance="?android:textAppearanceLarge"
            android:textStyle="bold"
-           android:layout_weight="5"/>
+           android:layout_weight="6"/>
 
        <ScrollView
            android:layout_width="match_parent"
-           android:layout_weight="95"
+           android:layout_weight="94"
            android:scrollbars="vertical"
            android:fadeScrollbars="false"
            android:scrollbarStyle="outsideOverlay"
@@ -32,7 +32,8 @@
                android:paddingBottom="30dp"
                android:id="@+id/wishList"
                android:layout_width="match_parent"
-               android:layout_height="match_parent"/>
+               android:layout_height="match_parent"
+               android:layout_gravity="center_horizontal"/>
        </ScrollView>
    </LinearLayout>
 

@@ -35,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "Successfully logged in.", Toast.LENGTH_SHORT).show()
                     var intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
                 else{
                     Toast.makeText(this, "Account is not found. Please try again.", Toast.LENGTH_SHORT).show()
@@ -57,5 +58,19 @@ class LoginActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         usernameLogin.setText(savedInstanceState?.getString(EXTRA_USER,""))
         passwordLogin.setText(savedInstanceState?.getString(EXTRA_PASS,""))
+    }
+
+    override fun onBackPressed() {
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(singletonData.reciever)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(singletonData.reciever, singletonData.filter)
     }
 }
