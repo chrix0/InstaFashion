@@ -1,6 +1,8 @@
 package com.PisangHitam.InstaFashion
 
 import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -11,13 +13,18 @@ import org.jetbrains.anko.uiThread
 
 @Suppress("Deprecation")
 class splash_screen : AppCompatActivity() {
+
+    val reciever = BR_networkCheck()
+    var filter = IntentFilter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(reciever, filter)
 
         //Dengan library anko
         doAsync{
-
             for(i in 0..1500){
                 uiThread {
                     progBar.progress += 1
@@ -26,10 +33,11 @@ class splash_screen : AppCompatActivity() {
             }
 
             uiThread {
-                progLabel.text = "Done!"
-                var intent = Intent(applicationContext, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
+                if (reciever.connected(this@splash_screen)){
+                    var intent = Intent(applicationContext, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
             }
         }
 
@@ -40,5 +48,19 @@ class splash_screen : AppCompatActivity() {
             finish()
         }, 3000)
          */
+    }
+    /*
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(reciever)
+    }
+    */
+
+    override fun onBackPressed() {
+
+    }
+
+    override fun onRestart() {
+        super.onRestart()
     }
 }

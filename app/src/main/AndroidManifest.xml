@@ -20,12 +20,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InstaFashion">
         <activity
+            android:name=".noNetworkDetected"
+            android:exported="false"
+            android:theme="@style/Theme.InstaFashion.NoActionBar"/>
+
+        <receiver
+            android:name=".BR_networkCheck"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
             android:name=".oa_container"
             android:exported="true" />
         <activity
             android:name=".splash_screen"
             android:exported="true"
-            
             android:theme="@style/Theme.InstaFashion.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,16 +51,14 @@
             android:theme="@style/Theme.InstaFashion.NoActionBar" />
         <activity
             android:name=".oa_recommend"
-            android:exported="false"
-             />
+            android:exported="false" />
         <activity
             android:name=".OA_result"
-            android:exported="false"
-             />
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.InstaFashion.NoActionBar"></activity>
+            android:theme="@style/Theme.InstaFashion.NoActionBar" />
         <activity
             android:name=".shop_productList"
             android:exported="false"
@@ -59,26 +66,21 @@
             android:windowSoftInputMode="stateVisible|adjustNothing" />
         <activity
             android:name=".shop_tracker"
-            android:exported="false"
-             />
+            android:exported="false" />
         <activity
             android:name=".shop_checkout"
-            android:exported="false"
-             />
+            android:exported="false" />
         <activity
             android:name=".shop_basket"
-            android:exported="true"
-             />
+            android:exported="true" />
         <activity
             android:name=".shop_infoProduk"
-            android:exported="true"
-             />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            
             android:theme="@style/Theme.InstaFashion.NoActionBar"
-            android:windowSoftInputMode="adjustNothing"></activity>
+            android:windowSoftInputMode="adjustNothing" />
     </application>
 
 </manifest>
