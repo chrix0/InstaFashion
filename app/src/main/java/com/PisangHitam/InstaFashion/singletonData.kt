@@ -1,5 +1,7 @@
 package com.PisangHitam.InstaFashion
 
+import android.content.BroadcastReceiver
+import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.media.ThumbnailUtils
 import com.PisangHitam.InstaFashion.classAccount
@@ -156,4 +158,7 @@ object singletonData {
 
         return ThumbnailUtils.extractThumbnail(pic, dimension, dimension)
     }
+
+    var reciever = BR_networkCheck()
+    var filter = IntentFilter()
 }

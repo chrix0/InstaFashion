@@ -49,7 +49,7 @@
             android:max="1500"
             android:min="0"
             android:progress="0"
-            app:indicatorColor="@color/inchwormGreen"/>
+            app:indicatorColor="@color/pal2"/>
     </LinearLayout>
 
     <LinearLayout

@@ -18,7 +18,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/sandyBrown"
+                android:background="@color/pal1"
                 android:padding="10dp">
 
                 <androidx.cardview.widget.CardView
@@ -36,7 +36,7 @@
                             android:text="@string/in_preparation"
                             android:layout_weight="4"
                             android:textColor="@color/black"
-                            android:background="@color/yellowish"
+                            android:background="@color/pal3"
                             android:gravity="center"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -52,6 +52,7 @@
                     android:id="@+id/jumlahItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/pal4"
                     android:layout_below="@id/produkTampil"
                     android:text="Total product count: 3" />
 
@@ -61,7 +62,7 @@
                     android:layout_height="40dp"
                     android:layout_below="@id/jumlahItem"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/darkerBrown"
+                    android:backgroundTint="@color/pal2"
                     android:elevation="10dp"
                     android:text="@string/details"
                     android:textColor="@color/white"

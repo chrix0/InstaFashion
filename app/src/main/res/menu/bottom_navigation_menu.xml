@@ -13,6 +13,6 @@
     <item
         android:id="@+id/profile_Main_Frag"
         android:enabled="true"
-        android:icon="@drawable/navbar_profile"
+        android:icon="@drawable/navbar_profile_filled"
         android:title="Profile"/>
 </menu>

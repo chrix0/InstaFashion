@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:text="RETRY"
             app:strokeColor="@color/black"
+            android:textColor="@color/black"
             app:strokeWidth="1dp"
             android:layout_marginTop="80dp"
             android:backgroundTint="@color/transparent"/>

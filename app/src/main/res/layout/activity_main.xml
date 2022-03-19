@@ -69,9 +69,8 @@
         android:layout_height="0dp"
         android:layout_gravity="bottom"
         android:layout_weight="1.5"
-        android:background="@color/sandyBrown"
-        app:itemIconTint="@color/darkerBrown"
-        app:itemTextColor="@color/black"
+        android:background="@color/pal1"
+        app:itemIconTint="@color/pal4"
         app:menu="@menu/bottom_navigation_menu"></com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </LinearLayout>

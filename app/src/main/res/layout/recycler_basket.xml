@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/sandyBrown"
+            android:background="@color/pal3"
             android:orientation="horizontal"
             android:padding="10dp"
             android:weightSum="4">
@@ -85,7 +85,7 @@
                             android:layout_width="20dp"
                             android:layout_height="30dp"
                             android:layout_toRightOf="@id/delete"
-                            android:background="@color/yellowish"
+                            android:background="@color/pal2"
                             android:clickable="true"
                             android:gravity="center"
                             android:text="-"
@@ -108,7 +108,7 @@
                             android:layout_width="20dp"
                             android:layout_height="30dp"
                             android:layout_toRightOf="@id/integer_number"
-                            android:background="@color/yellowish"
+                            android:background="@color/pal2"
                             android:clickable="true"
                             android:gravity="center"
                             android:text="+"

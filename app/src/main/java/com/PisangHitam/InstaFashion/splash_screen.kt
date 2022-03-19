@@ -14,31 +14,36 @@ import org.jetbrains.anko.uiThread
 @Suppress("Deprecation")
 class splash_screen : AppCompatActivity() {
 
-    val reciever = BR_networkCheck()
-    var filter = IntentFilter()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION)
-        registerReceiver(reciever, filter)
+        singletonData.filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION)
 
         //Dengan library anko
         doAsync{
+            registerReceiver(singletonData.reciever, singletonData.filter)
             for(i in 0..1500){
                 uiThread {
                     progBar.progress += 1
                 }
-                Thread.sleep(1) //Beri jeda 1ms untuk setiap iterasi
+                Thread.sleep(1)
+                 //Beri jeda 1ms untuk setiap iterasi
             }
 
+            //Thread.sleep(2000)
             uiThread {
-                if (reciever.connected(this@splash_screen)){
+                if (singletonData.reciever.connected(this@splash_screen)) {
                     var intent = Intent(applicationContext, LoginActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
-                    finish()
                 }
             }
+
+            //Ada kemungkinan progress bar stuck di max
+            if (progBar.progress == progBar.max){
+                recreate()
+            }
+
         }
 
         /*
@@ -49,18 +54,18 @@ class splash_screen : AppCompatActivity() {
         }, 3000)
          */
     }
-    /*
-    override fun onDestroy() {
-        super.onDestroy()
-        unregisterReceiver(reciever)
-    }
-    */
 
     override fun onBackPressed() {
 
     }
 
-    override fun onRestart() {
-        super.onRestart()
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(singletonData.reciever)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(singletonData.reciever, singletonData.filter)
     }
 }

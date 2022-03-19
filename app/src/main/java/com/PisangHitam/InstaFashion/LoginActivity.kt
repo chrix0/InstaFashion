@@ -34,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
                 if(found){
                     Toast.makeText(this, "Successfully logged in.", Toast.LENGTH_SHORT).show()
                     var intent = Intent(this, MainActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                 }
                 else{
@@ -57,5 +58,15 @@ class LoginActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         usernameLogin.setText(savedInstanceState?.getString(EXTRA_USER,""))
         passwordLogin.setText(savedInstanceState?.getString(EXTRA_PASS,""))
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(singletonData.reciever)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(singletonData.reciever, singletonData.filter)
     }
 }

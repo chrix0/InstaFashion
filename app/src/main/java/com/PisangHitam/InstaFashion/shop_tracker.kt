@@ -63,9 +63,7 @@ class shop_tracker : AppCompatActivity() {
         listHistory.adapter = adapter
 
         returnShop.setOnClickListener {
-            var intent = Intent(this, MainActivity::class.java)
-            intent.putExtra(RETURN_LAST_TAB, "SHOP")
-            startActivity(intent)
+            finish()
         }
     }
 }

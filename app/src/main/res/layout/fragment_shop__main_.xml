@@ -27,13 +27,14 @@
                     android:id="@+id/carouselView"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    app:fillColor="@color/inchwormGreen"
-                    app:pageColor="@color/white"
+                    app:fillColor="@color/pal4"
+                    app:pageColor="@color/pal3"
                     app:radius="5dp"
                     app:pageTransformInterval="1500"
                     app:slideInterval="5000"
-                    app:strokeColor="@color/grey"
-                    app:strokeWidth="1dp" />
+                    app:strokeColor="@color/pal1"
+                    app:snap="true"
+                    app:strokeWidth="2dp" />
             </com.google.android.material.card.MaterialCardView>
 
             <RelativeLayout
@@ -114,6 +115,7 @@
                             android:layout_height="40dp"
                             android:textAlignment="viewEnd"
                             android:layout_toRightOf="@id/title"
+                            android:textColor="@color/pal1"
                             android:text="More items" />
                     </LinearLayout>
 
@@ -157,9 +159,6 @@
         app:fabDrawableTint="@color/black"
         app:fabGravity="bottom_end"
         app:fabMenu="@menu/fab_expand"
-        app:miniFabBackgroundTint="@color/sandyBrown"
-        app:miniFabDrawableTint="?attr/colorPrimaryDark"
-        app:miniFabTitleTextColor="?attr/colorPrimaryDark"
         android:layout_margin="16dp"
         app:touchGuard="true"/>
 </FrameLayout>
