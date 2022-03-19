@@ -11,14 +11,9 @@ class MainActivity : AppCompatActivity() {
     private val EXTRA_SEARCH = "SRC"
     private val EXTRA_LAST_SELECTED_NAV = "LAST_NAV"
 
-    val reciever = BR_networkCheck()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        //Matikan Broadcast reciever setelah login
-        unregisterReceiver(reciever)
 
         val navController = findNavController(R.id.fragmentContainerView)
         navBottom.setupWithNavController(navController)

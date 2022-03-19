@@ -14,13 +14,13 @@ class noNetworkDetected : AppCompatActivity() {
 
         retryConnect.setOnClickListener{
             if (checker.connected(this)){
-                Toast.makeText(this, "Connected.", Toast.LENGTH_SHORT)
+                Toast.makeText(applicationContext, "Connected.", Toast.LENGTH_SHORT).show()
 //                var intent = Intent(applicationContext, LoginActivity::class.java)
 //                startActivity(intent)
                 finish()
             }
             else{
-                Toast.makeText(this, "Failed to connect.", Toast.LENGTH_SHORT)
+                Toast.makeText(applicationContext, "Failed to connect.", Toast.LENGTH_SHORT).show()
             }
         }
     }
