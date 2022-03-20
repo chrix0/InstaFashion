@@ -19,10 +19,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InstaFashion">
+        <receiver
+            android:name=".BR_inetCheck"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
+        <service
+            android:name=".service_inetCheck"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <activity
             android:name=".noNetworkDetected"
             android:exported="false"
-            android:theme="@style/Theme.InstaFashion.NoActionBar"/>
+            android:theme="@style/Theme.InstaFashion.NoActionBar" />
 
         <receiver
             android:name=".BR_networkCheck"

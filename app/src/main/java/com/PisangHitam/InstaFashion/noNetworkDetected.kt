@@ -14,7 +14,7 @@ class noNetworkDetected : AppCompatActivity() {
         setContentView(R.layout.activity_no_network_detected)
 
         retryConnect.setOnClickListener{
-            if (singletonData.reciever.connected(this)){
+            if (singletonData.nw_receiver.connected(this, false)){
                 Toast.makeText(applicationContext, "Connected.", Toast.LENGTH_SHORT).show()
                 var intent = Intent(applicationContext, LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

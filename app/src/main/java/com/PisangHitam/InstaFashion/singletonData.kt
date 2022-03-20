@@ -159,6 +159,11 @@ object singletonData {
         return ThumbnailUtils.extractThumbnail(pic, dimension, dimension)
     }
 
-    var reciever = BR_networkCheck()
-    var filter = IntentFilter()
+    //BR - Cek network
+    var nw_receiver = BR_networkCheck()
+    var nw_filter = IntentFilter()
+
+    //BR - Cek internet
+    var inet_receiver = BR_inetCheck()
+    var inet_filter = IntentFilter()
 }

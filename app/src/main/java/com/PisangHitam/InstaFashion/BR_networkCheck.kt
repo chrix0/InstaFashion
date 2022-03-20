@@ -14,30 +14,32 @@ class BR_networkCheck : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         // Ketika menerima intent broadcast..
-        if (!connected(context)){
-            Toast.makeText(context, "No internet connection!", Toast.LENGTH_LONG)
+        if (!connected(context, false)){
+            Toast.makeText(context, "No internet connection!", Toast.LENGTH_LONG).show()
             var intent = Intent(context, noNetworkDetected::class.java)
             context.startActivity(intent)
         }
     }
 
-    fun connected(context: Context) : Boolean{
+    fun connected(context: Context, showToast: Boolean) : Boolean{
         val cm : ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         // Periksa apakah wifi atau mobile data hidup
         val active = cm.activeNetworkInfo
         if (active != null && active.isConnected){
-            when(active.type){
-                ConnectivityManager.TYPE_WIFI -> {
-                    Toast.makeText(context, "Wifi detected!", Toast.LENGTH_SHORT)
-                }
-                ConnectivityManager.TYPE_MOBILE -> {
-                    Toast.makeText(context, "Mobile data detected!", Toast.LENGTH_SHORT)
-                }
-            }
+            if (showToast) showToastActive(context, active.type)
             return true
         }
-        else{
-            return false
+        return false
+    }
+
+    fun showToastActive(context: Context, type : Int){
+        when(type){
+            ConnectivityManager.TYPE_WIFI -> {
+                Toast.makeText(context, "Wifi detected!", Toast.LENGTH_SHORT).show()
+            }
+            ConnectivityManager.TYPE_MOBILE -> {
+                Toast.makeText(context, "Mobile data detected!", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

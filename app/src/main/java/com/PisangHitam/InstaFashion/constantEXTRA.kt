@@ -9,3 +9,6 @@ const val RETURN_LAST_TAB = "com.PisangHitam.InstaFashion.LAST_TAB"
 const val REQUEST_CAMERA = 111
 const val REQUEST_GALLERY = 112
 const val OA_NEXT_STEP = "com.PisangHitam.InstaFashion.OA_NEXT"
+const val JOB_CHECK_INTERNET = 113
+const val CHECK_INTERNET = "com.PisangHitam.InstaFashion.INTERNET_CHECK"
+const val INTERNET_CONNECTED = "com.PisangHitam.InstaFashion.INTERNET_CON"

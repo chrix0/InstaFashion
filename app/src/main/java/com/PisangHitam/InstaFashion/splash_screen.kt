@@ -17,11 +17,11 @@ class splash_screen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-        singletonData.filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION)
+        singletonData.nw_filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION)
 
         //Dengan library anko
         doAsync{
-            registerReceiver(singletonData.reciever, singletonData.filter)
+            registerReceiver(singletonData.nw_receiver, singletonData.nw_filter)
             for(i in 0..1500){
                 uiThread {
                     progBar.progress += 1
@@ -32,7 +32,7 @@ class splash_screen : AppCompatActivity() {
 
             //Thread.sleep(2000)
             uiThread {
-                if (singletonData.reciever.connected(this@splash_screen)) {
+                if (singletonData.nw_receiver.connected(this@splash_screen, true)) {
                     var intent = Intent(applicationContext, LoginActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
@@ -61,11 +61,11 @@ class splash_screen : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        unregisterReceiver(singletonData.reciever)
+        unregisterReceiver(singletonData.nw_receiver)
     }
 
     override fun onResume() {
         super.onResume()
-        registerReceiver(singletonData.reciever, singletonData.filter)
+        registerReceiver(singletonData.nw_receiver, singletonData.nw_filter)
     }
 }

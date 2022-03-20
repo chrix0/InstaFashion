@@ -62,11 +62,11 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        unregisterReceiver(singletonData.reciever)
+        unregisterReceiver(singletonData.nw_receiver)
     }
 
     override fun onResume() {
         super.onResume()
-        registerReceiver(singletonData.reciever, singletonData.filter)
+        registerReceiver(singletonData.nw_receiver, singletonData.nw_filter)
     }
 }

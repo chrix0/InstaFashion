@@ -1,5 +1,6 @@
 package com.PisangHitam.InstaFashion
 
+import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //Cek koneksi internet
+        singletonData.inet_receiver = BR_inetCheck()
+        singletonData.inet_filter = IntentFilter(CHECK_INTERNET)
+        var service = Intent(this, service_inetCheck::class.java)
+        service_inetCheck.enqueueWork(this, service)
 
         val navController = findNavController(R.id.fragmentContainerView)
         navBottom.setupWithNavController(navController)
@@ -57,5 +64,15 @@ class MainActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         main_search.setText(savedInstanceState?.getString(EXTRA_SEARCH,""))
         navBottom.selectedItemId = savedInstanceState?.getInt(EXTRA_LAST_SELECTED_NAV, R.id.shop_Main_Frag)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(singletonData.inet_receiver, singletonData.inet_filter)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(singletonData.inet_receiver)
     }
 }
