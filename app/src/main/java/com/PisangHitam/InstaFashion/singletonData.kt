@@ -1,5 +1,7 @@
 package com.PisangHitam.InstaFashion
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.IntentFilter
 import android.graphics.Bitmap
@@ -166,4 +168,8 @@ object singletonData {
     //BR - Cek internet
     var inet_receiver = BR_inetCheck()
     var inet_filter = IntentFilter()
+
+    //BR - Notifikasi Recommender
+    var mAlarmManager : AlarmManager? = null
+    var mPendingIntent : PendingIntent? = null
 }

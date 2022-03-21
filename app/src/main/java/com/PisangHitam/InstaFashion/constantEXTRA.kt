@@ -12,3 +12,5 @@ const val OA_NEXT_STEP = "com.PisangHitam.InstaFashion.OA_NEXT"
 const val JOB_CHECK_INTERNET = 113
 const val CHECK_INTERNET = "com.PisangHitam.InstaFashion.INTERNET_CHECK"
 const val INTERNET_CONNECTED = "com.PisangHitam.InstaFashion.INTERNET_CON"
+const val EXTRA_NOTIF_MSG_REC = "com.PisangHitam.InstaFashion.NOTIF_MSG_REC"
+const val BUNDLE_NOTIF_MSG_REC = "com.PisangHitam.InstaFashion.NOTIF_MSG_REC_BUNDLE"

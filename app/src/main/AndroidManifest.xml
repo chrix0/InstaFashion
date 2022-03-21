@@ -20,9 +20,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InstaFashion">
         <receiver
-            android:name=".BR_inetCheck"
+            android:name=".BR_recNotifier"
             android:enabled="true"
             android:exported="true"></receiver>
+        <receiver
+            android:name=".BR_inetCheck"
+            android:enabled="true"
+            android:exported="true" />
 
         <service
             android:name=".service_inetCheck"

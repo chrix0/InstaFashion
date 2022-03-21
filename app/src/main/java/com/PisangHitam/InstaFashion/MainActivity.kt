@@ -1,17 +1,26 @@
 package com.PisangHitam.InstaFashion
 
+import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
     private val EXTRA_SEARCH = "SRC"
     private val EXTRA_LAST_SELECTED_NAV = "LAST_NAV"
 
+    @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -52,6 +61,51 @@ class MainActivity : AppCompatActivity() {
                 navBottom.selectedItemId = R.id.shop_Main_Frag
             }
         }
+
+        singletonData.mAlarmManager = null
+        singletonData.mPendingIntent = null
+
+        singletonData.mAlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        //Kalau mPendingIntent ada isi
+        if(singletonData.mPendingIntent != null){
+            //Batalkan alarm manager
+            singletonData.mAlarmManager?.cancel(singletonData.mPendingIntent)
+            //Batalkan Pending Intent
+            singletonData.mPendingIntent?.cancel()
+        }
+
+        var sendIntent = Intent(this, BR_recNotifier::class.java)
+
+        var product = getRandomProduct()
+        var notifText = "Take a look : ${product.namaProduk}"
+        var notifTitle = "Check this out!"
+        var rec = classRecNotif(notifText, notifTitle)
+
+        //BR tidak bisa menerima parcelable, sehingga perlu dibungkus dalam bundle terebih dahulu
+        var bundle = Bundle()
+        bundle.putParcelable(BUNDLE_NOTIF_MSG_REC, rec)
+        sendIntent.putExtra(EXTRA_NOTIF_MSG_REC, bundle)
+
+        Log.w("classRecNotif","${rec.ContextText} ${rec.ContextTitle}")
+
+        //Ambil waktu saat ini
+        var alarmTimer = Calendar.getInstance()
+        //Tambahkan 15 detik di alarmTimer
+        alarmTimer.add(Calendar.SECOND, 15)
+
+        singletonData.mPendingIntent = PendingIntent.getBroadcast(this, 200, sendIntent, 0 )
+        singletonData.mAlarmManager!!.setInexactRepeating(AlarmManager.RTC, alarmTimer.timeInMillis, AlarmManager.INTERVAL_FIFTEEN_MINUTES,singletonData.mPendingIntent)
+    }
+
+    //Gunakan nanoTime dari sistem sebagai seed untuk Random
+    fun rand(start : Int, end: Int) = Random(System.nanoTime()).nextInt(end - start + 1) + start
+
+    fun getRandomProduct() : classProduk{
+        var products = singletonData.outfitList
+        var jumlahProduct = products.size
+        var indexRandom = rand(0, jumlahProduct - 1)
+        return products[indexRandom]
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
