@@ -9,6 +9,10 @@ import androidx.core.app.JobIntentService
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.lang.Exception
+import java.net.InetAddress
+
+
+
 
 @Suppress("Deprecation")
 class service_inetCheck : JobIntentService() {
@@ -19,29 +23,16 @@ class service_inetCheck : JobIntentService() {
     }
 
     private fun isConnected() : Boolean{
+        val command = "ping -c 1 example.com"
         return try {
-            val command = "ping -c 1 google.com"
             Runtime.getRuntime().exec(command).waitFor() == 0
         } catch (e: Exception) {
             false
         }
-        return false
     }
 
     override fun onDestroy(){
         super.onDestroy()
-        doAsync {
-            if(!isConnected()){
-                uiThread {
-                    Toast.makeText(applicationContext, "Connection timeout! Please check your internet connection.", Toast.LENGTH_SHORT).show()
-                }
-            }
-            else{
-                uiThread {
-                    Toast.makeText(applicationContext, "Internet found (tolong hapus toast ini nanti).", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
     }
 
     companion object{

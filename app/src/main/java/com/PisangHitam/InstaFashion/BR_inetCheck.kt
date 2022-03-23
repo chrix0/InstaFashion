@@ -20,7 +20,7 @@ class BR_inetCheck : BroadcastReceiver() {
             }
             else{
                 uiThread {
-                    Toast.makeText(context, "Internet found (tolong hapus toast ini nanti).", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Internet found.", Toast.LENGTH_SHORT).show()
                 }
             }
         }

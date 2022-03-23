@@ -11,6 +11,7 @@ import android.os.Parcelable
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import kotlin.random.Random
 
 class BR_recNotifier : BroadcastReceiver() {
 
@@ -28,21 +29,23 @@ class BR_recNotifier : BroadcastReceiver() {
             null
         }
 
-        //Keluarkan parcelable dari bundle
+        /*
         var bundleIntent = intent.getBundleExtra(EXTRA_NOTIF_MSG_REC)
         var obj : classRecNotif? = null
         if (bundleIntent != null){
             obj = bundleIntent.getParcelable(BUNDLE_NOTIF_MSG_REC)!!
         }
+         */
 
-        var text = obj?.ContextText
-        var title = obj?.ContextTitle
+        var product = getRandomProduct()
+        var notifText = "${product.namaProduk}"
+        var notifTitle = "Check this out!"
 
         //Notifikasi
         var mBuilder = NotificationCompat.Builder(context, Channel_id)
             .setSmallIcon(R.drawable.logo01)
-            .setContentText(text)
-            .setContentTitle(title)
+            .setContentText(notifText)
+            .setContentTitle(notifTitle)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         var mNotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -55,5 +58,14 @@ class BR_recNotifier : BroadcastReceiver() {
 
         //Munculkan notifikasi
         mNotificationManager.notify(NotifyId, mBuilder.build())
+    }
+
+    fun rand(start : Int, end: Int) = Random(System.nanoTime()).nextInt(end - start + 1) + start
+
+    fun getRandomProduct() : classProduk{
+        var products = singletonData.outfitList
+        var jumlahProduct = products.size
+        var indexRandom = rand(0, jumlahProduct - 1)
+        return products[indexRandom]
     }
 }

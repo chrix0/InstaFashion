@@ -62,6 +62,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        main_cart.setOnClickListener{
+            var intent = Intent(this, shop_basket::class.java)
+            startActivity(intent)
+        }
+
         singletonData.mAlarmManager = null
         singletonData.mPendingIntent = null
 
@@ -82,12 +87,12 @@ class MainActivity : AppCompatActivity() {
         var notifTitle = "Check this out!"
         var rec = classRecNotif(notifText, notifTitle)
 
-        //BR tidak bisa menerima parcelable, sehingga perlu dibungkus dalam bundle terebih dahulu
+        //BR tidak bisa menerima parcelable. Jika perlu mengirim parcelable, harus dibungkus dalam bundle terebih dahulu
+        /*
         var bundle = Bundle()
         bundle.putParcelable(BUNDLE_NOTIF_MSG_REC, rec)
         sendIntent.putExtra(EXTRA_NOTIF_MSG_REC, bundle)
-
-        Log.w("classRecNotif","${rec.ContextText} ${rec.ContextTitle}")
+        */
 
         //Ambil waktu saat ini
         var alarmTimer = Calendar.getInstance()

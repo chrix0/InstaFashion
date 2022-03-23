@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_no_network_detected.*
 import org.jetbrains.anko.companionDeviceManager
+import kotlin.system.exitProcess
 
 class noNetworkDetected : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +24,11 @@ class noNetworkDetected : AppCompatActivity() {
             else{
                 Toast.makeText(applicationContext, "Failed to connect.", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        exitApp.setOnClickListener {
+            finishAffinity()
+            System.exit(0)
         }
     }
 }
