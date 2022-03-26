@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:layout_marginTop="25dp"
-            android:text="No network found. Please check your internet settings."/>
+            android:text="No network found. Please check your network settings."/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/retryConnect"

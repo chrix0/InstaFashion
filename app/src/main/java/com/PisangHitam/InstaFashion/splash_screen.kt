@@ -6,7 +6,9 @@ import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.room.Room
 import com.PisangHitam.InstaFashion.LoginActivity
+import com.PisangHitam.InstaFashion.Room.roomHelper
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -21,7 +23,6 @@ class splash_screen : AppCompatActivity() {
 
         //Dengan library anko
         doAsync{
-            registerReceiver(singletonData.nw_receiver, singletonData.nw_filter)
             for(i in 0..1500){
                 uiThread {
                     progBar.progress += 1

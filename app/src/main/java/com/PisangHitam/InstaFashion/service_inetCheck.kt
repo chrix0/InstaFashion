@@ -12,8 +12,6 @@ import java.lang.Exception
 import java.net.InetAddress
 
 
-
-
 @Suppress("Deprecation")
 class service_inetCheck : JobIntentService() {
     override fun onHandleWork(intent: Intent) {

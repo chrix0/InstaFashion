@@ -16,15 +16,32 @@
         android:layout_weight="70"
         android:src="@drawable/test_dog" />
 
-    <TextView
-        android:id="@+id/name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/productImg"
-        android:paddingTop="15dp"
-        android:text="TEST DOGS ARE NOT FOODS"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:weightSum="10">
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="TEST DOGS ARE NOT FOODS"
+            android:textSize="15sp"
+            android:layout_marginRight="10dp"
+            android:textStyle="bold"
+            android:layout_weight="9"/>
+
+        <ToggleButton
+            android:id="@+id/addToWish"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:button="@drawable/wishtoggle"
+            android:textOn=""
+            android:textOff=""
+            android:checked="false" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/price"

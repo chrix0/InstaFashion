@@ -17,9 +17,18 @@ import kotlinx.android.synthetic.main.fragment_shop__main_.*
 
 import com.synnapps.carouselview.CarouselView
 import android.widget.ImageView
+import android.widget.Toast
+import com.PisangHitam.InstaFashion.Room.daoOutfitList
+import com.PisangHitam.InstaFashion.Room.roomHelper
 import com.squareup.picasso.Picasso
 
 import com.synnapps.carouselview.ImageListener
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.runOnUiThread
+import org.jetbrains.anko.support.v4.runOnUiThread
+import org.jetbrains.anko.support.v4.supportFragmentUiThread
+import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.uiThread
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,18 +60,21 @@ class Shop_Main_Frag : Fragment() {
     }
 
     private fun doSomething(v: View): View {
+
+        var helper : roomHelper = singletonData.getRoomHelper(requireContext())
+        var dbOutfit : daoOutfitList? = helper.daoOutfitList()
         //RECYCLER VIEW
         val itemList = v.findViewById<RecyclerView>(R.id.itemList)
-
-        val first5item : List<classProduk> = singletonData.outfitList.take(5)
-
-        adapter = recycler_products_adapter(first5item){
-            val info = Intent(requireContext(), shop_infoProduk::class.java)
-            info.putExtra(SHOW_PRODUCT_INFO, it)
-            info.putExtra(CHANGE_TITLE,"Product Info")
-            startActivity(info)
+        for(i in singletonData.outfitList){
+            dbOutfit!!.addOutfit(i)
         }
-        itemList.adapter = adapter
+
+        var first5item : List<classProduk> = dbOutfit!!.getAllOutfit()
+
+        //val first5item : List<classProduk> = singletonData.outfitList.take(5)
+        Toast.makeText(context, first5item.size.toString(), Toast.LENGTH_SHORT)
+
+        itemList.adapter = getAdapter(first5item)
         itemList.layoutManager = LinearLayoutManager(requireContext(),
             LinearLayoutManager.HORIZONTAL, false)
 
@@ -111,7 +123,50 @@ class Shop_Main_Frag : Fragment() {
 
         carouselView.setImageListener(imageListener);
 
+
+        //Category Buttons
+        val catShirt = v.findViewById<Button>(R.id.catShirt)
+        val catTrousers = v.findViewById<Button>(R.id.catTrousers)
+        val catShoes = v.findViewById<Button>(R.id.catShoes)
+        val catAccess = v.findViewById<Button>(R.id.catAccess)
+        val catJacket = v.findViewById<Button>(R.id.catJacket)
+
+        catShirt.setOnClickListener {
+            adapter = getAdapter(dbOutfit!!.getOutfitLimited("shirt", 5))
+            itemList.adapter = adapter
+        }
+
+        catTrousers.setOnClickListener {
+            adapter = getAdapter(dbOutfit!!.getOutfitLimited("trousers", 5))
+            itemList.adapter = adapter
+        }
+
+        catShoes.setOnClickListener {
+            adapter = getAdapter(dbOutfit!!.getOutfitLimited("shoes", 5))
+            itemList.adapter = adapter
+        }
+
+        catAccess.setOnClickListener {
+            adapter = getAdapter(dbOutfit!!.getOutfitLimited("access", 5))
+            itemList.adapter = adapter
+        }
+
+        catJacket.setOnClickListener {
+            adapter = getAdapter(dbOutfit!!.getOutfitLimited("jacket", 5))
+            itemList.adapter = adapter
+        }
+
         return v
+    }
+
+    fun getAdapter(list : List<classProduk>) : recycler_products_adapter{
+        adapter = recycler_products_adapter(list){
+            val info = Intent(requireContext(), shop_infoProduk::class.java)
+            info.putExtra(SHOW_PRODUCT_INFO, it)
+            info.putExtra(CHANGE_TITLE,"Product Info")
+            startActivity(info)
+        }
+        return adapter
     }
 
     companion object {

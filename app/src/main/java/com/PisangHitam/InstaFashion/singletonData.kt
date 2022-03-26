@@ -3,9 +3,12 @@ package com.PisangHitam.InstaFashion
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.media.ThumbnailUtils
+import androidx.room.Room
+import com.PisangHitam.InstaFashion.Room.roomHelper
 import com.PisangHitam.InstaFashion.classAccount
 import com.PisangHitam.InstaFashion.classItemBasket
 import com.PisangHitam.InstaFashion.classOASession
@@ -172,4 +175,12 @@ object singletonData {
     //BR - Notifikasi Recommender
     var mAlarmManager : AlarmManager? = null
     var mPendingIntent : PendingIntent? = null
+
+    //ROOM DATABASE
+    fun getRoomHelper(context : Context) : roomHelper{
+        return Room.databaseBuilder(context, roomHelper::class.java, "InstaFashionRoom.db" )
+            .allowMainThreadQueries()
+            .build()
+    }
+
 }
