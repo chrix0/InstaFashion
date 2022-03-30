@@ -11,6 +11,7 @@ import com.PisangHitam.InstaFashion.classTransaction
 import kotlinx.android.synthetic.main.activity_shop_checkout.*
 import kotlinx.android.synthetic.main.activity_shop_checkout.subtotal
 import kotlinx.android.synthetic.main.activity_shop_info_produk.*
+import org.jetbrains.anko.doBeforeSdk
 import java.text.DecimalFormat
 import java.util.*
 
@@ -23,7 +24,8 @@ class shop_checkout : AppCompatActivity() {
         actionbar!!.title = "Checkout"
         actionbar.setDisplayHomeAsUpEnabled(true)
 
-        val user = singletonData.accList[singletonData.currentAccId]
+        val user = singletonData.getCurUserObj(this)
+//            singletonData.accList[singletonData.currentAccId]
         var curDate = Calendar.getInstance()
         var year = curDate.get(Calendar.YEAR)
         var month = curDate.get(Calendar.MONTH)
@@ -34,29 +36,29 @@ class shop_checkout : AppCompatActivity() {
 
         var transaksi = classTransaction(datePurchase = "${day}-${month}-${year} ${DecimalFormat("00").format(hour)}:${DecimalFormat("00").format(minute)}")
 
-        transaksi.id = singletonData.accList[singletonData.currentAccId].transactionHistory.size
+        transaksi.id = user!!.transactionHistory.size
         //items
-        transaksi.items.addAll(user.cartContent)
+        transaksi.items.addAll(user!!.cartContent)
 
         val promptAddress : String = getString(R.string.promptAddress)
         val promptPhone : String = getString(R.string.promptPhone)
 
         //address cara 1
-        var address = user.shippingAddress
+        var address = user!!.shippingAddress
         if(address[0].equals("") && address[1].equals("") && address[2].equals("") && address[3].equals("")){
             alamat.setText(promptAddress)
         }
         else{
-            transaksi.address = user.shippingAddress
-            alamat.setText(formatAlamat(user.shippingAddress))
+            transaksi.address = user!!.shippingAddress
+            alamat.setText(formatAlamat(user!!.shippingAddress))
         }
         //phoneNumber cara 1
-        if(user.phoneNumber.equals("")){
+        if(user!!.phoneNumber.equals("")){
             telp.setText(promptPhone)
         }
         else{
-            transaksi.phoneNumber = user.phoneNumber
-            telp.setText(user.phoneNumber)
+            transaksi.phoneNumber = user!!.phoneNumber
+            telp.setText(user!!.phoneNumber)
         }
 
         //method
@@ -88,11 +90,11 @@ class shop_checkout : AppCompatActivity() {
             var done = layout.findViewById<Button>(R.id.saveAddress)
             var cancel = layout.findViewById<Button>(R.id.cancelAddress)
 
-            if(singletonData.accList[singletonData.currentAccId].shippingAddress.size != 0){
-                address.setText(singletonData.accList[singletonData.currentAccId].shippingAddress[0])
-                city.setText(singletonData.accList[singletonData.currentAccId].shippingAddress[1])
-                province.setText(singletonData.accList[singletonData.currentAccId].shippingAddress[2])
-                postal.setText(singletonData.accList[singletonData.currentAccId].shippingAddress[3])
+            if(user!!.shippingAddress.size != 0){
+                address.setText(user!!.shippingAddress[0])
+                city.setText(user!!.shippingAddress[1])
+                province.setText(user!!.shippingAddress[2])
+                postal.setText(user!!.shippingAddress[3])
             }
 
             done.setOnClickListener {
@@ -104,10 +106,13 @@ class shop_checkout : AppCompatActivity() {
                     Toast.makeText(this,getString(R.string.need_all_filled),Toast.LENGTH_SHORT).show()
                 }
                 else{
-                    user.shippingAddress = mutableListOf<String>(address.text.toString(), city.text.toString(), province.text.toString(), postal.text.toString())
-                    singletonData.accList[singletonData.currentAccId].shippingAddress = user.shippingAddress
-                    transaksi.address = user.shippingAddress
+                    user!!.shippingAddress = mutableListOf<String>(address.text.toString(), city.text.toString(), province.text.toString(), postal.text.toString())
+                    transaksi.address = user!!.shippingAddress
                     alamat.setText(formatAlamat(transaksi.address))
+
+                    var db = singletonData.getRoomHelper(this)
+                    db.daoAccount().updateAcc(user!!)
+
                     Toast.makeText(this,getString(R.string.success_update_address),Toast.LENGTH_SHORT).show()
                     creator.cancel()
                 }
@@ -134,8 +139,8 @@ class shop_checkout : AppCompatActivity() {
             var cancel = layout.findViewById<Button>(R.id.cancelPhone)
 
             //Code here
-            if(!singletonData.accList[singletonData.currentAccId].phoneNumber.equals("")){
-                phone.setText(singletonData.accList[singletonData.currentAccId].phoneNumber)
+            if(!user.phoneNumber.equals("")){
+                phone.setText(user.phoneNumber)
             }
 
             done.setOnClickListener {
@@ -144,9 +149,12 @@ class shop_checkout : AppCompatActivity() {
                 }
                 else{
                     user.phoneNumber = phone.text.toString()
-                    singletonData.accList[singletonData.currentAccId].phoneNumber = user.phoneNumber
                     transaksi.phoneNumber = user.phoneNumber
                     telp.setText(user.phoneNumber)
+
+                    var db = singletonData.getRoomHelper(this)
+                    db.daoAccount().updateAcc(user)
+
                     Toast.makeText(this,getString(R.string.success_update_phone),Toast.LENGTH_SHORT).show()
                     creator.cancel()
                 }
@@ -161,13 +169,13 @@ class shop_checkout : AppCompatActivity() {
         }
 
         var ongkos : Int = 5000
-        transaksi.subTotal = singletonData.subtotalInCart()
+        transaksi.subTotal = singletonData.subtotalInCart(this)
         subtotal.setText("Rp." +singletonData.formatHarga(transaksi.subTotal))
 
         transaksi.shippingCost = ongkos
         ongkir.setText("Rp." +singletonData.formatHarga(transaksi.shippingCost))
 
-        transaksi.Total = singletonData.totalInCart()
+        transaksi.Total = singletonData.totalInCart(this)
         total.setText("Rp." +singletonData.formatHarga(transaksi.Total))
 
         checkout.setOnClickListener {
@@ -178,12 +186,17 @@ class shop_checkout : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.need_all_filled),Toast.LENGTH_LONG).show()
             }
             else{
-                singletonData.accList[singletonData.currentAccId].cartContent.clear()
+                user.cartContent.clear()
                 var toHistory = Intent(this, shop_tracker::class.java)
-                singletonData.accList[singletonData.currentAccId].transactionHistory.add(transaksi)
-                toHistory.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                user.transactionHistory.add(transaksi)
+
+                var db = singletonData.getRoomHelper(this)
+                db.daoAccount().updateAcc(user)
+
+                toHistory.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(toHistory)
             }
+
         }
     }
 

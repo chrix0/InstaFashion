@@ -82,20 +82,12 @@ class shop_productList : AppCompatActivity() {
         }
     }
 
-    private fun filter(searchText : String, data : MutableList<classProduk>) : MutableList<classProduk>{
-        var newList : MutableList<classProduk> = mutableListOf()
-        var text = searchText.trim().lowercase()
-        if (text.equals("")){
-            newList.addAll(data)
-        }
-        else{
-            for(i : classProduk in data){
-                if(i.namaProduk.lowercase().contains(text)){
-                    newList.add(i)
-                }
-            }
-        }
+    private fun filter(searchText : String, data : MutableList<classProduk>) : List<classProduk>{
+        var newList : List<classProduk> = mutableListOf()
 
+        var db = singletonData.getRoomHelper(this)
+        var like = "%${searchText}%"
+        newList = db.daoOutfitList().getOutfitLike(like)
         return newList
     }
 

@@ -64,6 +64,12 @@ class recycler_basket_adapter(val context : Context,
                 .setMessage(context.getString(R.string.confirmDeleteFromBasket, myData[position].namaProduk))
                 .setPositiveButton(context.getString(R.string.OK), DialogInterface.OnClickListener{ dialogInterface, i ->
                     myData.removeAt(position)
+
+                    var db = singletonData.getRoomHelper(context)
+                    var user = singletonData.getCurUserObj(context)
+                    user?.cartContent = myData
+                    db.daoAccount().updateAcc(user!!)
+
                     update()
                 })
                 .setNegativeButton(context.getString(R.string.cancel), DialogInterface.OnClickListener{ dialogInterface, i ->

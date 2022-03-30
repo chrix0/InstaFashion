@@ -33,6 +33,11 @@ class splash_screen : AppCompatActivity() {
 
             //Thread.sleep(2000)
             uiThread {
+//                var db = singletonData.getRoomHelper(baseContext)
+//                for(i in singletonData.accList){
+//                    db.daoAccount().newAcc(i)
+//                }
+//                singletonData.clearAllTable(baseContext)
                 if (singletonData.nw_receiver.connected(this@splash_screen, true)) {
                     var intent = Intent(applicationContext, LoginActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

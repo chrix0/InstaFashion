@@ -14,6 +14,7 @@ class LoginActivity : AppCompatActivity() {
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        var db = singletonData.getRoomHelper(applicationContext)
 
         button2.setOnClickListener{
             var userName = usernameLogin.text.toString()
@@ -24,11 +25,16 @@ class LoginActivity : AppCompatActivity() {
             }
             else {
                 var found = false
-                for ((index, i ) in singletonData.accList.withIndex()) {
-                    if (userName == i.userName && password == i.password) {
-                        found = true
-                        singletonData.currentAccId = i.id
-                    }
+//                for ((index, i ) in singletonData.accList.withIndex()) {
+//                    if (userName == i.userName && password == i.password) {
+//                        found = true
+//                        singletonData.currentAccId = i.id
+//                    }
+//                }
+                var getAccount = db.daoAccount().getAcc(userName, password)
+                if (getAccount.isNotEmpty()) {
+                    found = true
+                    singletonData.currentAccId = getAccount[0].id
                 }
 
                 if(found){

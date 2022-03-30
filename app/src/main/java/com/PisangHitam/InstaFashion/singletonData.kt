@@ -32,22 +32,23 @@ object singletonData {
             mutableListOf(),
             mutableListOf("","","",""),
             "",
+            mutableListOf(),
             mutableListOf()
         )
     )
 
     var currentAccId : Int = 0
 
-    fun subtotalInCart() : Int{
+    fun subtotalInCart(context: Context) : Int{
         var total = 0
-        for (i : classItemBasket in accList[currentAccId].cartContent){
+        for (i : classItemBasket in getRoomHelper(context).daoAccount().getAccById(currentAccId)[0].cartContent){
             total += i.hargaProduk * i.quantity
         }
         return total
     }
 
     //TOTAL + 5000 (sebagai ongkos kirim)
-    fun totalInCart() : Int = subtotalInCart() + 5000
+    fun totalInCart(context: Context) : Int = subtotalInCart(context) + 5000
 
     // SHOP PRODUCTS
     var outfitList : MutableList<classProduk> = mutableListOf(
@@ -178,9 +179,22 @@ object singletonData {
 
     //ROOM DATABASE
     fun getRoomHelper(context : Context) : roomHelper{
-        return Room.databaseBuilder(context, roomHelper::class.java, "InstaFashionRoom.db" )
+        val db = Room.databaseBuilder(context, roomHelper::class.java, "InstaFashionRoom.db" )
             .allowMainThreadQueries()
+            .fallbackToDestructiveMigration()
             .build()
+        return db
+    }
+
+    fun clearAllTable(context: Context){
+        getRoomHelper(context).clearAllTables()
+    }
+
+    fun getCurUserObj(context: Context) : classAccount?{
+        if(getRoomHelper(context).daoAccount().getAccById(currentAccId).isNotEmpty()){
+            return getRoomHelper(context).daoAccount().getAccById(currentAccId)[0]
+        }
+        return null
     }
 
 }

@@ -45,6 +45,12 @@ class recycler_shoptransaction_adapter(val context : Context, data : MutableList
                 .setMessage(context.getString(R.string.cancelOrderExplain))
                 .setPositiveButton(context.getString(R.string.OK), DialogInterface.OnClickListener{ dialogInterface, i ->
                     myData.removeAt(position)
+
+                    var db = singletonData.getRoomHelper(context)
+                    var user = singletonData.getCurUserObj(context)
+                    user?.transactionHistory = myData
+                    db.daoAccount().updateAcc(user!!)
+
                     notifyDataSetChanged()
                 })
                 .setNegativeButton(context.getString(R.string.cancel), DialogInterface.OnClickListener{ dialogInterface, i ->

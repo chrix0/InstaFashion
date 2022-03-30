@@ -10,13 +10,16 @@ interface daoAccount {
     fun getAllAcc() : List<classAccount>
 
     @Query("Select * from classAccount where COLUMN_USERNAME = :username and COLUMN_PASS = :password")
-    fun getAccVerify(username : String, password : String) : classAccount
+    fun getAcc(username : String, password : String) : List<classAccount>
 
-    @Query("Select * from classAccount where COLUMN_USERNAME = :username and COLUMN_PASS = :password")
-    fun getAcc(username : String, password : String) : classAccount
+    @Query("Select * from classAccount where COLUMN_USERNAME = :username")
+    fun getAccUserCheck(username : String) : List<classAccount>
+
+    @Query("Select * from classAccount where id = :id")
+    fun getAccById(id: Int) : List<classAccount>
 
     //INSERT
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     fun newAcc(acc : classAccount)
 
     //UPDATE (UPDATE PAS NAMBAH CART, TRANSACTION, UBAH ALAMAT, DLL. ME AGAK LUPA)

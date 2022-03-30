@@ -14,3 +14,8 @@ const val CHECK_INTERNET = "com.PisangHitam.InstaFashion.INTERNET_CHECK"
 const val INTERNET_CONNECTED = "com.PisangHitam.InstaFashion.INTERNET_CON"
 const val EXTRA_NOTIF_MSG_REC = "com.PisangHitam.InstaFashion.NOTIF_MSG_REC"
 const val BUNDLE_NOTIF_MSG_REC = "com.PisangHitam.InstaFashion.NOTIF_MSG_REC_BUNDLE"
+
+const val NOTIF_PRODUCTREC = 1000
+const val NOTIF_PRODUCTREC_CHANGED = 1001
+const val BROADCAST_PRODUCTREC_CHANGED = 1002
+const val UPDATE_SETTINGS = "2222"

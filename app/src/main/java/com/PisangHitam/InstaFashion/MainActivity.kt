@@ -82,11 +82,6 @@ class MainActivity : AppCompatActivity() {
 
         var sendIntent = Intent(this, BR_recNotifier::class.java)
 
-        var product = getRandomProduct()
-        var notifText = "Take a look : ${product.namaProduk}"
-        var notifTitle = "Check this out!"
-        var rec = classRecNotif(notifText, notifTitle)
-
         //BR tidak bisa menerima parcelable. Jika perlu mengirim parcelable, harus dibungkus dalam bundle terebih dahulu
         /*
         var bundle = Bundle()

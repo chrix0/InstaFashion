@@ -21,7 +21,9 @@ class shop_basket : AppCompatActivity() {
 
         val intentData = intent
 
-        val allData : MutableList<classItemBasket> = singletonData.accList[singletonData.currentAccId].cartContent
+        val db = singletonData.getRoomHelper(this)
+        val allData = db.daoAccount().getAccById(singletonData.currentAccId)[0].cartContent
+//            singletonData.accList[singletonData.currentAccId].cartContent
 
         if(intentData.hasExtra(ADD_TO_CART)){
             val item = intentData.getParcelableExtra<classItemBasket>(ADD_TO_CART) as classItemBasket
@@ -41,19 +43,24 @@ class shop_basket : AppCompatActivity() {
             else{
                 allData.add(item)
             }
+
+            //UPDATE
+            val user = singletonData.getCurUserObj(this)
+            user?.cartContent = allData
+            db.daoAccount().updateAcc(user!!)
         }
 
         allData.reverse()
-        adapter = recycler_basket_adapter(this, allData){
+        adapter = recycler_basket_adapter(this, singletonData.getCurUserObj(this)!!.cartContent){
             adapter.notifyDataSetChanged()
-            this.subtotal.setText("Rp." + singletonData.formatHarga(singletonData.subtotalInCart()))
+            this.subtotal.setText("Rp." + singletonData.formatHarga(singletonData.subtotalInCart(this)))
         }
         basketList.layoutManager = LinearLayoutManager(this)
         basketList.adapter = adapter
 
         var ongkos = 5000
 
-        subtotal.setText("Rp." +singletonData.formatHarga(singletonData.subtotalInCart()))
+        subtotal.setText("Rp." +singletonData.formatHarga(singletonData.subtotalInCart(this)))
         //ongkir.setText(singletonData.formatHarga(ongkos))
         //total.setText(singletonData.formatHarga(singletonData.totalInCart()))
 
@@ -72,4 +79,5 @@ class shop_basket : AppCompatActivity() {
         onBackPressed()
         return true
     }
+
 }

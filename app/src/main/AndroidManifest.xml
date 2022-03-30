@@ -20,9 +20,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InstaFashion">
         <receiver
-            android:name=".BR_recNotifier"
+            android:name=".BR_SettingsChanged.BR_productRecChanged"
             android:enabled="true"
             android:exported="true"></receiver>
+
+        <activity
+            android:name=".profile_settings"
+            android:exported="true" />
+
+        <receiver
+            android:name=".BR_recNotifier"
+            android:enabled="true"
+            android:exported="true" />
         <receiver
             android:name=".BR_inetCheck"
             android:enabled="true"

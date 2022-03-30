@@ -3,6 +3,7 @@ package com.PisangHitam.InstaFashion
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_shop_info_produk.*
 
@@ -27,17 +28,24 @@ class shop_infoProduk : AppCompatActivity() {
         Quantity.text = "1"
 
         addToCart.setOnClickListener {
-            val info = Intent(this, shop_basket::class.java)
-            var itemBasket = classItemBasket(
-                produk.idProduk,
-                produk.namaProduk,
-                produk.hargaProduk,
-                produk.urlGambarProduk,
-                produk.description,
-                Quantity.text.toString().toInt()
-            )
-            info.putExtra(ADD_TO_CART, itemBasket)
-            startActivity(info)
+            if(singletonData.getCurUserObj(this) != null){
+                val info = Intent(this, shop_basket::class.java)
+                var itemBasket = classItemBasket(
+                    produk.idProduk,
+                    produk.namaProduk,
+                    produk.hargaProduk,
+                    produk.urlGambarProduk,
+                    produk.description,
+                    Quantity.text.toString().toInt()
+                )
+                info.putExtra(ADD_TO_CART, itemBasket)
+                startActivity(info)
+            }
+            else{
+                Toast.makeText(this, "Please login.", Toast.LENGTH_SHORT).show()
+                var toLogin = Intent(this, LoginActivity::class.java)
+                startActivity(toLogin)
+            }
         }
 
         buttonInc.setOnClickListener{

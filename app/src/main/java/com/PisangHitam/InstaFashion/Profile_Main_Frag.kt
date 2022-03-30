@@ -39,8 +39,9 @@ class Profile_Main_Frag : Fragment() {
     }
 
     fun main(v : View) : View{
-        var user = singletonData.accList[singletonData.currentAccId]
-
+        var db = singletonData.getRoomHelper(requireContext())
+//        var user = singletonData.accList[singletonData.currentAccId]
+        var user = db.daoAccount().getAccById(singletonData.currentAccId)[0]
         var fullName = v.findViewById<TextView>(R.id.fullName)
         fullName.text = user.fullName
 
@@ -73,9 +74,18 @@ class Profile_Main_Frag : Fragment() {
 
         var logout = v.findViewById<Button>(R.id.logout)
         logout.setOnClickListener{
+            singletonData.mAlarmManager?.cancel(singletonData.mPendingIntent)
+            singletonData.mPendingIntent?.cancel()
             var intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }
+
+        var settings = v.findViewById<Button>(R.id.setting)
+        settings.setOnClickListener{
+            var intent = Intent(requireContext(), profile_settings::class.java)
+            startActivity(intent)
+        }
+
         return v
     }
 

@@ -23,8 +23,10 @@ class register : AppCompatActivity() {
         lateinit var cfullName : String
         lateinit var cemail : String
 
+        var db = singletonData.getRoomHelper(applicationContext)
+
         var clsAccount = classAccount(
-            singletonData.accList.size,
+            0,
             "TESTACCOUNT",
             "TEST",
             "Test Account",
@@ -32,14 +34,20 @@ class register : AppCompatActivity() {
             mutableListOf(),
             mutableListOf("","","",""),
             "",
+            mutableListOf(),
             mutableListOf()
         )
 
         fun checkdupe(string : String) : Boolean{
-            for(i in singletonData.accList){
-                if(string.equals(i.userName)){
-                    return true
-                }
+//            for(i in singletonData.accList){
+//                if(string.equals(i.userName)){
+//                    return true
+//                }
+//            }
+//            return false
+            var getAccount = db.daoAccount().getAccUserCheck(string)
+            if (getAccount.isNotEmpty()) {
+                return true
             }
             return false
         }
@@ -67,7 +75,8 @@ class register : AppCompatActivity() {
                     clsAccount.fullName=cfullName
                     clsAccount.email=cemail
 
-                    singletonData.accList.add(clsAccount)
+//                    singletonData.accList.add(clsAccount)
+                    db.daoAccount().newAcc(clsAccount)
                     Toast.makeText(this, "Your account has been successfully created", Toast.LENGTH_SHORT).show()
 
                     var intent = Intent(this, LoginActivity::class.java)
