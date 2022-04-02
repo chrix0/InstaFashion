@@ -23,7 +23,7 @@ class BR_productRecChanged() : BroadcastReceiver() {
         if(intent.action == "Undo"){
             var sendIntent = Intent(context, BR_recNotifier::class.java)
             var alarmTimer = Calendar.getInstance()
-            alarmTimer.add(Calendar.SECOND, 15)
+            //alarmTimer.add(Calendar.SECOND, 15)
 
             singletonData.mAlarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             singletonData.mPendingIntent = PendingIntent.getBroadcast(context, 200, sendIntent, 0 )
@@ -36,13 +36,12 @@ class BR_productRecChanged() : BroadcastReceiver() {
             //Buka kembali activity.
             var intent = Intent()
                intent.apply {
-                    //Memulai activity di luar activity context harus menyebutkan nama package dan class cara manual
+                   //Memulai activity di luar activity context harus menyebutkan nama package dan class cara manual
                    setClassName("com.PisangHitam.InstaFashion", "com.PisangHitam.InstaFashion.profile_settings")
                    //dan menambahkan flag FLAG_ACTIVITY_NEW_TASK
                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                }
             context.startActivity(intent)
-
         }
     }
 }

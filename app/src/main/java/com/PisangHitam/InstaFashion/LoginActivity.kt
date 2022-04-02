@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 else{
-                    Toast.makeText(this, "Account is not found. Please try again.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Account is not found. Please sign up.", Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -1,14 +1,20 @@
 package com.PisangHitam.InstaFashion
 
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.widget.Toast
 import androidx.room.Room
 import com.PisangHitam.InstaFashion.LoginActivity
 import com.PisangHitam.InstaFashion.Room.roomHelper
+import com.PisangHitam.InstaFashion.locChecker.js_getGeo
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -21,6 +27,12 @@ class splash_screen : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
         singletonData.nw_filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION)
 
+        //Start JobScheduler
+        startGetGeo()
+        //Mengambil data API
+        var geoGet = js_getGeo()
+        geoGet.getGeoFirst()
+        
         //Dengan library anko
         doAsync{
             for(i in 0..1500){
@@ -44,12 +56,6 @@ class splash_screen : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-
-            //Ada kemungkinan progress bar stuck di max
-            if (progBar.progress == progBar.max){
-                recreate()
-            }
-
         }
 
         /*
@@ -73,5 +79,20 @@ class splash_screen : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         registerReceiver(singletonData.nw_receiver, singletonData.nw_filter)
+    }
+
+    fun startGetGeo(){
+        var JobSchedulerId = SCHEDULER_GET_GEO
+        var serviceComponent = ComponentName(this, js_getGeo::class.java)
+
+        var mJobInfo = JobInfo.Builder(JobSchedulerId, serviceComponent)
+            .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+            .setRequiresDeviceIdle(false)
+            .setRequiresCharging(false)
+            .setPeriodic(15*60*1000) // setPeriodic minimal 15 menit.
+
+        var GeoJob = getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
+
+        GeoJob.schedule(mJobInfo.build())
     }
 }

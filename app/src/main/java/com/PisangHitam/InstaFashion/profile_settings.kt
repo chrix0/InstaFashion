@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.PisangHitam.InstaFashion.BR_SettingsChanged.BR_productRecChanged
 import kotlinx.android.synthetic.main.activity_profile_settings.*
 
@@ -96,5 +97,6 @@ class profile_settings : AppCompatActivity() {
     fun update(recNotifierState:Boolean){
         recNotifSwitch.isChecked = recNotifierState
     }
+
 
 }

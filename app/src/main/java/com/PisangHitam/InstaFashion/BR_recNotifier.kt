@@ -24,34 +24,26 @@ class BR_recNotifier : BroadcastReceiver() {
         val name = "ProductRecommendation"
         val importance = NotificationManager.IMPORTANCE_DEFAULT
 
-        /*
-        var bundleIntent = intent.getBundleExtra(EXTRA_NOTIF_MSG_REC)
-        var obj : classRecNotif? = null
-        if (bundleIntent != null){
-            obj = bundleIntent.getParcelable(BUNDLE_NOTIF_MSG_REC)!!
-        }
-         */
-
         var product = getRandomProduct()
         var notifText = "${product.namaProduk}"
         var notifTitle = "Check this out!"
 
 
-        //Deeplink Notifikasi
+        //Activity muncul setelah notifikasi ditekan
         val dest = Intent(context, shop_infoProduk::class.java)
         dest.putExtra(SHOW_PRODUCT_INFO, product)
 
-        val deeplinkPending = TaskStackBuilder.create(context)
+        val iPending = TaskStackBuilder.create(context)
             .addNextIntentWithParentStack(dest) //Intent
-            .getPendingIntent(110, PendingIntent.FLAG_UPDATE_CURRENT) //ID (bebas isinya), flag
+            .getPendingIntent(110, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        //Notifikasi
+        //Pembentukan notifikasi
         var mBuilder = NotificationCompat.Builder(context, Channel_id)
             .setSmallIcon(R.drawable.logo01)
             .setContentText(notifText)
             .setContentTitle(notifTitle)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setContentIntent(deeplinkPending)
+            .setContentIntent(iPending) //!!
             .setAutoCancel(true)
 
         val nNotifyChannel : NotificationChannel? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

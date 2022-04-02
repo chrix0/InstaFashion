@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.app.ShareCompat
+import com.PisangHitam.InstaFashion.locChecker.js_getGeo
 import kotlinx.android.synthetic.main.fragment_profile__main_.*
 
 
@@ -85,6 +86,14 @@ class Profile_Main_Frag : Fragment() {
             var intent = Intent(requireContext(), profile_settings::class.java)
             startActivity(intent)
         }
+
+        var country = v.findViewById<TextView>(R.id.country)
+        var countryCode = v.findViewById<TextView>(R.id.countryCode)
+        var timezone = v.findViewById<TextView>(R.id.timezone)
+
+        country.text = "Country : ${singletonData.geoRes!![0]}"
+        countryCode.text = "Country Code : ${singletonData.geoRes!![1]}"
+        timezone.text = "Timezone: ${singletonData.geoRes!![3]} (${singletonData.geoRes!![2]})"
 
         return v
     }

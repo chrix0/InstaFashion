@@ -1,5 +1,7 @@
 package com.PisangHitam.InstaFashion
 
+import java.util.*
+
 const val EXTRA_PRODUCT = "com.PisangHitam.InstaFashion.FOOD_PRODUCT"
 const val CHANGE_TITLE = "com.PisangHitam.InstaFashion.CHANGE"
 const val SHOW_PRODUCT_INFO = "com.PisangHitam.InstaFashion.PRODUCT_INFO"
@@ -19,3 +21,5 @@ const val NOTIF_PRODUCTREC = 1000
 const val NOTIF_PRODUCTREC_CHANGED = 1001
 const val BROADCAST_PRODUCTREC_CHANGED = 1002
 const val UPDATE_SETTINGS = "2222"
+
+const val SCHEDULER_GET_GEO = 9000

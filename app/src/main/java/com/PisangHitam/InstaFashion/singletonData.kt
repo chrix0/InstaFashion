@@ -177,6 +177,10 @@ object singletonData {
     var mAlarmManager : AlarmManager? = null
     var mPendingIntent : PendingIntent? = null
 
+    //JobService - Geo JSON
+    var jsonStringGeo : String? = null
+    var geoRes : MutableList<String>? = null
+
     //ROOM DATABASE
     fun getRoomHelper(context : Context) : roomHelper{
         val db = Room.databaseBuilder(context, roomHelper::class.java, "InstaFashionRoom.db" )

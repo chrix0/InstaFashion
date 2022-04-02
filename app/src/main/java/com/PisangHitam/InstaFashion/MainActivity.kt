@@ -2,15 +2,21 @@ package com.PisangHitam.InstaFashion
 
 import android.annotation.SuppressLint
 import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.icu.util.Calendar
+import android.media.RingtoneManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
@@ -67,8 +73,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        singletonData.mAlarmManager = null
-        singletonData.mPendingIntent = null
+//        Kondisi awal
+//        singletonData.mAlarmManager = null
+//        singletonData.mPendingIntent = null
 
         singletonData.mAlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -80,20 +87,12 @@ class MainActivity : AppCompatActivity() {
             singletonData.mPendingIntent?.cancel()
         }
 
-        var sendIntent = Intent(this, BR_recNotifier::class.java)
-
-        //BR tidak bisa menerima parcelable. Jika perlu mengirim parcelable, harus dibungkus dalam bundle terebih dahulu
-        /*
-        var bundle = Bundle()
-        bundle.putParcelable(BUNDLE_NOTIF_MSG_REC, rec)
-        sendIntent.putExtra(EXTRA_NOTIF_MSG_REC, bundle)
-        */
-
         //Ambil waktu saat ini
         var alarmTimer = Calendar.getInstance()
-        //Tambahkan 15 detik di alarmTimer
-        alarmTimer.add(Calendar.SECOND, 15)
+        //Tambahkan 15 detik di alarmTimer (untuk menghemat waktu pengecekan, baris kode di bawah ini sementara tidak digunakan)
+        //alarmTimer.add(Calendar.SECOND, 15)
 
+        var sendIntent = Intent(this, BR_recNotifier::class.java)
         singletonData.mPendingIntent = PendingIntent.getBroadcast(this, 200, sendIntent, 0 )
         singletonData.mAlarmManager!!.setInexactRepeating(AlarmManager.RTC, alarmTimer.timeInMillis, AlarmManager.INTERVAL_FIFTEEN_MINUTES,singletonData.mPendingIntent)
     }
