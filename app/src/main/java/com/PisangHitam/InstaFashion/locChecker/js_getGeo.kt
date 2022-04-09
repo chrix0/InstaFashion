@@ -3,14 +3,18 @@ package com.PisangHitam.InstaFashion.locChecker
 import android.app.job.JobParameters
 import android.app.job.JobService
 import android.util.Log
+import android.widget.Toast
 import com.PisangHitam.InstaFashion.singletonData
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import cz.msebera.android.httpclient.Header
+import org.jetbrains.anko.doAsync
 import org.json.JSONArray
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
 
 class js_getGeo : JobService() {
 
@@ -22,11 +26,16 @@ class js_getGeo : JobService() {
     override fun onStartJob(p0: JobParameters?): Boolean {
         Log.w("Get Geo", "Job Service js_getGeo berjalan")
         getGeo(p0, getIP()!!)
+
+        var calendar = Calendar.getInstance()
+        val formatTanggal = SimpleDateFormat("EEEE, d MMMM yyyy, h:mm:ss a")
+        Toast.makeText(this, formatTanggal.format(calendar.time), Toast.LENGTH_SHORT).show()
+
         return true
     }
 
     override fun onStopJob(p0: JobParameters?): Boolean {
-        Log.w("Get Geo", "Job Service js_getGeo behenti")
+        Log.w("Get Geo", "onStopJob Dipanggil")
         return false
     }
 
@@ -100,9 +109,9 @@ class js_getGeo : JobService() {
         return ip
     }
 
-    fun getGeoFirst(){
+    fun getGeoFirst(ip : String){
         var client = AsyncHttpClient()
-        var url = "http://ipwhois.app/json/139.194.38.159"
+        var url = "http://ipwhois.app/json/$ip"
         var charSet = Charsets.UTF_8
         var handler = object : AsyncHttpResponseHandler(){
             override fun onSuccess(
@@ -121,6 +130,7 @@ class js_getGeo : JobService() {
                 timezoneName = JSONObj!!.getString("timezone")
 
                 singletonData.geoRes = mutableListOf(country!!, countryCode!!, timezone!!, timezoneName!!)
+                hasil.addAll(singletonData.geoRes!!)
             }
 
             override fun onFailure(
@@ -133,5 +143,11 @@ class js_getGeo : JobService() {
             }
         }
         client.get(url, handler)
+    }
+
+    companion object{
+        var hasil : MutableList<String> = mutableListOf()
+
+
     }
 }

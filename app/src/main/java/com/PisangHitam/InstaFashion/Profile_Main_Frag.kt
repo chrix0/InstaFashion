@@ -91,9 +91,14 @@ class Profile_Main_Frag : Fragment() {
         var countryCode = v.findViewById<TextView>(R.id.countryCode)
         var timezone = v.findViewById<TextView>(R.id.timezone)
 
-        country.text = "Country : ${singletonData.geoRes!![0]}"
-        countryCode.text = "Country Code : ${singletonData.geoRes!![1]}"
-        timezone.text = "Timezone: ${singletonData.geoRes!![3]} (${singletonData.geoRes!![2]})"
+//        country.text = "Country : ${singletonData.geoRes!![0]}"
+//        countryCode.text = "Country Code : ${singletonData.geoRes!![1]}"
+//        timezone.text = "Timezone: ${singletonData.geoRes!![3]} (${singletonData.geoRes!![2]})"
+
+        var hasil = js_getGeo.hasil
+        country.text = "Country : ${hasil[0]}"
+        countryCode.text = "Country Code : ${hasil[1]}"
+        timezone.text = "Timezone: ${hasil[3]} (${hasil[2]})"
 
         return v
     }

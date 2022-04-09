@@ -94,7 +94,8 @@ class MainActivity : AppCompatActivity() {
 
         var sendIntent = Intent(this, BR_recNotifier::class.java)
         singletonData.mPendingIntent = PendingIntent.getBroadcast(this, 200, sendIntent, 0 )
-        singletonData.mAlarmManager!!.setInexactRepeating(AlarmManager.RTC, alarmTimer.timeInMillis, AlarmManager.INTERVAL_FIFTEEN_MINUTES,singletonData.mPendingIntent)
+        singletonData.mAlarmManager!!.setInexactRepeating(AlarmManager.RTC, alarmTimer.timeInMillis,
+            AlarmManager.INTERVAL_FIFTEEN_MINUTES,singletonData.mPendingIntent)
     }
 
     //Gunakan nanoTime dari sistem sebagai seed untuk Random

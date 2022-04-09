@@ -28,7 +28,6 @@ class BR_recNotifier : BroadcastReceiver() {
         var notifText = "${product.namaProduk}"
         var notifTitle = "Check this out!"
 
-
         //Activity muncul setelah notifikasi ditekan
         val dest = Intent(context, shop_infoProduk::class.java)
         dest.putExtra(SHOW_PRODUCT_INFO, product)

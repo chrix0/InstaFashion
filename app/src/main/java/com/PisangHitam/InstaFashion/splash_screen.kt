@@ -29,9 +29,9 @@ class splash_screen : AppCompatActivity() {
 
         //Start JobScheduler
         startGetGeo()
-        //Mengambil data API
+        //Mengambil data dari API pertama kali
         var geoGet = js_getGeo()
-        geoGet.getGeoFirst()
+        geoGet.getGeoFirst(geoGet.getIP()!!)
         
         //Dengan library anko
         doAsync{
@@ -70,6 +70,8 @@ class splash_screen : AppCompatActivity() {
     override fun onBackPressed() {
 
     }
+
+
 
     override fun onStop() {
         super.onStop()

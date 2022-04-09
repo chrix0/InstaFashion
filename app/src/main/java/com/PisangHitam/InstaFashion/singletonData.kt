@@ -21,21 +21,21 @@ object singletonData {
 
     //1. DATA + METHOD FITUR =============================================
 
-    // LOGIN SIGNUP + BASKET
-    var accList : MutableList<classAccount> = mutableListOf(
-        classAccount(
-            0,
-            "TEST",
-            "TEST",
-            "Test Account",
-            "testaccount@gmail.com",
-            mutableListOf(),
-            mutableListOf("","","",""),
-            "",
-            mutableListOf(),
-            mutableListOf()
-        )
-    )
+    // LOGIN SIGNUP + BASKET [sudah tidak digunakan]
+//    var accList : MutableList<classAccount> = mutableListOf(
+//        classAccount(
+//            0,
+//            "TEST",
+//            "TEST",
+//            "Test Account",
+//            "testaccount@gmail.com",
+//            mutableListOf(),
+//            mutableListOf("","","",""),
+//            "",
+//            mutableListOf(),
+//            mutableListOf()
+//        )
+//    )
 
     var currentAccId : Int = 0
 
