@@ -65,7 +65,6 @@ class BR_recNotifier : BroadcastReceiver() {
         if (nNotifyChannel != null) {
             mNotificationManager.createNotificationChannel(nNotifyChannel)
         }
-
         //Munculkan notifikasi
         mNotificationManager.notify(NotifyId, mBuilder.build())
     }

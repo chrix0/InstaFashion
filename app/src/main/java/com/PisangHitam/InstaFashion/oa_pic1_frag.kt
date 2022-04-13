@@ -51,16 +51,12 @@ class oa_pic1_frag : Fragment() {
                 lastPhoto = session.pic1
             }
         }
-
     }
-
     private var session = classOASession()
     private var lastPhoto : Bitmap? = null
     private lateinit var v : View
     private lateinit var bitmap: Bitmap
-
     private val EXTRA_SAVE_SESSION = "SAVE_SESSION_1"
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,15 +73,12 @@ class oa_pic1_frag : Fragment() {
         val toStep2 = v.findViewById<Button>(R.id.toStep2)
         val photo = v.findViewById<ImageView>(R.id.photo)
 
-
         openCamera.setOnClickListener {
             displayCam()
         }
-
         openGallery.setOnClickListener {
             fromGallery()
         }
-
         toStep2.setOnClickListener {
             if(session.insertedPic1){
                 nextStep()
@@ -94,7 +87,6 @@ class oa_pic1_frag : Fragment() {
                 Toast.makeText(context,"Please take a picture of your outfit before continuing",Toast.LENGTH_SHORT).show()
             }
         }
-
         if(lastPhoto != null){
             photo.setImageBitmap(lastPhoto)
         }

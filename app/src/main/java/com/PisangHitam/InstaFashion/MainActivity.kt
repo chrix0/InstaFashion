@@ -93,8 +93,10 @@ class MainActivity : AppCompatActivity() {
         //alarmTimer.add(Calendar.SECOND, 15)
 
         var sendIntent = Intent(this, BR_recNotifier::class.java)
-        singletonData.mPendingIntent = PendingIntent.getBroadcast(this, 200, sendIntent, 0 )
-        singletonData.mAlarmManager!!.setInexactRepeating(AlarmManager.RTC, alarmTimer.timeInMillis,
+        singletonData.mPendingIntent = PendingIntent.getBroadcast(this, 200,
+            sendIntent, 0 )
+        singletonData.mAlarmManager!!.setInexactRepeating(AlarmManager.RTC,
+            alarmTimer.timeInMillis,
             AlarmManager.INTERVAL_FIFTEEN_MINUTES,singletonData.mPendingIntent)
     }
 

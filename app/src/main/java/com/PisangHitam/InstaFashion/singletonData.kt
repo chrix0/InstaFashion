@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.media.ThumbnailUtils
 import androidx.room.Room
+
 import com.PisangHitam.InstaFashion.Room.roomHelper
 import com.PisangHitam.InstaFashion.classAccount
 import com.PisangHitam.InstaFashion.classItemBasket
@@ -22,20 +23,20 @@ object singletonData {
     //1. DATA + METHOD FITUR =============================================
 
     // LOGIN SIGNUP + BASKET [sudah tidak digunakan]
-//    var accList : MutableList<classAccount> = mutableListOf(
-//        classAccount(
-//            0,
-//            "TEST",
-//            "TEST",
-//            "Test Account",
-//            "testaccount@gmail.com",
-//            mutableListOf(),
-//            mutableListOf("","","",""),
-//            "",
-//            mutableListOf(),
-//            mutableListOf()
-//        )
-//    )
+    var accList : MutableList<classAccount> = mutableListOf(
+        classAccount(
+            0,
+            "TEST",
+            "TEST",
+            "Test Account",
+            "testaccount@gmail.com",
+            mutableListOf(),
+            mutableListOf("","","",""),
+            "",
+            mutableListOf(),
+            mutableListOf()
+        )
+    )
 
     var currentAccId : Int = 0
 

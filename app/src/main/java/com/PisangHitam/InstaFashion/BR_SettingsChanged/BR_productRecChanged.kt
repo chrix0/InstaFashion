@@ -27,7 +27,8 @@ class BR_productRecChanged() : BroadcastReceiver() {
 
             singletonData.mAlarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             singletonData.mPendingIntent = PendingIntent.getBroadcast(context, 200, sendIntent, 0 )
-            singletonData.mAlarmManager!!.setInexactRepeating(AlarmManager.RTC, alarmTimer.timeInMillis, AlarmManager.INTERVAL_FIFTEEN_MINUTES,singletonData.mPendingIntent)
+            singletonData.mAlarmManager!!.setInexactRepeating(AlarmManager.RTC, alarmTimer.timeInMillis,
+                AlarmManager.INTERVAL_FIFTEEN_MINUTES,singletonData.mPendingIntent)
 
             //Tutup notifikasi
             var manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

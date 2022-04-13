@@ -12,10 +12,8 @@ import androidx.core.app.ShareCompat
 import com.PisangHitam.InstaFashion.locChecker.js_getGeo
 import kotlinx.android.synthetic.main.fragment_profile__main_.*
 
-
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
 
 class Profile_Main_Frag : Fragment() {
     // TODO: Rename and change types of parameters
@@ -73,6 +71,12 @@ class Profile_Main_Frag : Fragment() {
                 .startChooser()
         }
 
+        var shareBySms = v.findViewById<Button>(R.id.shareBySms)
+        shareBySms.setOnClickListener{
+            var intent = Intent(requireContext(), profile_sms::class.java)
+            startActivity(intent)
+        }
+
         var logout = v.findViewById<Button>(R.id.logout)
         logout.setOnClickListener{
             singletonData.mAlarmManager?.cancel(singletonData.mPendingIntent)
@@ -86,6 +90,7 @@ class Profile_Main_Frag : Fragment() {
             var intent = Intent(requireContext(), profile_settings::class.java)
             startActivity(intent)
         }
+
 
         var country = v.findViewById<TextView>(R.id.country)
         var countryCode = v.findViewById<TextView>(R.id.countryCode)
