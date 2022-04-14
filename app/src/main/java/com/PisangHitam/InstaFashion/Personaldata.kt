@@ -19,9 +19,9 @@ class Personaldata : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personaldata)
 
-        var user = singletonData.accList[singletonData.currentAccId]
+        var user = singletonData.getCurUserObj(this)
 
-        name.setText(user.fullName)
+        name.setText(user!!.fullName)
         email.setText(user.email)
         address.setText(user.shippingAddress[0])
         City.setText(user.shippingAddress[1])
@@ -30,10 +30,13 @@ class Personaldata : AppCompatActivity() {
         Pnumber.setText(user.phoneNumber)
 
         save.setOnClickListener{
-            singletonData.accList[singletonData.currentAccId].fullName = name.text.toString()
-            singletonData.accList[singletonData.currentAccId].email = email.text.toString()
+            user.fullName = name.text.toString()
+            user.email = email.text.toString()
             user.shippingAddress = mutableListOf<String>(address.text.toString(), City.text.toString(),Province.text.toString(),psCode.text.toString())
-            singletonData.accList[singletonData.currentAccId].phoneNumber = Pnumber.text.toString()
+            user.phoneNumber = Pnumber.text.toString()
+            val db = singletonData.getRoomHelper(this)
+            db.daoAccount().updateAcc(user)
+
             var intent = Intent(this,MainActivity::class.java)
             intent.putExtra(RETURN_LAST_TAB, "PROFILE")
             startActivity(intent)

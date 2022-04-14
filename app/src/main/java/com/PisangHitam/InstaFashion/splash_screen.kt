@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.room.Room
 import com.PisangHitam.InstaFashion.LoginActivity
 import com.PisangHitam.InstaFashion.Room.roomHelper
+import com.PisangHitam.InstaFashion.SharedPref.loginSharedPref
 import com.PisangHitam.InstaFashion.locChecker.js_getGeo
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import org.jetbrains.anko.doAsync
@@ -50,8 +51,22 @@ class splash_screen : AppCompatActivity() {
 //                    db.daoAccount().newAcc(i)
 //                }
 //                singletonData.clearAllTable(baseContext)
+                var intent : Intent
                 if (singletonData.nw_receiver.connected(this@splash_screen, true)) {
-                    var intent = Intent(applicationContext, LoginActivity::class.java)
+                    var sharedpref = loginSharedPref(this@splash_screen)
+                    if(sharedpref.idUser == -1){
+                        intent = Intent(this@splash_screen, LoginActivity::class.java)
+                    }
+                    else{
+                        var db = singletonData.getRoomHelper(applicationContext)
+                        var getAccount = db.daoAccount().getAccById(sharedpref.idUser!!)
+                        if (getAccount.isNotEmpty()) {
+                            singletonData.currentAccId = getAccount[0].id
+                        }
+                        intent = Intent(this@splash_screen, MainActivity::class.java)
+                    }
+
+
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
                 }

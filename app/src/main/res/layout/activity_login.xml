@@ -50,6 +50,15 @@
         android:inputType="textPassword"
         android:textSize="16sp" />
 
+    <CheckBox
+        android:id="@+id/keepLoggedIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Keep me logged in"
+        android:layout_gravity="left"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"/>
 
     <Button
         android:id="@+id/button2"

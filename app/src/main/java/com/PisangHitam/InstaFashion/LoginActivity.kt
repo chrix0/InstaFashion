@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.PisangHitam.InstaFashion.SharedPref.loginSharedPref
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -39,6 +40,10 @@ class LoginActivity : AppCompatActivity() {
 
                 if(found){
                     Toast.makeText(this, "Successfully logged in.", Toast.LENGTH_SHORT).show()
+                    var sharedpref = loginSharedPref(this)
+                    if(keepLoggedIn.isChecked){
+                        sharedpref.idUser = getAccount[0].id
+                    }
                     var intent = Intent(this, MainActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)

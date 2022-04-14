@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.app.ShareCompat
+import com.PisangHitam.InstaFashion.SharedPref.loginSharedPref
 import com.PisangHitam.InstaFashion.locChecker.js_getGeo
 import kotlinx.android.synthetic.main.fragment_profile__main_.*
 
@@ -81,6 +82,9 @@ class Profile_Main_Frag : Fragment() {
         logout.setOnClickListener{
             singletonData.mAlarmManager?.cancel(singletonData.mPendingIntent)
             singletonData.mPendingIntent?.cancel()
+            var sharedpref = loginSharedPref(requireContext())
+            sharedpref.resetKept()
+            singletonData.currentAccId = 0
             var intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }
