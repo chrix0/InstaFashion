@@ -11,11 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_profile_sms.*
 
 class FetchContact(context: Context) :
-AsyncTaskLoader<MutableList<classContact>>(context){
+AsyncTaskLoader<MutableList<classContact>>(context) {
     override fun onStartLoading() {
         super.onStartLoading()
         forceLoad()
     }
+
     @SuppressLint("Range")
     override fun loadInBackground(): MutableList<classContact>? {
         var firstName = ContactsContract.PhoneLookup.DISPLAY_NAME_PRIMARY
@@ -25,22 +26,27 @@ AsyncTaskLoader<MutableList<classContact>>(context){
         var email = ContactsContract.RawContactsEntity.CONTACT_ID
         var emailStyle = ContactsContract.CommonDataKinds.Email.TYPE
         var picture = ContactsContract.Contacts.PHOTO_URI
-        var myListContact : MutableList<classContact> = mutableListOf()
+        var myListContact: MutableList<classContact> = mutableListOf()
         var myContactUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
-        var myProjection = arrayOf(firstName,lastName,number1,
-            numberDevice1, email,emailStyle,picture)
-        var data = context.contentResolver.query(myContactUri,myProjection,null,
-        null,"$number1 ASC")
-        if(data!=null){
+        var myProjection = arrayOf(
+            firstName, lastName, number1,
+            numberDevice1, email, emailStyle, picture
+        )
+        var data = context.contentResolver.query(
+            myContactUri, myProjection, null,
+            null, "$number1 ASC"
+        )
+        if (data != null) {
             data.moveToFirst()
-            while(!data.isAfterLast){
+            while (!data.isAfterLast) {
                 myListContact.add(
                     classContact(
-                        data.getString(data.getColumnIndex(firstName)) ?:"", "",
-                        data.getString(data.getColumnIndex(number1))?:"",
-                        typeNumber(data.getString(data.getColumnIndex(numberDevice1)))?:"",
-                        getNameEmailDetails(data.getString(data.getColumnIndex(email)))[0]?:"",
-                        typeEmail(getNameEmailDetails(data.getString(data.getColumnIndex(email)))[1])?:"",
+                        data.getString(data.getColumnIndex(firstName)) ?: "", "",
+                        data.getString(data.getColumnIndex(number1)) ?: "",
+                        typeNumber(data.getString(data.getColumnIndex(numberDevice1))) ?: "",
+                        getNameEmailDetails(data.getString(data.getColumnIndex(email)))[0] ?: "",
+                        typeEmail(getNameEmailDetails(data.getString(data.getColumnIndex(email)))[1])
+                            ?: "",
                         data.getString(data.getColumnIndex(picture)) ?: ""
                     )
                 )
@@ -49,6 +55,7 @@ AsyncTaskLoader<MutableList<classContact>>(context){
         }
         return myListContact
     }
+
     fun typeNumber(type : String) : String{
         var type1 = type.toInt()
         return when(type1) {
