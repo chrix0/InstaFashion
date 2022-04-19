@@ -20,7 +20,6 @@ class Personaldata : AppCompatActivity() {
         setContentView(R.layout.activity_personaldata)
 
         var user = singletonData.getCurUserObj(this)
-
         name.setText(user!!.fullName)
         email.setText(user.email)
         address.setText(user.shippingAddress[0])
