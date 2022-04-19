@@ -19,7 +19,14 @@ class Personaldata : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personaldata)
 
-        var user = singletonData.getCurUserObj(this)
+        val db = singletonData.getRoomHelper(this)
+
+        var user : classAccount? = if(intent.hasExtra(dummy_for_test)){
+            intent.getParcelableExtra<classAccount>(dummy_for_test)
+        } else{
+            singletonData.getCurUserObj(this)
+        }
+
         name.setText(user!!.fullName)
         email.setText(user.email)
         address.setText(user.shippingAddress[0])
@@ -33,7 +40,6 @@ class Personaldata : AppCompatActivity() {
             user.email = email.text.toString()
             user.shippingAddress = mutableListOf<String>(address.text.toString(), City.text.toString(),Province.text.toString(),psCode.text.toString())
             user.phoneNumber = Pnumber.text.toString()
-            val db = singletonData.getRoomHelper(this)
             db.daoAccount().updateAcc(user)
 
             var intent = Intent(this,MainActivity::class.java)

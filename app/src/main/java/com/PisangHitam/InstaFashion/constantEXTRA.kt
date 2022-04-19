@@ -23,3 +23,5 @@ const val BROADCAST_PRODUCTREC_CHANGED = 1002
 const val UPDATE_SETTINGS = "2222"
 
 const val SCHEDULER_GET_GEO = 9000
+
+const val dummy_for_test = "DUMMY"
