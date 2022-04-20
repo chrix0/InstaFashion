@@ -27,7 +27,6 @@ import org.junit.runner.RunWith
 class RegisterTester {
     @Rule @JvmField
     var activityTestRule = ActivityTestRule(register::class.java)
-    var intentTestRule = IntentsTestRule(register::class.java)
 
     @Test
     fun clickRegisterButton(){
