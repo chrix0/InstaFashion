@@ -169,13 +169,13 @@ class shop_checkout : AppCompatActivity() {
         }
 
         var ongkos : Int = 5000
-        transaksi.subTotal = singletonData.subtotalInCart(this)
+        transaksi.subTotal = singletonData.subtotalInCart(user.cartContent)
         subtotal.setText("Rp." +singletonData.formatHarga(transaksi.subTotal))
 
         transaksi.shippingCost = ongkos
         ongkir.setText("Rp." +singletonData.formatHarga(transaksi.shippingCost))
 
-        transaksi.Total = singletonData.totalInCart(this)
+        transaksi.Total = singletonData.totalInCart(user.cartContent)
         total.setText("Rp." +singletonData.formatHarga(transaksi.Total))
 
         checkout.setOnClickListener {
@@ -196,7 +196,6 @@ class shop_checkout : AppCompatActivity() {
                 toHistory.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(toHistory)
             }
-
         }
     }
 

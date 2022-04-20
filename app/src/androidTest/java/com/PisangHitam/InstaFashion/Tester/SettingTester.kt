@@ -23,12 +23,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class ProfileFragTester {
+class SettingTester {
     @Rule @JvmField
     var activityTestRule = ActivityTestRule(profile_settings::class.java)
     @Test
     fun turnNotification(){
         Espresso.onView(ViewMatchers.withId(R.id.recNotifSwitch)).perform(ViewActions.doubleClick())
-
     }
 }

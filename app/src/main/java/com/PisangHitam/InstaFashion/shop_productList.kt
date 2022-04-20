@@ -18,10 +18,12 @@ class shop_productList : AppCompatActivity() {
         val intentData = intent
         var tempList : MutableList<classProduk> = mutableListOf()
         setTitle(intentData.getStringExtra(CHANGE_TITLE))
-        val allData = intentData.getParcelableArrayListExtra<classProduk>(EXTRA_PRODUCT) as MutableList<classProduk>
+//        val allData = intentData.getParcelableArrayListExtra<classProduk>(EXTRA_PRODUCT) as MutableList<classProduk>
+        var db = singletonData.getRoomHelper(this)
+        val allData = db.daoOutfitList().getAllOutfit() as MutableList<classProduk>
         tempList.addAll(allData)
 
-        //Adapter + on click event
+        //Adapter + on click events
         adapter = recycler_products_adapter(tempList){
             val info = Intent(this, shop_infoProduk::class.java)
             info.putExtra(SHOW_PRODUCT_INFO, it as Parcelable)

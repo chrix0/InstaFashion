@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Wishlist_Main_Frag"
+    android:id="@+id/fragmentWish"
     android:padding="15dp">
 
    <LinearLayout

@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.core.app.ShareCompat
 import com.PisangHitam.InstaFashion.SharedPref.loginSharedPref
 import com.PisangHitam.InstaFashion.locChecker.js_getGeo
+import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.fragment_profile__main_.*
 
 private const val ARG_PARAM1 = "param1"
@@ -41,7 +42,15 @@ class Profile_Main_Frag : Fragment() {
     fun main(v : View) : View{
         var db = singletonData.getRoomHelper(requireContext())
 //        var user = singletonData.accList[singletonData.currentAccId]
-        var user = db.daoAccount().getAccById(singletonData.currentAccId)[0]
+        var user : classAccount?
+        var testArgs = arguments
+        if(testArgs?.getParcelable<classAccount>(dummy_for_test) != null){
+            user = db.daoAccount().getAccUserCheck("TEST")[0]
+        }
+        else{
+            user = db.daoAccount().getAccById(singletonData.currentAccId)[0]
+        }
+
         var fullName = v.findViewById<TextView>(R.id.fullName)
         fullName.text = user.fullName
 
@@ -104,10 +113,17 @@ class Profile_Main_Frag : Fragment() {
 //        countryCode.text = "Country Code : ${singletonData.geoRes!![1]}"
 //        timezone.text = "Timezone: ${singletonData.geoRes!![3]} (${singletonData.geoRes!![2]})"
 
-        var hasil = js_getGeo.hasil
-        country.text = "Country : ${hasil[0]}"
-        countryCode.text = "Country Code : ${hasil[1]}"
-        timezone.text = "Timezone: ${hasil[3]} (${hasil[2]})"
+        if(testArgs?.getParcelable<classAccount>(dummy_for_test) != null) {
+            country.text = "Country : TEST"
+            countryCode.text = "Country Code : TEST"
+            timezone.text = "Timezone: TEST"
+        }
+        else{
+            var hasil = js_getGeo.hasil
+            country.text = "Country : ${hasil[0]}"
+            countryCode.text = "Country Code : ${hasil[1]}"
+            timezone.text = "Timezone: ${hasil[3]} (${hasil[2]})"
+        }
 
         return v
     }

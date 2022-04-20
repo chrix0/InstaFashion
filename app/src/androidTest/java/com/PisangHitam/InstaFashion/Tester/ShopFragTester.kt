@@ -17,12 +17,9 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import com.PisangHitam.InstaFashion.R
-import com.PisangHitam.InstaFashion.Shop_Main_Frag
+import com.PisangHitam.InstaFashion.*
 import org.junit.Test
 import org.junit.runner.RunWith
-import com.PisangHitam.InstaFashion.MainActivity
-import com.PisangHitam.InstaFashion.shop_productList
 import kotlinx.android.synthetic.main.activity_main.*
 import org.hamcrest.Matchers.endsWith
 import org.junit.After
@@ -55,7 +52,9 @@ class ShopFragTester {
             Shop_Main_Frag()
         }
         onView(withId(R.id.speedDial)).perform(ViewActions.click())
+        onView(withText("Basket")).perform(ViewActions.click())
 
+        intended(hasComponent(shop_basket::class.java.name))
     }
     @After
     fun tearDown(){

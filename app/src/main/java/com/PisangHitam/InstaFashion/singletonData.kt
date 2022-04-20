@@ -40,16 +40,16 @@ object singletonData {
 
     var currentAccId : Int = 0
 
-    fun subtotalInCart(context: Context) : Int{
+    fun subtotalInCart(cartContent: MutableList<classItemBasket>) : Int{
         var total = 0
-        for (i : classItemBasket in getRoomHelper(context).daoAccount().getAccById(currentAccId)[0].cartContent){
+        for (i : classItemBasket in cartContent){
             total += i.hargaProduk * i.quantity
         }
         return total
     }
 
     //TOTAL + 5000 (sebagai ongkos kirim)
-    fun totalInCart(context: Context) : Int = subtotalInCart(context) + 5000
+    fun totalInCart(cartContent: MutableList<classItemBasket>) : Int = subtotalInCart(cartContent) + 5000
 
     // SHOP PRODUCTS
     var outfitList : MutableList<classProduk> = mutableListOf(
