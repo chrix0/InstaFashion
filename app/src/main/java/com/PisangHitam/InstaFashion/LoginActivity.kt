@@ -3,6 +3,8 @@ package com.PisangHitam.InstaFashion
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
+import android.os.Parcelable
 import android.widget.Toast
 import com.PisangHitam.InstaFashion.SharedPref.loginSharedPref
 import kotlinx.android.synthetic.main.activity_login.*
@@ -58,6 +60,7 @@ class LoginActivity : AppCompatActivity() {
             var intent = Intent(this, register::class.java)
             startActivity(intent)
         }
+
     }
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

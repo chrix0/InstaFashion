@@ -39,8 +39,7 @@
             android:background="@color/transparent"
             android:button="@drawable/wishtoggle"
             android:textOn=""
-            android:textOff=""
-            android:checked="false" />
+            android:textOff="" />
     </LinearLayout>
 
     <TextView

@@ -13,13 +13,16 @@ import android.media.RingtoneManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_shop_product_list.*
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -73,6 +76,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        main_search.setOnEditorActionListener { textView, i, keyEvent ->
+            if (i == EditorInfo.IME_ACTION_DONE){
+                var intent = Intent(this, shop_productList::class.java)
+                if(main_search.text.isNotEmpty()){
+                    intent.putExtra(SEARCH_FROM_MAIN, main_search.text.toString())
+                    startActivity(intent)
+                }
+            }
+            return@setOnEditorActionListener true
+        }
+
 //        Kondisi awal
 //        singletonData.mAlarmManager = null
 //        singletonData.mPendingIntent = null
@@ -102,13 +116,6 @@ class MainActivity : AppCompatActivity() {
 
     //Gunakan nanoTime dari sistem sebagai seed untuk Random
     fun rand(start : Int, end: Int) = Random(System.nanoTime()).nextInt(end - start + 1) + start
-
-    fun getRandomProduct() : classProduk{
-        var products = singletonData.outfitList
-        var jumlahProduct = products.size
-        var indexRandom = rand(0, jumlahProduct - 1)
-        return products[indexRandom]
-    }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

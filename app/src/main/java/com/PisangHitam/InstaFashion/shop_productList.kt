@@ -20,8 +20,13 @@ class shop_productList : AppCompatActivity() {
         setTitle(intentData.getStringExtra(CHANGE_TITLE))
 //        val allData = intentData.getParcelableArrayListExtra<classProduk>(EXTRA_PRODUCT) as MutableList<classProduk>
         var db = singletonData.getRoomHelper(this)
+
         val allData = db.daoOutfitList().getAllOutfit() as MutableList<classProduk>
-        tempList.addAll(allData)
+
+        if(intent.hasExtra(SEARCH_FROM_MAIN))
+            tempList.addAll(filter(intentData.getStringExtra(SEARCH_FROM_MAIN)!!, allData))
+        else
+            tempList.addAll(allData)
 
         //Adapter + on click events
         adapter = recycler_products_adapter(tempList){

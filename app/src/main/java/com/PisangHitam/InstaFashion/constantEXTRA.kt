@@ -25,3 +25,5 @@ const val UPDATE_SETTINGS = "2222"
 const val SCHEDULER_GET_GEO = 9000
 
 const val dummy_for_test = "DUMMY"
+
+const val SEARCH_FROM_MAIN = "SEARCH MAIN"

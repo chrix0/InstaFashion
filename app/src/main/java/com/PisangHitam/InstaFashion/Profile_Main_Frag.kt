@@ -120,9 +120,16 @@ class Profile_Main_Frag : Fragment() {
         }
         else{
             var hasil = js_getGeo.hasil
-            country.text = "Country : ${hasil[0]}"
-            countryCode.text = "Country Code : ${hasil[1]}"
-            timezone.text = "Timezone: ${hasil[3]} (${hasil[2]})"
+            if (hasil.isEmpty()){
+                country.text = "Country : -"
+                countryCode.text = "Country Code : -"
+                timezone.text = "Timezone: -"
+            }
+            else{
+                country.text = "Country : ${hasil[0]}"
+                countryCode.text = "Country Code : ${hasil[1]}"
+                timezone.text = "Timezone: ${hasil[3]} (${hasil[2]})"
+            }
         }
 
         return v

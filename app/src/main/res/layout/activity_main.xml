@@ -30,7 +30,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="18"
                 android:padding="10dp"
-                android:maxLines="1"
+                android:inputType="text"
+                android:imeOptions="actionDone"
                 android:lines="1"
                 android:hint="Search"
                 android:background="@drawable/shape_rounded_edittext_corners"/>

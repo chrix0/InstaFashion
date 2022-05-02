@@ -30,5 +30,8 @@ class noNetworkDetected : AppCompatActivity() {
             finishAffinity()
             System.exit(0)
         }
+
+
+
     }
 }
