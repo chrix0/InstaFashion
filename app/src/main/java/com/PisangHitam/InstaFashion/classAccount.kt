@@ -6,10 +6,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.PisangHitam.InstaFashion.Room.converterAddress
-import com.PisangHitam.InstaFashion.Room.converterCart
-import com.PisangHitam.InstaFashion.Room.converterProduk
-import com.PisangHitam.InstaFashion.Room.converterTrans
+import com.PisangHitam.InstaFashion.Room.*
 import kotlinx.android.parcel.Parcelize
 
 //Composite key
@@ -39,6 +36,8 @@ data class classAccount(
     var transactionHistory : MutableList<classTransaction> = mutableListOf(),
 
     @ColumnInfo(name = "COLUMN_WISHLIST") @TypeConverters(converterProduk::class)
-    var wishlist : MutableList<classProduk> = mutableListOf()
+    var wishlist : MutableList<classProduk> = mutableListOf(),
 
+    @ColumnInfo(name = "COLUMN_NOTIF") @TypeConverters(converterNotif::class)
+    var notifications : MutableList<classRecNotif> = mutableListOf()
 ) : Parcelable

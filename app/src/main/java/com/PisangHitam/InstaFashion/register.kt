@@ -35,6 +35,7 @@ class register : AppCompatActivity() {
             mutableListOf("","","",""),
             "",
             mutableListOf(),
+            mutableListOf(),
             mutableListOf()
         )
 

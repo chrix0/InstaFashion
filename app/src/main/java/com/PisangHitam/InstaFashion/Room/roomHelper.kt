@@ -8,9 +8,13 @@ import com.PisangHitam.InstaFashion.classProduk
 @Database(
     entities = [classAccount::class, classProduk::class],
     version = 5)
-@TypeConverters(value = [converterCart::class, converterAddress::class, converterTrans::class, converterProduk::class])
+@TypeConverters(value =
+    [converterCart::class,
+        converterAddress::class,
+        converterTrans::class,
+        converterProduk::class,
+        converterNotif::class])
 abstract class roomHelper : RoomDatabase(){
     abstract fun daoAccount() : daoAccount
     abstract fun daoOutfitList() : daoOutfitList
-
 }

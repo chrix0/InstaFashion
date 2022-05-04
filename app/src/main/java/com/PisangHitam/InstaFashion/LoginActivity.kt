@@ -19,6 +19,11 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         var db = singletonData.getRoomHelper(applicationContext)
 
+        //situational - TOLONG DIHAPUS KALAU TIDAK DIGUNAKAN
+        Thread{
+            db.clearAllTables()
+        }
+
         button2.setOnClickListener{
             var userName = usernameLogin.text.toString()
             var password = passwordLogin.text.toString()
