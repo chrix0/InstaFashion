@@ -1,6 +1,9 @@
 package com.PisangHitam.InstaFashion
 
 import android.content.Intent
+import android.media.AudioManager
+import android.media.SoundPool
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
@@ -12,6 +15,9 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity() {
     private val EXTRA_USER = "USER"
     private val EXTRA_PASS = "PASSWORD"
+
+    private var sp : SoundPool? = null
+    private var soundID = 0
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -53,6 +59,8 @@ class LoginActivity : AppCompatActivity() {
                     }
                     var intent = Intent(this, MainActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    sp?.play(soundID,0.99f, 0.99f, 1, 0, 0.99f)
+
                     startActivity(intent)
                 }
                 else{
@@ -67,6 +75,42 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onStart() {
+        super.onStart()
+        //Di sini cocok digunakan untuk melakukan load data..
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            createNewSoundPool()
+        }
+        else{
+            createOldSoundPool()
+        }
+
+//        sp?.setOnLoadCompleteListener{soundPool, id, status ->
+//            if (status != 0){
+//                //Status yang bukan 0 berarti ada masalah dalam proses loading
+//            }
+//            else{
+//            }
+//        }
+
+        //load(context, lagu raw, priority)
+        //lebih kecil nilai priority lebih tinggi prioritasnya
+        soundID = sp?.load(this, R.raw.se_loginok, 1) ?: 0
+    }
+
+    //Fungsi createNewSoundPool untuk yang SDK lollipop dan atasnya
+    private fun createNewSoundPool(){
+        sp = SoundPool.Builder()
+            .setMaxStreams(15)
+            .build()
+    }
+
+    //Fungsi createNewSoundPool untuk yang di bawah lollipop
+    private fun createOldSoundPool(){
+        sp = SoundPool(15, AudioManager.STREAM_MUSIC, 0) //Max streams, ??, kualitas suara
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(EXTRA_USER, usernameLogin.text.toString())

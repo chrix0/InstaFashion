@@ -7,7 +7,7 @@ import com.PisangHitam.InstaFashion.classProduk
 
 @Database(
     entities = [classAccount::class, classProduk::class],
-    version = 5)
+    version = 6)
 @TypeConverters(value =
     [converterCart::class,
         converterAddress::class,

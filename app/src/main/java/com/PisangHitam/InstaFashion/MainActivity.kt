@@ -10,6 +10,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.icu.util.Calendar
 import android.media.RingtoneManager
+import android.media.SoundPool
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,6 +29,9 @@ import kotlin.random.Random
 class MainActivity : AppCompatActivity() {
     private val EXTRA_SEARCH = "SRC"
     private val EXTRA_LAST_SELECTED_NAV = "LAST_NAV"
+
+    private var sp : SoundPool? = null
+    private var soundID = 0
 
     @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
