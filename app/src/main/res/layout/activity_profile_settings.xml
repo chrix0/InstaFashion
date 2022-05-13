@@ -32,6 +32,49 @@
             android:layout_height="wrap_content"
             android:text="Recommendation Notification" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Background Music"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/player_stop"
+                android:button="@null"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="20dp"
+                android:drawableRight="@drawable/playerstoptoggle"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/player_play"
+                android:button="@null"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="20dp"
+                android:drawableRight="@drawable/playerplaytoggle"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/player_pause"
+                android:button="@null"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="20dp"
+                android:drawableRight="@drawable/playerpausetoggle"/>
+        </RadioGroup>
+
+
     </LinearLayout>
 
 </ScrollView>

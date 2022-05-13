@@ -22,6 +22,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.PisangHitam.InstaFashion.singletonData.myMediaPlayer
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_shop_product_list.*
 import kotlin.random.Random
@@ -141,5 +142,9 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         unregisterReceiver(singletonData.inet_receiver)
+    }
+
+    override fun onPause() {
+        super.onPause()
     }
 }

@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.IntentFilter
 import android.graphics.Bitmap
+import android.media.MediaPlayer
 import android.media.ThumbnailUtils
 import androidx.room.Room
 
@@ -202,4 +203,8 @@ object singletonData {
         return null
     }
 
+    // MEDIA PLAYER
+    var myMediaPlayer : MediaPlayer? = null
+    var playerPaused = false
+    var playerCreated = false
 }

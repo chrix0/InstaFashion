@@ -27,3 +27,8 @@ const val SCHEDULER_GET_GEO = 9000
 const val dummy_for_test = "DUMMY"
 
 const val SEARCH_FROM_MAIN = "SEARCH MAIN"
+
+const val ACTION_PLAY = "PLAY"
+const val ACTION_STOP = "STOP"
+const val ACTION_CREATE = "CREATE"
+const val ACTION_PAUSE = "PAUSE"
