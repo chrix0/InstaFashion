@@ -26,9 +26,9 @@ class LoginActivity : AppCompatActivity() {
         var db = singletonData.getRoomHelper(applicationContext)
 
         //situational - TOLONG DIHAPUS KALAU TIDAK DIGUNAKAN
-        Thread{
-            db.clearAllTables()
-        }
+//        Thread{
+//            db.clearAllTables()
+//        }
 
         button2.setOnClickListener{
             var userName = usernameLogin.text.toString()
@@ -101,9 +101,7 @@ class LoginActivity : AppCompatActivity() {
 
     //Fungsi createNewSoundPool untuk yang SDK lollipop dan atasnya
     private fun createNewSoundPool(){
-        sp = SoundPool.Builder()
-            .setMaxStreams(15)
-            .build()
+        sp = SoundPool.Builder().setMaxStreams(15).build()
     }
 
     //Fungsi createNewSoundPool untuk yang di bawah lollipop
@@ -133,3 +131,5 @@ class LoginActivity : AppCompatActivity() {
         registerReceiver(singletonData.nw_receiver, singletonData.nw_filter)
     }
 }
+
+

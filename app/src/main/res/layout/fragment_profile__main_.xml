@@ -52,11 +52,15 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="8">
+            android:layout_weight="8"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
                 <Button
                     android:id="@+id/personalData"
                     android:layout_width="match_parent"
@@ -73,6 +77,14 @@
                     android:fontFamily="@font/montserrat_bold"
                     android:text="Purchase History" />
 
+                <Button
+                    android:id="@+id/lastTransaction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Save Last transaction to text" />
+d
                 <Button
                     android:id="@+id/share"
                     android:layout_width="match_parent"

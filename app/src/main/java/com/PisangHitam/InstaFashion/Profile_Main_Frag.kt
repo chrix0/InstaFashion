@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ShareCompat
 import com.PisangHitam.InstaFashion.SharedPref.loginSharedPref
 import com.PisangHitam.InstaFashion.locChecker.js_getGeo
@@ -102,6 +103,17 @@ class Profile_Main_Frag : Fragment() {
         settings.setOnClickListener{
             var intent = Intent(requireContext(), profile_settings::class.java)
             startActivity(intent)
+        }
+
+        var ltrans = v.findViewById<Button>(R.id.lastTransaction)
+        ltrans.setOnClickListener {
+            if(user.transactionHistory.isNotEmpty()){
+                var intent = Intent(requireContext(), profile_lastTransactionToText::class.java)
+                startActivity(intent)
+            }
+            else{
+                Toast.makeText(requireContext(), "You haven't made any transactions.", Toast.LENGTH_SHORT).show()
+            }
         }
 
 
