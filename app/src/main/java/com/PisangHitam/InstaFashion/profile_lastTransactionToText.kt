@@ -48,6 +48,7 @@ class profile_lastTransactionToText : AppCompatActivity() {
             "Phone Number : ${last?.phoneNumber}",
             "Subtotal : ${last?.subTotal}",
             "Shipping cost : ${last?.shippingCost}",
+
             "Total : ${last?.subTotal + last?.shippingCost}"
         )
 
@@ -59,17 +60,15 @@ class profile_lastTransactionToText : AppCompatActivity() {
             //fileList() merupakan method built-in
 
             var existed : String = ""
+            var file : File? = null
             try{
-                var file = File(filesDir, "IFLastTransaction.txt")
+                file = File(filesDir, "${user?.userName}LastTransaction.txt")
                 if(!file.exists()){
                     file.createNewFile()
                 }
                 file.readLines().forEach {
                     existed += "$it \n"
                 }
-            }
-            catch (e: FileNotFoundException){
-                Toast.makeText(this, "File is missing.", Toast.LENGTH_SHORT)
             }
             catch (e: IOException){
                 Toast.makeText(this, "Unable to read the file.", Toast.LENGTH_SHORT)
@@ -80,14 +79,14 @@ class profile_lastTransactionToText : AppCompatActivity() {
                     .setTitle("File contains details of previous transaction")
                     .setMessage("$existed \n\nDo you want to overwrite the file?")
                     .setPositiveButton("Yes") { _, i ->
-                        saveInternal()
+                        saveInternal(file!!)
                     }
                     .setNegativeButton("No") { _, i ->
                     }
                 dialog.show()
             }
             else{
-                saveInternal()
+                saveInternal(file!!)
             }
         }
 
@@ -99,14 +98,15 @@ class profile_lastTransactionToText : AppCompatActivity() {
                     exDir.mkdir()
                 }
 
+                //READ - EXTERNAL
                 var existed : String = ""
-                var file = File(exDir, "externalIFLastTransaction.txt")
+                var file = File(exDir, "external${user?.userName}LastTransaction.txt")
                 if(!file.exists()){
                     file.createNewFile()
                 }
                 file.readLines().forEach {
                     existed += "$it\n"
-                }
+                };
 
                 if(existed.isNotEmpty()){
                     var dialog = AlertDialog.Builder(this)
@@ -126,14 +126,9 @@ class profile_lastTransactionToText : AppCompatActivity() {
         }
     }
 
-    fun saveInternal(){
+    fun saveInternal(target: File){
         //SAVE - INTERNAL
-        var db = singletonData.getRoomHelper(this)
-        var user = singletonData.getCurUserObj(this)
-        var all = user?.transactionHistory
-        var last = all?.get(all.size - 1)
-
-        var file = File(filesDir, "IFLastTransaction.txt")
+        var file =  target
 
         for (i in 0 until inputData.size){
             if(i == 0){
@@ -149,22 +144,15 @@ class profile_lastTransactionToText : AppCompatActivity() {
     }
 
     fun saveExternal(target: File){
-
-        var db = singletonData.getRoomHelper(this)
-        var user = singletonData.getCurUserObj(this)
-        var all = user?.transactionHistory
-        var last = all?.get(all.size - 1)
-
+        //SAVE - EXTERNAL
         var file = target
-        file.writeText("Transaction ID : ${last?.id}, \n\r")
-        file.appendText("Username : ${user?.userName}, \n\r")
-        file.appendText("Time of purchase : ${last?.datePurchase}, \n\r")
-        file.appendText("Payment method : ${last?.method}, \n\r")
-        file.appendText("Shipping address : ${singletonData.formatAlamat(last!!.address)}, \n\r")
-        file.appendText("Phone Number : ${last?.phoneNumber}, \n\r")
-        file.appendText("Subtotal : ${last?.subTotal}, \n\r")
-        file.appendText( "Shipping cost : ${last?.shippingCost}, \n\r")
-        file.appendText("Total : ${last?.subTotal + last?.shippingCost} \n\r")
+        for (i in 0 until inputData.size){
+            if(i == 0){
+                file.writeText("${inputData[i]}, \n\r")
+            }
+            else
+                file.appendText("${inputData[i]}, \n\r")
+        }
 
         Snackbar.make(parentLayout, "Success! File is saved at ${file.absolutePath}", Snackbar.LENGTH_INDEFINITE)
             .setAction("OK") { }
