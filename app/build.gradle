@@ -63,6 +63,7 @@ dependencies {
     implementation 'com.synnapps:carouselview:0.1.4'
     implementation "org.jetbrains.anko:anko:0.10.8"
     implementation 'com.loopj.android:android-async-http:1.4.11'
+    implementation 'com.github.fondesa:kpermissions:3.3.0'
 
     implementation "androidx.room:room-runtime:2.4.2"
     implementation 'androidx.room:room-ktx:2.4.2'
@@ -86,4 +87,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.0'
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:3.1.0"
     debugImplementation('androidx.fragment:fragment-testing:1.4.1')
+
 }

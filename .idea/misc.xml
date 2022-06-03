@@ -31,12 +31,14 @@
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_personaldata.xml" value="0.2" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_profile_last_transaction_to_text.xml" value="0.25416666666666665" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_profile_settings.xml" value="0.4" />
+        <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_profile_sms.xml" value="0.15989583333333332" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_register.xml" value="0.11481481481481481" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_shop_basket.xml" value="0.19270833333333334" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_shop_checkout.xml" value="0.25052083333333336" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_shop_info_produk.xml" value="0.264" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_shop_product_list.xml" value="0.1" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_splash_screen.xml" value="0.2" />
+        <entry key="..\:/InstaFashion/app/src/main/res/layout/dialog_profile_sms_contact.xml" value="0.25416666666666665" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/dialog_shop_checkout_address.xml" value="0.25052083333333336" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/dialog_shop_checkout_phone.xml" value="0.25052083333333336" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/dialog_shop_history_details.xml" value="0.25052083333333336" />
