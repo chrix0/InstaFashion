@@ -1,15 +1,13 @@
 package com.PisangHitam.InstaFashion.Room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import com.PisangHitam.InstaFashion.classAccount
 import com.PisangHitam.InstaFashion.classProduk
 
 @Dao
 interface daoOutfitList {
-//    SELECT ALL
-    @Query("Select * from classProduk")
+//    SELECT ALL (SETELAH DIOPTIMASI)
+    @Transaction @Query("Select * from classProduk")
     fun getAllOutfit() : List<classProduk>
 
 //    SELECT WHERE CATEGORY (ALL)
@@ -31,7 +29,28 @@ interface daoOutfitList {
     @Query("Select * from classProduk where COLUMN_NAMA_PRODUK like :name or COLUMN_DESC_PRODUK like :name")
     fun getOutfitLike(name: String) : List<classProduk> //Isi sendiri bagian name, misalnya "%yang dicari%"
 
-//    INSERT ALL
+//    INSERT (SEBELUM OPTIMISASI)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addOutfit(item : classProduk)
+
+//    UPDATE (SEBELUM OPTIMISASI)
+    @Update
+    fun updateOutfit(itemOutfit : classProduk)
+
+//    INSERT (SETELAH OPTIMISASI) shopFrag
+    @Transaction
+    fun addAllOutfit(list : List<classProduk>){
+        for(i in list){
+            addOutfit(i)
+        }
+    }
+
+//    UPDATE (SETELAH OPTIMISASI)
+    @Transaction
+    fun updateAllOutfit(list : List<classProduk>){
+        for(i in list){
+            updateOutfit(i)
+        }
+    }
 }
+

@@ -65,9 +65,11 @@ class Shop_Main_Frag : Fragment() {
         var dbOutfit : daoOutfitList? = helper.daoOutfitList()
         //RECYCLER VIEW
         val itemList = v.findViewById<RecyclerView>(R.id.itemList)
-        for(i in singletonData.outfitList){
-            dbOutfit!!.addOutfit(i)
-        }
+
+//        for(i in singletonData.outfitList){
+//            dbOutfit!!.addOutfit(i)
+//        }
+        dbOutfit!!.addAllOutfit(singletonData.outfitList)
 
         var first5item : List<classProduk> = dbOutfit!!.getAllOutfit()
 

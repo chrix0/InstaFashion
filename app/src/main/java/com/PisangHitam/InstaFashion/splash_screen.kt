@@ -46,11 +46,10 @@ class splash_screen : AppCompatActivity() {
 
             //Thread.sleep(2000)
             uiThread {
-//                var db = singletonData.getRoomHelper(baseContext)
-//                for(i in singletonData.accList){
-//                    db.daoAccount().newAcc(i)
-//                }
-//                singletonData.clearAllTable(baseContext)
+                var db = singletonData.getRoomHelper(baseContext)
+                //!!!
+                db.daoAccount().addAllAcc(singletonData.accList)
+
                 var intent : Intent
                 if (singletonData.nw_receiver.connected(this@splash_screen, true)) {
                     var sharedpref = loginSharedPref(this@splash_screen)

@@ -2,11 +2,12 @@ package com.PisangHitam.InstaFashion.Room
 
 import androidx.room.*
 import com.PisangHitam.InstaFashion.classAccount
+import com.PisangHitam.InstaFashion.classProduk
 
 @Dao
 interface daoAccount {
-    //SELECT
-    @Query("Select * from classAccount")
+    //SELECT (SETELAH OPTIMASI)
+    @Transaction @Query("Select * from classAccount")
     fun getAllAcc() : List<classAccount>
 
     @Query("Select * from classAccount where COLUMN_USERNAME = :username and COLUMN_PASS = :password")
@@ -22,8 +23,23 @@ interface daoAccount {
     @Insert
     fun newAcc(acc : classAccount)
 
-    //UPDATE (UPDATE PAS NAMBAH CART, TRANSACTION, UBAH ALAMAT, DLL. ME AGAK LUPA)
+    //UPDATE
     @Update
-    fun updateAcc(acc : classAccount) //Updatenya berdasarkan primary key di objek acc itu
+    fun updateAcc(acc : classAccount)
 
+    //INSERT (SETELAH OPTIMISASI) splash
+    @Transaction
+    fun addAllAcc(list : List<classAccount>){
+        for(i in list){
+            newAcc(i)
+        }
+    }
+
+    // UPDATE (SETELAH OPTIMISASI)
+    @Transaction
+    fun updateAllAcc(list : List<classAccount>){
+        for(i in list){
+            updateAcc(i)
+        }
+    }
 }

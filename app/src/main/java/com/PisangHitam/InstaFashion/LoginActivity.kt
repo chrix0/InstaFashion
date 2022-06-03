@@ -1,6 +1,7 @@
 package com.PisangHitam.InstaFashion
 
 import android.content.Intent
+import android.database.Cursor
 import android.media.AudioManager
 import android.media.SoundPool
 import android.os.Build
@@ -131,5 +132,8 @@ class LoginActivity : AppCompatActivity() {
         registerReceiver(singletonData.nw_receiver, singletonData.nw_filter)
     }
 }
+
+
+
 
 
