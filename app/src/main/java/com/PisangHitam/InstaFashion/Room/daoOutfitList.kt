@@ -6,7 +6,7 @@ import com.PisangHitam.InstaFashion.classProduk
 
 @Dao
 interface daoOutfitList {
-//    SELECT ALL (SETELAH DIOPTIMASI)
+    //SELECT ALL (SETELAH DIOPTIMASI)
     @Transaction @Query("Select * from classProduk")
     fun getAllOutfit() : List<classProduk>
 
@@ -29,7 +29,6 @@ interface daoOutfitList {
     @Query("Select * from classProduk where COLUMN_NAMA_PRODUK like :name or COLUMN_DESC_PRODUK like :name")
     fun getOutfitLike(name: String) : List<classProduk> //Isi sendiri bagian name, misalnya "%yang dicari%"
 
-//    INSERT (SEBELUM OPTIMISASI)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addOutfit(item : classProduk)
 
@@ -37,7 +36,7 @@ interface daoOutfitList {
     @Update
     fun updateOutfit(itemOutfit : classProduk)
 
-//    INSERT (SETELAH OPTIMISASI) shopFrag
+//    INSERT (SETELAH OPTIMASI)
     @Transaction
     fun addAllOutfit(list : List<classProduk>){
         for(i in list){
@@ -45,12 +44,13 @@ interface daoOutfitList {
         }
     }
 
-//    UPDATE (SETELAH OPTIMISASI)
+//    UPDATE (SETELAH OPTIMASI)
     @Transaction
     fun updateAllOutfit(list : List<classProduk>){
         for(i in list){
             updateOutfit(i)
         }
     }
+
 }
 

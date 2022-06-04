@@ -27,7 +27,7 @@ interface daoAccount {
     @Update
     fun updateAcc(acc : classAccount)
 
-    //INSERT (SETELAH OPTIMISASI) splash
+    //INSERT (SETELAH OPTIMASI)
     @Transaction
     fun addAllAcc(list : List<classAccount>){
         for(i in list){
@@ -35,11 +35,12 @@ interface daoAccount {
         }
     }
 
-    // UPDATE (SETELAH OPTIMISASI)
+    // UPDATE (SETELAH OPTIMASI)
     @Transaction
     fun updateAllAcc(list : List<classAccount>){
         for(i in list){
             updateAcc(i)
         }
     }
+
 }

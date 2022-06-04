@@ -135,35 +135,42 @@ class profile_sms : AppCompatActivity(), LoaderManager.LoaderCallbacks<MutableLi
             number.setText("${target.number1}")
 
             done.setOnClickListener {
-                var operations = ArrayList<ContentProviderOperation>()
-                var selection = ContactsContract.Data.RAW_CONTACT_ID + "=? AND " +
-                        ContactsContract.Data.MIMETYPE + "=?"
+                permissionsBuilder(Manifest.permission.WRITE_CONTACTS).build().send() { result ->
+                    if (result.allDenied()) {
+                        Toast.makeText(
+                            this,
+                            "Permission denied. Please grant the permission to add contacts.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else if (result.allGranted()) {
+                        var operations = ArrayList<ContentProviderOperation>()
+                        var selection = ContactsContract.Data.RAW_CONTACT_ID + "=? AND " +
+                                ContactsContract.Data.MIMETYPE + "=?"
 
-                //Update name
-                operations.add(
-                    ContentProviderOperation.newUpdate(ContactsContract.Data.CONTENT_URI)
-                        .withSelection(selection, arrayOf(target.id.toString(), ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE))
-                        .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
-                        .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, name.text.toString())
-                        .build()
-                )
+                        //Update name
+                        operations.add(
+                            ContentProviderOperation.newUpdate(ContactsContract.Data.CONTENT_URI)
+                                .withSelection(selection, arrayOf(target.id.toString(), ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE))
+                                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+                                .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, name.text.toString())
+                                .build()
+                        )
+                        //Update number
+                        operations.add(
+                            ContentProviderOperation.newUpdate(ContactsContract.Data.CONTENT_URI)
+                                .withSelection(selection, arrayOf(target.id.toString(), ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE))
+                                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+                                .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, number.text.toString())
+                                .build()
+                        )
 
-                //Update number
-                operations.add(
-                    ContentProviderOperation.newUpdate(ContactsContract.Data.CONTENT_URI)
-                        .withSelection(selection, arrayOf(target.id.toString(), ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE))
-                        .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
-                        .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, number.text.toString())
-                        .build()
-                )
-
-
-
-                contentResolver.applyBatch(ContactsContract.AUTHORITY, operations)
-                Toast.makeText(this, "Contact successfully edited", Toast.LENGTH_SHORT).show()
-                creator.cancel()
-                //Restart loader ketika kontak sudah ditambah
-                LoaderManager.getInstance(this).restartLoader(1, null, this)
+                        contentResolver.applyBatch(ContactsContract.AUTHORITY, operations)
+                        Toast.makeText(this, "Contact successfully edited", Toast.LENGTH_SHORT).show()
+                        creator.cancel()
+                        //Restart loader ketika kontak sudah diupdate
+                        LoaderManager.getInstance(this).restartLoader(1, null, this)
+                    }
+                }
             }
 
             cancel.setOnClickListener{
