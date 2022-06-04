@@ -1,5 +1,6 @@
 package com.PisangHitam.InstaFashion
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -20,6 +21,10 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.PisangHitam.InstaFashion.Room.daoOutfitList
 import com.PisangHitam.InstaFashion.Room.roomHelper
+import com.fondesa.kpermissions.allDenied
+import com.fondesa.kpermissions.allGranted
+import com.fondesa.kpermissions.extension.permissionsBuilder
+import com.fondesa.kpermissions.extension.send
 import com.squareup.picasso.Picasso
 
 import com.synnapps.carouselview.ImageListener
@@ -110,8 +115,17 @@ class Shop_Main_Frag : Fragment() {
 
         val analyzer = v.findViewById<Button>(R.id.analyzer)
         analyzer.setOnClickListener {
-            var intent = Intent(requireContext(), oa_container::class.java)
-            startActivity(intent)
+            permissionsBuilder(Manifest.permission.CAMERA).build().send() {
+                    result ->
+                if (result.allDenied()){
+                    Toast.makeText(requireContext(), "Permission denied. Unable to continue", Toast.LENGTH_SHORT).show()
+                }
+                else if (result.allGranted()){
+                    Toast.makeText(requireContext(), "Permission granted.", Toast.LENGTH_SHORT).show()
+                    var intent = Intent(requireContext(), oa_container::class.java)
+                    startActivity(intent)
+                }
+            }
         }
 
         //Code untuk CarouselView
@@ -161,7 +175,7 @@ class Shop_Main_Frag : Fragment() {
         return v
     }
 
-    fun getAdapter(list : List<classProduk>) : recycler_products_adapter{
+    private fun getAdapter(list : List<classProduk>) : recycler_products_adapter{
         adapter = recycler_products_adapter(list){
             val info = Intent(requireContext(), shop_infoProduk::class.java)
             info.putExtra(SHOW_PRODUCT_INFO, it)

@@ -98,7 +98,7 @@ d
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/montserrat_bold"
-                    android:text="Share By Sms" />
+                    android:text="Your contacts" />
                 <Button
                     android:id="@+id/setting"
                     android:layout_width="match_parent"

@@ -19,6 +19,10 @@ class Personaldata : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personaldata)
 
+        val actionbar = supportActionBar
+        actionbar!!.title = "Your personal data"
+        actionbar.setDisplayHomeAsUpEnabled(true)
+
         val db = singletonData.getRoomHelper(this)
 
         var user : classAccount? = if(intent.hasExtra(dummy_for_test)){
@@ -69,5 +73,10 @@ class Personaldata : AppCompatActivity() {
         Province.setText(savedInstanceState?.getString(EXTRA_PROV, ""))
         psCode.setText(savedInstanceState?.getString(EXTRA_POST, ""))
         Pnumber.setText(savedInstanceState?.getString(EXTRA_PHONE, ""))
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

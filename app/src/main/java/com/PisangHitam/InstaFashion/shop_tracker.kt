@@ -13,11 +13,6 @@ import org.jetbrains.anko.startActivity
 import org.w3c.dom.Text
 
 class shop_tracker : AppCompatActivity() {
-    //Alert dialog details ok
-    //Ignore back button ok
-    //Alert dialog cancel ok
-    //checkout fill all checker
-    //Multi fab library
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +20,7 @@ class shop_tracker : AppCompatActivity() {
 
         val actionbar = supportActionBar
         actionbar!!.title = getString(R.string.purchase_history_title)
+        actionbar.setDisplayHomeAsUpEnabled(true)
 
         var user = singletonData.getCurUserObj(this)
 
@@ -70,5 +66,9 @@ class shop_tracker : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

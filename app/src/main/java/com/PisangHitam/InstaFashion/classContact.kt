@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 
 data class classContact(
+    var id : Long,
     var firstName : String,
     var lastName : String,
     var number1 : String,

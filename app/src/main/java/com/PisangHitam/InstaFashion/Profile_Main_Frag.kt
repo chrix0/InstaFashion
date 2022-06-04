@@ -1,5 +1,6 @@
 package com.PisangHitam.InstaFashion
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,6 +13,10 @@ import android.widget.Toast
 import androidx.core.app.ShareCompat
 import com.PisangHitam.InstaFashion.SharedPref.loginSharedPref
 import com.PisangHitam.InstaFashion.locChecker.js_getGeo
+import com.fondesa.kpermissions.allDenied
+import com.fondesa.kpermissions.allGranted
+import com.fondesa.kpermissions.extension.permissionsBuilder
+import com.fondesa.kpermissions.extension.send
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.fragment_profile__main_.*
 
@@ -84,8 +89,18 @@ class Profile_Main_Frag : Fragment() {
 
         var shareBySms = v.findViewById<Button>(R.id.shareBySms)
         shareBySms.setOnClickListener{
-            var intent = Intent(requireContext(), profile_sms::class.java)
-            startActivity(intent)
+            //Dengan library KPermissions
+            permissionsBuilder(Manifest.permission.READ_CONTACTS).build().send() {
+                    result ->
+                if (result.allDenied()){
+                    Toast.makeText(requireContext(), "Permission denied. Unable to continue", Toast.LENGTH_SHORT).show()
+                }
+                else if (result.allGranted()){
+                    Toast.makeText(requireContext(), "Permission granted.", Toast.LENGTH_SHORT).show()
+                    var intent = Intent(requireContext(), profile_sms::class.java)
+                    startActivity(intent)
+                }
+            }
         }
 
         var logout = v.findViewById<Button>(R.id.logout)

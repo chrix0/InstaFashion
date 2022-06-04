@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".profile_sms"
     android:weightSum="10"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="10dp">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contactRecyView"
         android:layout_width="match_parent"
@@ -16,6 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Test insert kontak"
+        android:text="Add new contact"
         android:id="@+id/addContact"/>
 </LinearLayout>

@@ -19,6 +19,7 @@ AsyncTaskLoader<MutableList<classContact>>(context) {
 
     @SuppressLint("Range")
     override fun loadInBackground(): MutableList<classContact>? {
+        var id = ContactsContract.RawContacts.CONTACT_ID
         var firstName = ContactsContract.PhoneLookup.DISPLAY_NAME_PRIMARY
         var lastName = ContactsContract.CommonDataKinds.Identity.DISPLAY_NAME
         var number1 = ContactsContract.CommonDataKinds.Phone.NUMBER
@@ -29,6 +30,7 @@ AsyncTaskLoader<MutableList<classContact>>(context) {
         var myListContact: MutableList<classContact> = mutableListOf()
         var myContactUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
         var myProjection = arrayOf(
+            id,
             firstName, lastName, number1,
             numberDevice1, email, emailStyle, picture
         )
@@ -41,6 +43,7 @@ AsyncTaskLoader<MutableList<classContact>>(context) {
             while (!data.isAfterLast) {
                 myListContact.add(
                     classContact(
+                        data.getLong(data.getColumnIndex(id)),
                         data.getString(data.getColumnIndex(firstName)) ?: "", "",
                         data.getString(data.getColumnIndex(number1)) ?: "",
                         typeNumber(data.getString(data.getColumnIndex(numberDevice1))) ?: "",
@@ -88,7 +91,7 @@ AsyncTaskLoader<MutableList<classContact>>(context) {
         var result : MutableList<String> = mutableListOf()
         val cr: ContentResolver = context.contentResolver
         val PROJECTION = arrayOf(
-            ContactsContract.RawContacts.CONTACT_ID,
+            ContactsContract.Data.RAW_CONTACT_ID,
             ContactsContract.Contacts.DISPLAY_NAME,
             ContactsContract.Contacts.PHOTO_ID,
             ContactsContract.CommonDataKinds.Email.DATA,

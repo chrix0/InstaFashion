@@ -1,9 +1,11 @@
 package com.PisangHitam.InstaFashion
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +13,8 @@ import kotlinx.android.synthetic.main.activity_register.view.*
 import kotlinx.android.synthetic.main.layout_contact_recy_view.view.*
 import kotlinx.android.synthetic.main.layout_contact_recy_view.view.email
 
-class recycler_contact_adapter(private val contact: List<classContact>) :RecyclerView.Adapter<myHolder>() {
+class recycler_contact_adapter(var acontext : Context, private val contact: List<classContact>,
+var editor : (classContact) -> Unit) :RecyclerView.Adapter<myHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): myHolder {
         return myHolder(
             LayoutInflater.from(parent.context)
@@ -21,6 +24,10 @@ class recycler_contact_adapter(private val contact: List<classContact>) :Recycle
 
     override fun onBindViewHolder(holder: myHolder, position: Int) {
         holder.bindContact(contact[position])
+        holder.item.setOnClickListener {
+            Toast.makeText(acontext, contact[position].id.toString(), Toast.LENGTH_SHORT).show()
+            editor(contact[position])
+        }
     }
 
     override fun getItemCount(): Int = contact.size
@@ -34,7 +41,7 @@ class myHolder(view : View) : RecyclerView.ViewHolder(view){
     var email = view.email
     var emailStyle = view.emailStyle
     var picture = view.picture
-
+    var item = view.contactItem
 
     fun bindContact(tmp : classContact){
         firstName.text = "${tmp.firstName}"
