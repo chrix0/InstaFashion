@@ -50,9 +50,7 @@ class profile_settings : AppCompatActivity() {
         if (myMediaPlayer?.isPlaying == true){
             player_play.isChecked = true
         }
-
         var playerIntent = Intent(this, musicService::class.java)
-
         if(!playerCreated){
             playerCreated = true
             playerIntent?.action = ACTION_CREATE

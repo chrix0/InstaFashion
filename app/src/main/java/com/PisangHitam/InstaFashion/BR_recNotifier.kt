@@ -29,6 +29,9 @@ class BR_recNotifier : BroadcastReceiver() {
         var notifText = "${product.namaProduk}"
         var notifTitle = "Check this out!"
 
+        var recNotif = classRecNotif(notifText,notifTitle)
+
+
         //Activity muncul setelah notifikasi ditekan
         val dest = Intent(context, shop_infoProduk::class.java)
         dest.putExtra(SHOW_PRODUCT_INFO, product)
@@ -68,6 +71,11 @@ class BR_recNotifier : BroadcastReceiver() {
         }
         //Munculkan notifikasi
         mNotificationManager.notify(NotifyId, mBuilder.build())
+
+        var db = singletonData.getRoomHelper(context)
+        var user = singletonData.getCurUserObj(context)
+        user!!.notifications.add(recNotif)
+        db.daoAccount().updateAcc(user)
     }
 
     fun rand(start : Int, end: Int) = Random(System.nanoTime()).nextInt(end - start + 1) + start
@@ -76,6 +84,7 @@ class BR_recNotifier : BroadcastReceiver() {
         var products = singletonData.outfitList
         var jumlahProduct = products.size
         var indexRandom = rand(0, jumlahProduct - 1)
+
         return products[indexRandom]
     }
 }

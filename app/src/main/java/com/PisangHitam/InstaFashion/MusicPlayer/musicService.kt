@@ -14,9 +14,7 @@ class musicService : Service(),
     MediaPlayer.OnPreparedListener,
     MediaPlayer.OnCompletionListener,
     MediaPlayer.OnErrorListener{
-
     override fun onBind(intent: Intent): IBinder? = null
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent != null){
             var actionIntent = intent.action
@@ -31,7 +29,6 @@ class musicService : Service(),
                         myMediaPlayer?.setOnErrorListener(this)
                     }
                 }
-
                 ACTION_PLAY ->{
                     if(!myMediaPlayer!!.isPlaying){
                         if(playerPaused){
@@ -76,22 +73,18 @@ class musicService : Service(),
         }
         return flags
     }
-
     override fun onPrepared(p0: MediaPlayer?) {
         //Ketika file audio sudah diload
         myMediaPlayer?.start() //Mulaikan musiknya
     }
-
     override fun onCompletion(p0: MediaPlayer?) {
         //Ketika file audio sudah selesai dibaca
     }
-
     override fun onError(p0: MediaPlayer?, p1: Int, p2: Int): Boolean {
         //Ketika ada masalah dalam membaca file audio
         Toast.makeText(this, "Failed reading audio file..", Toast.LENGTH_SHORT).show()
         return false
     }
-
     override fun onDestroy(){
         super.onDestroy()
         myMediaPlayer?.release() //Tutup media player ketika tidak digunakan

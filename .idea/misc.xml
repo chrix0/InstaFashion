@@ -32,7 +32,7 @@
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_profile_last_transaction_to_text.xml" value="0.25416666666666665" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_profile_settings.xml" value="0.4" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_profile_sms.xml" value="0.15989583333333332" />
-        <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_register.xml" value="0.264" />
+        <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_register.xml" value="0.11481481481481481" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_shop_basket.xml" value="0.19270833333333334" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_shop_checkout.xml" value="0.25052083333333336" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_shop_info_produk.xml" value="0.264" />
@@ -49,19 +49,20 @@
         <entry key="..\:/InstaFashion/app/src/main/res/layout/fragment_wishlist__main_.xml" value="0.22" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/layout_contact_recy_view.xml" value="0.15208333333333332" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/recycler_basket.xml" value="0.1" />
-        <entry key="..\:/InstaFashion/app/src/main/res/layout/widget_clock.xml" value="0.4" />
         <entry key="..\:/InstaFashion/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.11481481481481481" />
         <entry key="..\:/InstaFashion/app/src/main/res/menu/fab_expand.xml" value="0.1" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/drawable/layout_contact_recy_view.xml" value="0.1415" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_no_network_detected.xml" value="0.25416666666666665" />
+        <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_notification_main.xml" value="0.19791666666666666" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_oa_container.xml" value="0.6" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_oa_recommend.xml" value="0.264" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_oa_result.xml" value="0.25416666666666665" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_personaldata.xml" value="0.25416666666666665" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_profile_settings.xml" value="0.2203125" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_profile_sms.xml" value="0.23645833333333333" />
+        <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_recycler_notification.xml" value="0.19791666666666666" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_register.xml" value="0.264" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_shop_basket.xml" value="0.4" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/activity_shop_product_list.xml" value="0.25416666666666665" />
@@ -73,7 +74,12 @@
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/fragment_shop__main_.xml" value="0.4" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/fragment_wishlist__main_.xml" value="0.4" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/layout_contact_recy_view.xml" value="0.1" />
+        <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/recommendation_widget.xml" value="0.1" />
+        <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/recommendation_widget_item.xml" value="0.23854166666666668" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/recycler_basket.xml" value="0.20885416666666667" />
+        <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/recycler_notification.xml" value="0.4" />
+        <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/recycler_products.xml" value="0.4" />
+        <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/layout/recycler_tracker_productlist.xml" value="0.23854166666666668" />
         <entry key="..\:/Mikroskil/Semester 5/Prog Mobile/InstaFashion/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25416666666666665" />
       </map>
     </option>

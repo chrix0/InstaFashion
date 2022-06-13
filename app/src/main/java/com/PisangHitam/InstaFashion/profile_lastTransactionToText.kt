@@ -58,7 +58,6 @@ class profile_lastTransactionToText : AppCompatActivity() {
         internal.setOnClickListener{
             //READ - INTERNAL
             //fileList() merupakan method built-in
-
             var existed : String = ""
             var file : File? = null
             try{
@@ -73,7 +72,6 @@ class profile_lastTransactionToText : AppCompatActivity() {
             catch (e: IOException){
                 Toast.makeText(this, "Unable to read the file.", Toast.LENGTH_SHORT)
             }
-
             if(existed.isNotEmpty()){
                 var dialog = AlertDialog.Builder(this)
                     .setTitle("File contains details of previous transaction")
@@ -97,7 +95,6 @@ class profile_lastTransactionToText : AppCompatActivity() {
                 if(!exDir.exists()){
                     exDir.mkdir()
                 }
-
                 //READ - EXTERNAL
                 var existed : String = ""
                 var file = File(exDir, "external${user?.userName}LastTransaction.txt")
@@ -107,7 +104,6 @@ class profile_lastTransactionToText : AppCompatActivity() {
                 file.readLines().forEach {
                     existed += "$it\n"
                 };
-
                 if(existed.isNotEmpty()){
                     var dialog = AlertDialog.Builder(this)
                         .setTitle("File contains details of previous transaction")

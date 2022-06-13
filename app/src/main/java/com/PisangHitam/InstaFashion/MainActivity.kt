@@ -38,18 +38,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         //Cek koneksi internet
         singletonData.inet_receiver = BR_inetCheck()
         singletonData.inet_filter = IntentFilter(CHECK_INTERNET)
         var service = Intent(this, service_inetCheck::class.java)
         service_inetCheck.enqueueWork(this, service)
-
         val navController = findNavController(R.id.fragmentContainerView)
         navBottom.setupWithNavController(navController)
-
         navController.navigate(R.id.shop_Main_Frag)
-
         navBottom.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.shop_Main_Frag -> {
@@ -67,6 +63,11 @@ class MainActivity : AppCompatActivity() {
                 else ->
                     false
             }
+        }
+
+        main_notify.setOnClickListener{
+            var intent = Intent(this, NotificationMain::class.java)
+            startActivity(intent)
         }
 
         var intentData = intent

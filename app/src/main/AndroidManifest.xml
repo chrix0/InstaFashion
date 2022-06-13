@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.PisangHitam.InstaFashion">
+    package="com.PisangHitam.InstaFashion" >
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -21,10 +21,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.InstaFashion">
+        android:theme="@style/Theme.InstaFashion" >
+        <receiver
+            android:name=".RecommendationWidget"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/recommendation_widget_info" />
+        </receiver>
         <receiver
             android:name=".WidgetClock.WidgetClock"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -43,6 +54,12 @@
             android:enabled="true"
             android:exported="true" />
 
+        <activity
+            android:name=".recycler_notification"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationMain"
+            android:exported="false" />
         <activity
             android:name=".profile_sms"
             android:exported="false" />
@@ -91,7 +108,7 @@
         <activity
             android:name=".splash_screen"
             android:exported="true"
-            android:theme="@style/Theme.InstaFashion.NoActionBar">
+            android:theme="@style/Theme.InstaFashion.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

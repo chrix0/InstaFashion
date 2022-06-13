@@ -40,12 +40,6 @@ class register : AppCompatActivity() {
         )
 
         fun checkdupe(string : String) : Boolean{
-//            for(i in singletonData.accList){
-//                if(string.equals(i.userName)){
-//                    return true
-//                }
-//            }
-//            return false
             var getAccount = db.daoAccount().getAccUserCheck(string)
             if (getAccount.isNotEmpty()) {
                 return true

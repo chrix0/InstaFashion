@@ -9,7 +9,6 @@ interface daoAccount {
     //SELECT (SETELAH OPTIMASI)
     @Transaction @Query("Select * from classAccount")
     fun getAllAcc() : List<classAccount>
-
     @Query("Select * from classAccount where COLUMN_USERNAME = :username and COLUMN_PASS = :password")
     fun getAcc(username : String, password : String) : List<classAccount>
 
@@ -18,7 +17,6 @@ interface daoAccount {
 
     @Query("Select * from classAccount where id = :id")
     fun getAccById(id: Int) : List<classAccount>
-
     //INSERT
     @Insert
     fun newAcc(acc : classAccount)

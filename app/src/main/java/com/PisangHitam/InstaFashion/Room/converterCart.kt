@@ -7,15 +7,9 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.newFixedThreadPoolContext
 
 import java.util.Collections
-
-
-
-
 class converterCart {
 //    Dengan GSON
 //    https://medium.com/@toddcookevt/android-room-storing-lists-of-objects-766cca57e3f9
-
-//    Room tidak bisa menyimpan list, jadi list tsb perlu dikonversi dulu menjadi JSON
 
     @TypeConverter
     open fun StringToList(string : String): MutableList<classItemBasket>{

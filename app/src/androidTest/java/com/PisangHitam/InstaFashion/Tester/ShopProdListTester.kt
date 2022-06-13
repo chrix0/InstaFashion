@@ -36,7 +36,8 @@ class ShopProdListTester {
     fun searchTest(){
         onView(withId(R.id.search)).perform(ViewActions.typeText("Adidas"))
         onView(withId(R.id.search)).perform(pressKey(KeyEvent.KEYCODE_ENTER))
-        onView(withId(R.id.productList)).check(matches(hasDescendant(withText("Adidas Response Run Men's Running Shoes - Black - Black, UK 9"))))
+        onView(withId(R.id.productList))
+            .check(matches(hasDescendant(withText("Adidas Response Run Men's Running Shoes - Black - Black, UK 9"))))
     }
 
     @After
