@@ -23,6 +23,7 @@
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_no_network_detected.xml" value="0.2" />
+        <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_notification_main.xml" value="0.12129629629629629" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_oa_container.xml" value="0.20462962962962963" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_oa_pic1.xml" value="0.21944444444444444" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_oa_pic2.xml" value="0.20462962962962963" />
@@ -30,7 +31,7 @@
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_oa_result.xml" value="0.11481481481481481" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_personaldata.xml" value="0.2" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_profile_last_transaction_to_text.xml" value="0.25416666666666665" />
-        <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_profile_settings.xml" value="0.4" />
+        <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_profile_settings.xml" value="0.264" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_profile_sms.xml" value="0.15989583333333332" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_register.xml" value="0.11481481481481481" />
         <entry key="..\:/InstaFashion/app/src/main/res/layout/activity_shop_basket.xml" value="0.19270833333333334" />

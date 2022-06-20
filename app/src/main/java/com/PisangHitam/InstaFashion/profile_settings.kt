@@ -12,6 +12,7 @@ import android.icu.util.Calendar
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
@@ -20,10 +21,19 @@ import com.PisangHitam.InstaFashion.BR_SettingsChanged.BR_productRecChanged
 import com.PisangHitam.InstaFashion.MusicPlayer.musicService
 import com.PisangHitam.InstaFashion.singletonData.myMediaPlayer
 import com.PisangHitam.InstaFashion.singletonData.playerCreated
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.reward.RewardItem
+import com.google.android.gms.ads.reward.RewardedVideoAd
+import com.google.android.gms.ads.reward.RewardedVideoAdListener
 import kotlinx.android.synthetic.main.activity_profile_settings.*
 import org.jetbrains.anko.sdk27.coroutines.onCheckedChange
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
-class profile_settings : AppCompatActivity() {
+class profile_settings : AppCompatActivity(), RewardedVideoAdListener {
+
+    var counter = 0
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +86,45 @@ class profile_settings : AppCompatActivity() {
                 playerIntent.setAction(ACTION_STOP)
                 startService(playerIntent)
             }
+        }
+
+        MobileAds.initialize(this, "ca-app-pub-3303024751964337~5073638132")
+        var adRequires = AdRequest.Builder()
+            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+            .build()
+
+        //BANNER
+        adView.loadAd(adRequires)
+
+        //INTERSTITIAL
+        showInterstitial()
+
+        //REWARD
+        loadReward()
+    }
+
+    fun loadReward(){
+        var adRequires = AdRequest.Builder()
+            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+            .build()
+
+        var mRewardedVideoAd: RewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this)
+        mRewardedVideoAd.rewardedVideoAdListener = this
+        mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917",
+            adRequires)
+
+        showRewardAd.setOnClickListener {
+            mRewardedVideoAd.show()
+        }
+    }
+
+    fun showInterstitial(){
+        var mInterstitialAd = singletonData.mInterstitialAd
+        if(mInterstitialAd!!.isLoaded)
+            mInterstitialAd!!.show()
+        else{
+            Toast.makeText(this, "Interstitial ad wasn't loaded", Toast.LENGTH_SHORT).show()
+            singletonData.loadInterstitial(this)
         }
     }
 
@@ -143,5 +192,33 @@ class profile_settings : AppCompatActivity() {
 
     fun update(recNotifierState:Boolean){
         recNotifSwitch.isChecked = recNotifierState
+    }
+
+    override fun onRewardedVideoAdLoaded() {
+        showRewardAd.visibility = View.VISIBLE
+    }
+
+    override fun onRewardedVideoAdOpened() {
+    }
+
+    override fun onRewardedVideoStarted() {
+    }
+
+    override fun onRewardedVideoAdClosed() {
+    }
+
+    override fun onRewarded(p0: RewardItem?) {
+        counter += p0!!.amount
+        countWatch.text = "Watch points : ${counter.toString()}"
+        loadReward()
+    }
+
+    override fun onRewardedVideoAdLeftApplication() {
+    }
+
+    override fun onRewardedVideoAdFailedToLoad(p0: Int) {
+    }
+
+    override fun onRewardedVideoCompleted() {
     }
 }

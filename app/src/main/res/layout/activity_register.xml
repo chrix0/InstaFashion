@@ -97,8 +97,5 @@
         android:clickable="true"
         android:fontFamily="@font/montserrat_bold"
         android:text="Have an account? Try logging in!"
-        android:textSize="16sp"
-/>
-
-
+        android:textSize="16sp" />
 </LinearLayout>

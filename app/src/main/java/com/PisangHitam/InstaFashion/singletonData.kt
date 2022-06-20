@@ -15,6 +15,10 @@ import com.PisangHitam.InstaFashion.classAccount
 import com.PisangHitam.InstaFashion.classItemBasket
 import com.PisangHitam.InstaFashion.classOASession
 import com.PisangHitam.InstaFashion.classProduk
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.reward.RewardedVideoAd
 import com.google.gson.Gson
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -207,4 +211,20 @@ object singletonData {
     var myMediaPlayer : MediaPlayer? = null
     var playerPaused = false
     var playerCreated = false
+
+
+    // INTERSTITIAL LOAD
+    var mInterstitialAd: InterstitialAd? = null
+    fun loadInterstitial(context: Context){
+        var adRequires = AdRequest.Builder()
+            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+            .build()
+        mInterstitialAd = InterstitialAd(context).apply {
+            adUnitId = "ca-app-pub-3940256099942544/1033173712"
+        }
+        mInterstitialAd!!.loadAd(adRequires)
+    }
+
+    // REWARDED LOAD
+    var mRewardedVideoAd: RewardedVideoAd? = null
 }

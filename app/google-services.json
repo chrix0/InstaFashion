@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "398686062778",
+    "project_id": "instafashion-bdf78",
+    "storage_bucket": "instafashion-bdf78.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398686062778:android:e6b517ed1014c001c91a83",
+        "android_client_info": {
+          "package_name": "com.PisangHitam.InstaFashion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398686062778-56oknp68hhocrj214r0kgnsbek6oalts.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArkY5IX59FNTef9IMzpmg7F4urMtmuvzw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398686062778-56oknp68hhocrj214r0kgnsbek6oalts.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
