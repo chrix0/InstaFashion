@@ -11,6 +11,7 @@ import android.os.Looper
 import android.os.Parcelable
 import android.widget.Toast
 import com.PisangHitam.InstaFashion.SharedPref.loginSharedPref
+import com.PisangHitam.InstaFashion.realtimeDB.fbDatabase
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -40,7 +41,11 @@ class LoginActivity : AppCompatActivity() {
                     singletonData.currentAccId = getAccount[0].id
                 }
 
-                if(found){
+                var fbDb = fbDatabase(this)
+                var accListFB = singletonData.fbUpdated
+                var fbFound = fbDb.foundAcc(accListFB, userName, password)
+
+                if(found and fbFound){
                     Toast.makeText(this, "Successfully logged in.", Toast.LENGTH_SHORT).show()
                     var sharedpref = loginSharedPref(this)
                     if(keepLoggedIn.isChecked){

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.PisangHitam.InstaFashion.LoginActivity
 import com.PisangHitam.InstaFashion.classAccount
+import com.PisangHitam.InstaFashion.realtimeDB.fbDatabase
 import kotlinx.android.synthetic.main.activity_register.*
 
 class register : AppCompatActivity() {
@@ -71,11 +72,20 @@ class register : AppCompatActivity() {
                     clsAccount.email=cemail
 
 //                    singletonData.accList.add(clsAccount)
-                    db.daoAccount().newAcc(clsAccount)
-                    Toast.makeText(this, "Your account has been successfully created", Toast.LENGTH_SHORT).show()
 
-                    var intent = Intent(this, LoginActivity::class.java)
-                    startActivity(intent)
+                    var fbDb = fbDatabase(this)
+
+                    if (!fbDb.foundAcc(singletonData.fbUpdated, cuserName, cpassword)){
+                        fbDb.saveAcc(cuserName, cpassword)
+                        db.daoAccount().newAcc(clsAccount)
+                        Toast.makeText(this, "Your account has been successfully created", Toast.LENGTH_SHORT).show()
+                        var intent = Intent(this, LoginActivity::class.java)
+                        startActivity(intent)
+                    }
+                    else{
+                        Toast.makeText(this, "another account existed", Toast.LENGTH_SHORT).show()
+                    }
+
                 }
             }
         }

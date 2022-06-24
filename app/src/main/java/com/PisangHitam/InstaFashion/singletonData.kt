@@ -227,4 +227,7 @@ object singletonData {
 
     // REWARDED LOAD
     var mRewardedVideoAd: RewardedVideoAd? = null
+
+    //FIREBASE REALTIME
+    var fbUpdated : MutableMap<String,List<String>> = mutableMapOf()
 }
