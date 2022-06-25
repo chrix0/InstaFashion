@@ -16,6 +16,7 @@ import com.PisangHitam.InstaFashion.LoginActivity
 import com.PisangHitam.InstaFashion.Room.roomHelper
 import com.PisangHitam.InstaFashion.SharedPref.loginSharedPref
 import com.PisangHitam.InstaFashion.locChecker.js_getGeo
+import com.PisangHitam.InstaFashion.realtimeDB.fbDatabase
 import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import org.jetbrains.anko.doAsync
@@ -72,6 +73,7 @@ class splash_screen : AppCompatActivity() {
                 }
             }
 
+            var fbDb = fbDatabase(applicationContext)
         }
 
         /*

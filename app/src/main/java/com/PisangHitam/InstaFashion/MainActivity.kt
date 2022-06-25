@@ -82,6 +82,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        main_notify.setOnClickListener {
+            var intent = Intent(this, NotificationMain::class.java)
+            startActivity(intent)
+        }
+
         main_search.setOnEditorActionListener { textView, i, keyEvent ->
             if (i == EditorInfo.IME_ACTION_DONE){
                 var intent = Intent(this, shop_productList::class.java)

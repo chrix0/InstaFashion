@@ -40,11 +40,8 @@ class LoginActivity : AppCompatActivity() {
                     found = true
                     singletonData.currentAccId = getAccount[0].id
                 }
-
                 var fbDb = fbDatabase(this)
-                var accListFB = singletonData.fbUpdated
-                var fbFound = fbDb.foundAcc(accListFB, userName, password)
-
+                var fbFound = fbDb.foundAcc(singletonData.fbUpdated, userName, password)
                 if(found and fbFound){
                     Toast.makeText(this, "Successfully logged in.", Toast.LENGTH_SHORT).show()
                     var sharedpref = loginSharedPref(this)

@@ -15,6 +15,7 @@ import com.PisangHitam.InstaFashion.classAccount
 import com.PisangHitam.InstaFashion.classItemBasket
 import com.PisangHitam.InstaFashion.classOASession
 import com.PisangHitam.InstaFashion.classProduk
+import com.PisangHitam.InstaFashion.realtimeDB.fbDatabase
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
@@ -229,5 +230,8 @@ object singletonData {
     var mRewardedVideoAd: RewardedVideoAd? = null
 
     //FIREBASE REALTIME
+    var fbDb : fbDatabase? = null
     var fbUpdated : MutableMap<String,List<String>> = mutableMapOf()
+
+
 }
